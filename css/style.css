@@ -1,0 +1,568 @@
+/* ============================================================
+   Sushi Experience Booking - Common Styles
+   ============================================================ */
+
+/* --- Reset & Base --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Cormorant Garamond', 'Noto Serif JP', Georgia, serif;
+  color: #3d2c1e;
+  background: #faf7f2;
+  line-height: 1.6;
+}
+
+a { color: #b5651d; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* --- Header / Navbar --- */
+.navbar {
+  background: #3d2c1e;
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar .logo {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.navbar .logo span {
+  color: #e8a23a;
+  font-weight: 800;
+}
+
+.lang-toggle {
+  display: flex;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.lang-toggle button {
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  border: none;
+  padding: 6px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.lang-toggle button.active {
+  background: #e8a23a;
+  color: #3d2c1e;
+  font-weight: 600;
+}
+
+/* --- Hero Section --- */
+.hero {
+  background: linear-gradient(135deg, #3d2c1e 0%, #5a3d2a 100%);
+  color: #fff;
+  text-align: center;
+  padding: 60px 24px 50px;
+}
+
+.hero .label {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 12px;
+  color: #e8a23a;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 16px;
+  opacity: 0.8;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- Container --- */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+/* --- Section --- */
+.section {
+  padding: 50px 0;
+  text-align: center;
+}
+
+.section .label {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 12px;
+  color: #e8a23a;
+  margin-bottom: 8px;
+}
+
+.section h2 {
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+/* --- Feature Cards (Your Experience) --- */
+.features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.feature-card {
+  background: #fff;
+  border: 1px solid #e8e0d6;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+}
+
+.feature-card .icon {
+  width: 48px;
+  height: 48px;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-card h3 {
+  font-size: 18px;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+
+.feature-card p {
+  font-size: 14px;
+  color: #6b5c50;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- Pricing Cards --- */
+.pricing {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.price-card {
+  background: #fff;
+  border: 1px solid #e8e0d6;
+  border-radius: 12px;
+  padding: 32px 48px;
+  text-align: center;
+  min-width: 200px;
+}
+
+.price-card .type {
+  font-size: 14px;
+  color: #6b5c50;
+  font-family: 'Inter', sans-serif;
+}
+
+.price-card .amount {
+  font-size: 48px;
+  font-weight: 400;
+  margin: 8px 0;
+}
+
+.price-card .amount .currency {
+  font-size: 20px;
+  vertical-align: top;
+}
+
+.price-card .note {
+  font-size: 13px;
+  color: #6b5c50;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- Calendar --- */
+.calendar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.calendar-nav button {
+  background: #fff;
+  border: 1px solid #e8e0d6;
+  border-radius: 24px;
+  padding: 8px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  color: #3d2c1e;
+  transition: all 0.2s;
+}
+
+.calendar-nav button:hover {
+  background: #f0e8dd;
+}
+
+.calendar-nav .month-label {
+  font-size: 22px;
+  font-style: italic;
+  min-width: 180px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.calendar-grid .day-header {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b5c50;
+  text-transform: uppercase;
+  padding: 8px 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.calendar-grid .day {
+  padding: 12px 4px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: default;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.calendar-grid .day.available {
+  background: #fff;
+  border: 1px solid #e8e0d6;
+  cursor: pointer;
+}
+
+.calendar-grid .day.available:hover {
+  background: #f0e8dd;
+  transform: scale(1.05);
+}
+
+.calendar-grid .day.few-spots {
+  background: #fff;
+  border: 1px solid #e8a23a;
+  cursor: pointer;
+}
+
+.calendar-grid .day.full {
+  color: #999;
+}
+
+.calendar-grid .day .dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 4px auto 0;
+}
+
+.dot.green { background: #4caf50; }
+.dot.orange { background: #e8a23a; }
+.dot.red { background: #d32f2f; }
+
+.calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  color: #6b5c50;
+}
+
+.calendar-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+/* --- Rules / Policy Cards --- */
+.rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  text-align: left;
+}
+
+.rule-card {
+  background: #fff;
+  border: 1px solid #e8e0d6;
+  border-radius: 12px;
+  padding: 32px;
+}
+
+.rule-card h3 {
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e8e0d6;
+}
+
+.rule-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.rule-card ul li {
+  padding: 6px 0;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: #5a4a3e;
+}
+
+.rule-card ul li::before {
+  content: "\2022 ";
+  color: #3d2c1e;
+  margin-right: 4px;
+}
+
+.rule-card ul li.warning {
+  color: #c62828;
+}
+
+/* --- Footer --- */
+.footer {
+  background: #3d2c1e;
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  padding: 30px 24px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+}
+
+.footer a {
+  color: rgba(255,255,255,0.8);
+}
+
+/* --- Booking Form --- */
+.form-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  font-family: 'Inter', sans-serif;
+  color: #3d2c1e;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d4c8bc;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: 'Inter', sans-serif;
+  background: #fff;
+  color: #3d2c1e;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #e8a23a;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.btn-primary {
+  background: #e8a23a;
+  color: #3d2c1e;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: #d4912e;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #3d2c1e;
+  border: 1px solid #d4c8bc;
+  border-radius: 8px;
+  padding: 14px 32px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+  background: #f0e8dd;
+}
+/* --- Status messages --- */
+.message {
+  padding: 16px 24px;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.message.success {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.message.error {
+  background: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.message.info {
+  background: #fff3e0;
+  color: #e65100;
+  border: 1px solid #ffcc02;
+}
+
+/* --- Loading Spinner --- */
+.spinner {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e8e0d6;
+  border-top-color: #e8a23a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-container {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.loading-container p {
+  margin-top: 12px;
+  color: #6b5c50;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+/* --- Result Page (Success / Cancel) --- */
+.result-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 40px 24px;
+  text-align: center;
+}
+
+.result-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+}
+
+.result-container h2 {
+  font-size: 28px;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.result-container p {
+  font-size: 15px;
+  color: #6b5c50;
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 12px;
+}
+
+.booking-details {
+  background: #fff;
+  border: 1px solid #e8e0d6;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 24px 0;
+  text-align: left;
+}
+
+.booking-details .detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0ebe5;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.booking-details .detail-row:last-child {
+  border-bottom: none;
+}
+
+.booking-details .detail-row .label {
+  color: #6b5c50;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 30px; }
+  .features { grid-template-columns: 1fr; }
+  .rules-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .pricing { flex-direction: column; align-items: center; }
+  .price-card .amount { font-size: 36px; }
+}
