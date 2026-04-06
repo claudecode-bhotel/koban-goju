@@ -464,7 +464,7 @@
         }
 
         .rules-card li::before {
-            content: '•';
+            content: 'â¢';
             position: absolute;
             left: 0;
             color: #e8a23a;
@@ -570,7 +570,7 @@
         /* Responsive */
         @media (max-width: 768px) {
             .navbar {
-                padding: 1rem;
+                padding: 0.75rem 1rem;
             }
 
             .navbar-brand {
@@ -578,7 +578,7 @@
             }
 
             .navbar-controls {
-                gap: 1rem;
+                gap: 0.5rem;
             }
 
             .container {
@@ -587,28 +587,136 @@
 
             .section-title {
                 font-size: 1.8rem;
+                margin-bottom: 2rem;
             }
 
             .experience-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .experience-card {
+                padding: 1.25rem 0.75rem;
+            }
+
+            .experience-card-icon {
+                font-size: 2rem;
+            }
+
+            .experience-card-title {
+                font-size: 0.85rem;
+            }
+
+            .experience-card-content {
+                font-size: 0.8rem;
             }
 
             .pricing-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .pricing-card {
+                padding: 1.5rem 1rem;
+            }
+
+            .pricing-card-price {
+                font-size: 2rem;
+            }
+
+            /* Calendar mobile fixes */
+            .calendar-container {
+                padding: 1rem;
+            }
+
+            .calendar-header {
+                margin-bottom: 1rem;
+            }
+
+            .calendar-month {
+                font-size: 1.1rem;
+            }
+
+            .calendar-nav button {
+                padding: 0.4rem 0.75rem;
+                font-size: 0.85rem;
+            }
+
+            .calendar-weekdays {
+                gap: 0.25rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .calendar-weekday {
+                font-size: 0.7rem;
+                padding: 0.25rem 0;
+            }
+
+            .calendar-grid {
+                gap: 0.25rem;
+            }
+
+            .calendar-day {
+                font-size: 0.8rem;
+                border-radius: 3px;
+            }
+
+            .calendar-day.available::after,
+            .calendar-day.few-spots::after,
+            .calendar-day.full::after {
+                width: 5px;
+                height: 5px;
+                bottom: 3px;
+                right: 3px;
             }
 
             .calendar-legend {
-                gap: 1rem;
+                gap: 0.75rem;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
+            .legend-item {
+                font-size: 0.75rem;
+            }
+
+            .legend-dot {
+                width: 8px;
+                height: 8px;
+            }
+
+            /* Rules section */
             .rules-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .rules-card {
+                padding: 1.5rem;
             }
 
             .footer-links {
                 gap: 1rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .experience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calendar-weekday {
+                font-size: 0.65rem;
+            }
+
+            .calendar-day {
+                font-size: 0.75rem;
             }
         }
 
@@ -652,61 +760,61 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-label en active">BOOKING</div>
-        <div class="hero-label ja">予約</div>
+        <div class="hero-label ja">äºç´</div>
         <h1 class="hero-title">
             <span class="en active">Dashi & Sushi Experience</span>
-            <span class="ja">出汁と寿司体験</span>
+            <span class="ja">åºæ±ã¨å¯¿å¸ä½é¨</span>
         </h1>
         <p class="hero-subtitle">
             <span class="en active">An authentic Japanese culinary journey at Koban-dori Goju</span>
-            <span class="ja">交番通り五十での本格日本料理体験</span>
+            <span class="ja">äº¤çªéãäºåã§ã®æ¬æ ¼æ¥æ¬æçä½é¨</span>
         </p>
     </section>
 
     <!-- What's Included Section -->
     <section class="container">
         <div class="section-label en active">WHAT'S INCLUDED</div>
-        <div class="section-label ja">体験内容</div>
+        <div class="section-label ja">ä½é¨åå®¹</div>
         <h2 class="section-title">
             <span class="en active">Your Experience</span>
-            <span class="ja">あなたの体験</span>
+            <span class="ja">ããªãã®ä½é¨</span>
         </h2>
 
         <div class="experience-grid">
             <div class="experience-card">
-                <div class="experience-card-icon">🕐</div>
+                <div class="experience-card-icon">ð</div>
                 <h3 class="experience-card-title">
                     <span class="en active">Duration</span>
-                    <span class="ja">所要時間</span>
+                    <span class="ja">æè¦æé</span>
                 </h3>
-                <p class="experience-card-content">11:00 AM - 1:00 PM<br><span class="en active">(approx. 2 hours)</span><span class="ja">（約2時間）</span></p>
+                <p class="experience-card-content">11:00 AM - 1:00 PM<br><span class="en active">(approx. 2 hours)</span><span class="ja">ï¼ç´2æéï¼</span></p>
             </div>
 
             <div class="experience-card">
-                <div class="experience-card-icon">👥</div>
+                <div class="experience-card-icon">ð¥</div>
                 <h3 class="experience-card-title">
                     <span class="en active">Group Size</span>
-                    <span class="ja">グループ人数</span>
+                    <span class="ja">ã°ã«ã¼ãäººæ°</span>
                 </h3>
-                <p class="experience-card-content"><span class="en active">2-8 guests per session</span><span class="ja">1セッション2～8名</span></p>
+                <p class="experience-card-content"><span class="en active">2-8 guests per session</span><span class="ja">1ã»ãã·ã§ã³2ï½8å</span></p>
             </div>
 
             <div class="experience-card">
-                <div class="experience-card-icon">📅</div>
+                <div class="experience-card-icon">ð</div>
                 <h3 class="experience-card-title">
                     <span class="en active">Schedule</span>
-                    <span class="ja">スケジュール</span>
+                    <span class="ja">ã¹ã±ã¸ã¥ã¼ã«</span>
                 </h3>
-                <p class="experience-card-content"><span class="en active">Mondays & Thursdays only</span><span class="ja">月曜日・木曜日のみ</span></p>
+                <p class="experience-card-content"><span class="en active">Mondays & Thursdays only</span><span class="ja">æææ¥ã»æ¨ææ¥ã®ã¿</span></p>
             </div>
 
             <div class="experience-card">
-                <div class="experience-card-icon">🎁</div>
+                <div class="experience-card-icon">ð</div>
                 <h3 class="experience-card-title">
                     <span class="en active">Souvenir Set</span>
-                    <span class="ja">お土産セット</span>
+                    <span class="ja">ãåç£ã»ãã</span>
                 </h3>
-                <p class="experience-card-content"><span class="en active">Dashi pack, rice, salt & plate</span><span class="ja">出汁パック、米、塩＆皿</span></p>
+                <p class="experience-card-content"><span class="en active">Dashi pack, rice, salt & plate</span><span class="ja">åºæ±ããã¯ãç±³ãå¡©ï¼ç¿</span></p>
             </div>
         </div>
     </section>
@@ -714,34 +822,34 @@
     <!-- Pricing Section -->
     <section class="container">
         <div class="section-label en active">PRICING</div>
-        <div class="section-label ja">料金</div>
+        <div class="section-label ja">æé</div>
         <h2 class="section-title">
             <span class="en active">Per Person</span>
-            <span class="ja">お一人様</span>
+            <span class="ja">ãä¸äººæ§</span>
         </h2>
 
         <div class="pricing-grid">
             <div class="pricing-card">
                 <h3 class="pricing-card-title">
                     <span class="en active">Adult</span>
-                    <span class="ja">大人</span>
+                    <span class="ja">å¤§äºº</span>
                 </h3>
-                <div class="pricing-card-price">¥9,800</div>
+                <div class="pricing-card-price">Â¥9,800</div>
                 <p class="pricing-card-label">
                     <span class="en active">per person</span>
-                    <span class="ja">お一人様</span>
+                    <span class="ja">ãä¸äººæ§</span>
                 </p>
             </div>
 
             <div class="pricing-card">
                 <h3 class="pricing-card-title">
                     <span class="en active">Child</span>
-                    <span class="ja">お子様</span>
+                    <span class="ja">ãå­æ§</span>
                 </h3>
-                <div class="pricing-card-price">¥5,000</div>
+                <div class="pricing-card-price">Â¥5,000</div>
                 <p class="pricing-card-label">
                     <span class="en active">Elementary & under</span>
-                    <span class="ja">小学生以下一名</span>
+                    <span class="ja">å°å­¦çä»¥ä¸ä¸å</span>
                 </p>
             </div>
         </div>
@@ -750,10 +858,10 @@
     <!-- Availability / Calendar Section -->
     <section class="container">
         <div class="section-label en active">SELECT A DATE</div>
-        <div class="section-label ja">日付を選択</div>
+        <div class="section-label ja">æ¥ä»ãé¸æ</div>
         <h2 class="section-title">
             <span class="en active">Availability</span>
-            <span class="ja">空き状況</span>
+            <span class="ja">ç©ºãç¶æ³</span>
         </h2>
 
         <div id="calendar-error" class="error" style="display: none;"></div>
@@ -761,7 +869,7 @@
             <div class="loading-spinner"></div>
             <p style="margin-top: 0.5rem;">
                 <span class="en active">Loading availability...</span>
-                <span class="ja">空き状況を読み込み中...</span>
+                <span class="ja">ç©ºãç¶æ³ãèª­ã¿è¾¼ã¿ä¸­...</span>
             </p>
         </div>
 
@@ -775,31 +883,31 @@
             <div class="calendar-weekdays">
                 <div class="calendar-weekday">
                     <span class="en active">SUN</span>
-                    <span class="ja">日</span>
+                    <span class="ja">æ¥</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">MON</span>
-                    <span class="ja">月</span>
+                    <span class="ja">æ</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">TUE</span>
-                    <span class="ja">火</span>
+                    <span class="ja">ç«</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">WED</span>
-                    <span class="ja">水</span>
+                    <span class="ja">æ°´</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">THU</span>
-                    <span class="ja">木</span>
+                    <span class="ja">æ¨</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">FRI</span>
-                    <span class="ja">金</span>
+                    <span class="ja">é</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">SAT</span>
-                    <span class="ja">土</span>
+                    <span class="ja">å</span>
                 </div>
             </div>
 
@@ -812,21 +920,21 @@
                     <span class="legend-dot available"></span>
                     <span>
                         <span class="en active">Available</span>
-                        <span class="ja">空きあり</span>
+                        <span class="ja">ç©ºããã</span>
                     </span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-dot few"></span>
                     <span>
                         <span class="en active">Few spots</span>
-                        <span class="ja">残りわずか</span>
+                        <span class="ja">æ®ãããã</span>
                     </span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-dot full"></span>
                     <span>
                         <span class="en active">Full</span>
-                        <span class="ja">満席</span>
+                        <span class="ja">æºå¸­</span>
                     </span>
                 </div>
             </div>
@@ -836,33 +944,33 @@
     <!-- Important Information Section -->
     <section class="container">
         <div class="section-label en active">IMPORTANT INFORMATION</div>
-        <div class="section-label ja">重要情報</div>
+        <div class="section-label ja">éè¦æå ±</div>
         <h2 class="section-title">
             <span class="en active">Rules & Cancellation Policy</span>
-            <span class="ja">ルール＆キャンセルポリシー</span>
+            <span class="ja">ã«ã¼ã«ï¼ã­ã£ã³ã»ã«ããªã·ã¼</span>
         </h2>
 
         <div class="rules-grid">
             <div class="rules-card">
                 <h3 class="rules-card-title">
                     <span class="en active">Booking Rules</span>
-                    <span class="ja">予約ルール</span>
+                    <span class="ja">äºç´ã«ã¼ã«</span>
                 </h3>
                 <ul>
                     <li>
-                        <strong><span class="en active">Available on</span><span class="ja">利用可能日</span>:</strong> <span class="en active">Monday & Thursday only</span><span class="ja">月曜日・木曜日のみ</span>
+                        <strong><span class="en active">Available on</span><span class="ja">å©ç¨å¯è½æ¥</span>:</strong> <span class="en active">Monday & Thursday only</span><span class="ja">æææ¥ã»æ¨ææ¥ã®ã¿</span>
                     </li>
                     <li>
-                        <strong><span class="en active">Time</span><span class="ja">時間</span>:</strong> 11:00 AM - 1:00 PM
+                        <strong><span class="en active">Time</span><span class="ja">æé</span>:</strong> 11:00 AM - 1:00 PM
                     </li>
                     <li>
-                        <strong><span class="en active">Group Size</span><span class="ja">グループ人数</span>:</strong> <span class="en active">2-8 guests</span><span class="ja">2～8名</span>
+                        <strong><span class="en active">Group Size</span><span class="ja">ã°ã«ã¼ãäººæ°</span>:</strong> <span class="en active">2-8 guests</span><span class="ja">2ï½8å</span>
                     </li>
                     <li>
-                        <strong><span class="en active">Booking Deadline</span><span class="ja">予約期限</span>:</strong> <span class="en active">3 days before at 11:00 AM JST</span><span class="ja">3日前の午前11時（日本時間）</span>
+                        <strong><span class="en active">Booking Deadline</span><span class="ja">äºç´æé</span>:</strong> <span class="en active">3 days before at 11:00 AM JST</span><span class="ja">3æ¥åã®åå11æï¼æ¥æ¬æéï¼</span>
                     </li>
                     <li>
-                        <strong><span class="en active">Allergies</span><span class="ja">アレルギー</span>:</strong> <span class="en active">Please inform us of any dietary restrictions</span><span class="ja">食物アレルギーがあればお知らせください</span>
+                        <strong><span class="en active">Allergies</span><span class="ja">ã¢ã¬ã«ã®ã¼</span>:</strong> <span class="en active">Please inform us of any dietary restrictions</span><span class="ja">é£ç©ã¢ã¬ã«ã®ã¼ãããã°ãç¥ãããã ãã</span>
                     </li>
                 </ul>
             </div>
@@ -870,36 +978,36 @@
             <div class="rules-card">
                 <h3 class="rules-card-title">
                     <span class="en active">Cancellation Policy</span>
-                    <span class="ja">キャンセルポリシー</span>
+                    <span class="ja">ã­ã£ã³ã»ã«ããªã·ã¼</span>
                 </h3>
                 <div class="cancellation-row">
                     <div class="cancellation-period">
                         <span class="en active">3+ days before (before 11:00 AM JST)</span>
-                        <span class="ja">3日以上前（午前11時まで日本時間）</span>
+                        <span class="ja">3æ¥ä»¥ä¸åï¼åå11æã¾ã§æ¥æ¬æéï¼</span>
                     </div>
                     <div class="cancellation-charge">
                         <span class="en active">Free cancellation</span>
-                        <span class="ja">無料キャンセル</span>
+                        <span class="ja">ç¡æã­ã£ã³ã»ã«</span>
                     </div>
                 </div>
                 <div class="cancellation-row">
                     <div class="cancellation-period">
                         <span class="en active">2 days before - day of booking</span>
-                        <span class="ja">2日前～予約日当日</span>
+                        <span class="ja">2æ¥åï½äºç´æ¥å½æ¥</span>
                     </div>
                     <div class="cancellation-charge charge">
                         <span class="en active">100% charge</span>
-                        <span class="ja">100% の料金がかかります</span>
+                        <span class="ja">100% ã®æéããããã¾ã</span>
                     </div>
                 </div>
                 <div class="cancellation-row">
                     <div class="cancellation-period">
                         <span class="en active">Refund</span>
-                        <span class="ja">返金</span>
+                        <span class="ja">è¿é</span>
                     </div>
                     <div class="cancellation-charge">
                         <span class="en active">Processed within a few business days</span>
-                        <span class="ja">数営業日以内に処理されます</span>
+                        <span class="ja">æ°å¶æ¥­æ¥ä»¥åã«å¦çããã¾ã</span>
                     </div>
                 </div>
             </div>
@@ -909,11 +1017,11 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p class="footer-text">© b hotel — Koban-dori Goju (交番通り五十)</p>
+            <p class="footer-text">Â© b hotel â Koban-dori Goju (äº¤çªéãäºå)</p>
             <div class="footer-links">
                 <a href="privacy.html">
                     <span class="en active">Privacy Policy</span>
-                    <span class="ja">プライバシーポリシー</span>
+                    <span class="ja">ãã©ã¤ãã·ã¼ããªã·ã¼</span>
                 </a>
             </div>
         </div>
@@ -985,13 +1093,13 @@
                 'July', 'August', 'September', 'October', 'November', 'December'
             ];
             const monthNamesJa = [
-                '1月', '2月', '3月', '4月', '5月', '6月',
-                '7月', '8月', '9月', '10月', '11月', '12月'
+                '1æ', '2æ', '3æ', '4æ', '5æ', '6æ',
+                '7æ', '8æ', '9æ', '10æ', '11æ', '12æ'
             ];
 
             const monthText = currentLang === 'en'
                 ? `${monthNames[month]} ${year}`
-                : `${year}年${monthNamesJa[month]}`;
+                : `${year}å¹´${monthNamesJa[month]}`;
             calendarMonthYear.textContent = monthText;
 
             // Clear calendar
@@ -1071,7 +1179,7 @@
                 calendarError.style.display = 'block';
                 calendarError.textContent = currentLang === 'en'
                     ? 'Failed to load availability. Please refresh the page.'
-                    : 'ご利用いただけません。ページを更新してください。';
+                    : 'ãå©ç¨ããã ãã¾ããããã¼ã¸ãæ´æ°ãã¦ãã ããã';
             }
         }
 
