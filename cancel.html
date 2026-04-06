@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Booking - b hotel Sushi Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;600&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="logo">
+                    <span class="logo-b">b</span> hotel
+                </div>
+                <button class="lang-toggle" id="langToggle">JP / EN</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="cancel-main">
+            <!-- Step 1: Lookup Form -->
+            <div id="step1" class="cancel-step">
+                <div class="step-label" data-en="CANCELLATION" data-jp="キャンセル">CANCELLATION</div>
+                <h1 class="step-title" data-en="Cancel Your Booking" data-jp="予約のキャンセル">Cancel Your Booking</h1>
+
+                <form id="lookupForm" class="lookup-form">
+                    <div class="form-group">
+                        <label for="email" data-en="Email" data-jp="メールアドレス">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bookingDate" data-en="Booking Date" data-jp="予約日">Booking Date</label>
+                        <input type="date" id="bookingDate" name="bookingDate" required>
+                    </div>
+
+                    <button type="submit" class="button button-primary" data-en="Look Up Booking" data-jp="予約を検索">Look Up Booking</button>
+                </form>
+
+                <div id="lookupError" class="error-message" style="display: none;"></div>
+            </div>
+
+            <!-- Step 2: Confirm Cancellation -->
+            <div id="step2" class="cancel-step" style="display: none;">
+                <h2 class="step-title-2" data-en="Confirm Cancellation" data-jp="キャンセルの確認">Confirm Cancellation</h2>
+
+                <!-- Booking Details -->
+                <div class="booking-details-card">
+                    <div class="detail-row">
+                        <span class="detail-label" data-en="Date" data-jp="日付">Date</span>
+                        <span class="detail-value" id="confirmDate">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label" data-en="Name" data-jp="名前">Name</span>
+                        <span class="detail-value" id="confirmName">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label" data-en="Email" data-jp="メール">Email</span>
+                        <span class="detail-value" id="confirmEmail">-</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label" data-en="Guests" data-jp="ゲスト数">Guests</span>
+                        <span class="detail-value" id="confirmGuests">-</span>
+                    </div>
+                    <div class="detail-row total">
+                        <span class="detail-label" data-en="Amount" data-jp="金額">Amount</span>
+                        <span class="detail-value" id="confirmAmount">-</span>
+                    </div>
+                </div>
+
+                <!-- Cancellation Policy -->
+                <div id="cancellationPolicyBox" class="policy-box">
+                    <div id="freePolicy" style="display: none;">
+                        <p class="policy-text" data-en="Free cancellation" data-jp="無料キャンセル">Free cancellation</p>
+                    </div>
+                    <div id="chargePolicy" style="display: none;">
+                        <p class="policy-text warning" data-en="Cancellation deadline has passed" data-jp="キャンセル期限が過ぎています">Cancellation deadline has passed</p>
+                        <p class="policy-detail" data-en="2 days before - day of: 100% charge" data-jp="2日前～当日：100%料金">2 days before - day of: 100% charge</p>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button class="button button-secondary" onclick="goBackToStep1()" data-en="Back" data-jp="戻る">Back</button>
+                    <button id="confirmCancelBtn" class="button button-danger" onclick="submitCancellation()" data-en="Cancel Booking" data-jp="予約をキャンセル">Cancel Booking</button>
+                </div>
+
+                <div id="cancelError" class="error-message" style="display: none;"></div>
+            </div>
+
+            <!-- Success State -->
+            <div id="step3" class="cancel-step" style="display: none;">
+                <div class="checkmark-icon">✓</div>
+                <h1 class="success-title" data-en="Booking Cancelled" data-jp="予約がキャンセルされました">Booking Cancelled</h1>
+                <p class="success-subtitle" data-en="Your booking has been successfully cancelled" data-jp="ご予約がキャンセルされました">Your booking has been successfully cancelled</p>
+                <a href="index.html" class="button button-primary" data-en="Back to Home" data-jp="ホームに戻る">Back to Home</a>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="footer-copyright">© b hotel — Koban-dori Goju (交番通り五十)</p>
+                <a href="privacy.html" class="footer-link" data-en="Privacy Policy" data-jp="プライバシーポリシー">Privacy Policy</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        let currentBookingData = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePageLanguage();
+            document.getElementById('lookupForm').addEventListener('submit', handleLookup);
+        });
+
+        function updatePageLanguage() {
+            const lang = getLang();
+            document.querySelectorAll('[data-en][data-jp]').forEach(element => {
+                const text = lang === 'en' ? element.getAttribute('data-en') : element.getAttribute('data-jp');
+                element.textContent = text;
+            });
+            document.documentElement.lang = lang;
+        }
+
+        async function handleLookup(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const bookingDate = document.getElementById('bookingDate').value;
+            const errorDiv = document.getElementById('lookupError');
+            errorDiv.style.display = 'none';
+
+            try {
+                const bookingData = await lookupBooking(email, bookingDate);
+                currentBookingData = bookingData;
+                displayBookingForCancellation(bookingData);
+            } catch (error) {
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = error.message || 'Booking not found';
+            }
+        }
+
+        function displayBookingForCancellation(bookingData) {
+            document.getElementById('confirmDate').textContent = formatDate(bookingData.date);
+            document.getElementById('confirmName').textContent = bookingData.name;
+            document.getElementById('confirmEmail').textContent = bookingData.email;
+            document.getElementById('confirmGuests').textContent = `${bookingData.adults} ${getLang() === 'en' ? 'adults' : '大人'}, ${bookingData.children} ${getLang() === 'en' ? 'children' : '子ども'}`;
+            document.getElementById('confirmAmount').textContent = formatCurrency(bookingData.total_amount);
+
+            // Show appropriate cancellation policy
+            if (bookingData.canCancel) {
+                document.getElementById('freePolicy').style.display = 'block';
+                document.getElementById('chargePolicy').style.display = 'none';
+                document.getElementById('confirmCancelBtn').classList.remove('button-danger');
+                document.getElementById('confirmCancelBtn').classList.add('button-danger');
+            } else {
+                document.getElementById('freePolicy').style.display = 'none';
+                document.getElementById('chargePolicy').style.display = 'block';
+                document.getElementById('confirmCancelBtn').disabled = true;
+                document.getElementById('confirmCancelBtn').style.opacity = '0.5';
+            }
+
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+        }
+
+        async function submitCancellation() {
+            const errorDiv = document.getElementById('cancelError');
+            errorDiv.style.display = 'none';
+
+            try {
+                await cancelBooking(currentBookingData.email, currentBookingData.date);
+                document.getElementById('step2').style.display = 'none';
+                document.getElementById('step3').style.display = 'block';
+            } catch (error) {
+                errorDiv.style.display = 'block';
+                errorDiv.textContent = error.message || 'Failed to cancel booking';
+            }
+        }
+
+        function goBackToStep1() {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step1').style.display = 'block';
+            currentBookingData = null;
+            document.getElementById('lookupError').style.display = 'none';
+            document.getElementById('cancelError').style.display = 'none';
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function formatCurrency(amount) {
+            return '¥' + Math.floor(amount).toLocaleString('ja-JP');
+        }
+
+        document.getElementById('langToggle').addEventListener('click', function() {
+            const currentLang = getLang();
+            const newLang = currentLang === 'en' ? 'jp' : 'en';
+            localStorage.setItem('lang', newLang);
+            updatePageLanguage();
+        });
+    </script>
+</body>
+</html>

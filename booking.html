@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserve Your Experience | b hotel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <span class="logo-b">b</span> hotel
+            </div>
+            <div class="navbar-links">
+                <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+                    <span class="lang-en active" data-lang="en">EN</span>
+                    <span class="lang-separator">/</span>
+                    <span class="lang-ja" data-lang="ja">JP</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Smaller) -->
+    <section class="hero hero-small">
+        <div class="hero-content">
+            <div class="hero-label" id="heroLabel">BOOKING</div>
+            <h1 id="heroTitle">Reserve Your Experience</h1>
+            <div class="hero-date" id="heroDate"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Booking Form Section -->
+        <section class="booking-section">
+            <form id="bookingForm" class="booking-form">
+                <!-- Back Link -->
+                <div class="back-link-container">
+                    <a href="index.html" class="back-link" id="backLink">← Back to Calendar</a>
+                </div>
+
+                <!-- Form Fields -->
+                <div class="form-group">
+                    <label for="selectedDate" id="labelDate">Selected Date</label>
+                    <input type="text" id="selectedDate" class="form-input" readonly>
+                    <input type="hidden" id="dateValue">
+                </div>
+
+                <div class="form-group">
+                    <label for="name" id="labelName">Name <span class="required">*</span></label>
+                    <input type="text" id="name" class="form-input" required>
+                    <span class="error-message" id="errorName"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" id="labelEmail">Email <span class="required">*</span></label>
+                    <input type="email" id="email" class="form-input" required>
+                    <span class="error-message" id="errorEmail"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" id="labelPhone">Phone</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="+81 XX-XXXX-XXXX">
+                    <span class="error-message" id="errorPhone"></span>
+                </div>
+
+                <!-- Guest Configuration -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="adults" id="labelAdults">Number of Adults <span class="required">*</span></label>
+                        <input type="number" id="adults" class="form-input" min="1" max="8" value="2" required>
+                        <span class="error-message" id="errorAdults"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="children" id="labelChildren">Number of Children</label>
+                        <input type="number" id="children" class="form-input" min="0" max="6" value="0">
+                        <span class="error-message" id="errorChildren"></span>
+                    </div>
+                </div>
+
+                <!-- Guest Size Validation Message -->
+                <div class="form-notice" id="groupSizeNotice" style="display: none;">
+                    <p id="groupSizeMessage">Group size must be between 2 and 8 people.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="allergies" id="labelAllergies">Allergies / Special Requests</label>
+                    <textarea id="allergies" class="form-input" rows="4" placeholder="Please let us know about any dietary restrictions or special requests..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="language" id="labelLanguage">Confirmation Language</label>
+                    <select id="language" class="form-input">
+                        <option value="en">English</option>
+                        <option value="ja">日本語 (Japanese)</option>
+                    </select>
+                </div>
+
+                <!-- Pricing Summary -->
+                <div class="pricing-summary">
+                    <div class="pricing-title" id="pricingTitle">Pricing Summary</div>
+                    <div class="pricing-row">
+                        <span id="pricingAdultsLabel">Adults</span>
+                        <span id="pricingAdultsValue">2 × ¥9,800 = ¥19,600</span>
+                    </div>
+                    <div class="pricing-row">
+                        <span id="pricingChildrenLabel">Children</span>
+                        <span id="pricingChildrenValue">0 × ¥5,000 = ¥0</span>
+                    </div>
+                    <div class="pricing-row pricing-total">
+                        <span id="pricingTotalLabel">Total</span>
+                        <span id="pricingTotalValue">¥19,600</span>
+                    </div>
+                </div>
+
+                <!-- Error Messages -->
+                <div class="error-alert" id="errorAlert" style="display: none;">
+                    <p id="errorAlertMessage"></p>
+                </div>
+
+                <!-- Success Message -->
+                <div class="success-alert" id="successAlert" style="display: none;">
+                    <p id="successAlertMessage">Redirecting to payment...</p>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <span id="submitBtnText">Proceed to Payment</span>
+                    <span class="loading-spinner" id="loadingSpinner" style="display: none;"></span>
+                </button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 id="footerTitle">b hotel</h3>
+                    <p id="footerDesc">Experience authentic sushi craftsmanship</p>
+                </div>
+                <div class="footer-section">
+                    <h4 id="footerContact">Contact</h4>
+                    <p>info@bhotel.com</p>
+                    <p>+81 3-XXXX-XXXX</p>
+                </div>
+                <div class="footer-section">
+                    <h4 id="footerHours">Hours</h4>
+                    <p id="footerHoursTue">Tue-Sun: 11AM - 10PM</p>
+                    <p id="footerHoursMon">Closed Mondays</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p id="footerCopy">&copy; 2025 b hotel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/api.js"></script>
+    <script>
+        // ============================================
+        // Language Management
+        // ============================================
+        const TRANSLATIONS = {
+            en: {
+                // Page titles and labels
+                heroLabel: 'BOOKING',
+                heroTitle: 'Reserve Your Experience',
+                labelDate: 'Selected Date',
+                labelName: 'Name',
+                labelEmail: 'Email',
+                labelPhone: 'Phone',
+                labelAdults: 'Number of Adults',
+                labelChildren: 'Number of Children',
+                labelAllergies: 'Allergies / Special Requests',
+                labelLanguage: 'Confirmation Language',
+                allergy_placeholder: 'Please let us know about any dietary restrictions or special requests...',
+
+                // Button and links
+                backLink: '← Back to Calendar',
+                submitBtn: 'Proceed to Payment',
+                processingBtn: 'Processing...',
+
+                // Pricing
+                pricingTitle: 'Pricing Summary',
+                pricingAdults: 'Adults',
+                pricingChildren: 'Children',
+                pricingTotal: 'Total',
+
+                // Validation messages
+                groupSizeMessage: 'Group size must be between 2 and 8 people.',
+                errorRequired: 'This field is required.',
+                errorInvalidEmail: 'Please enter a valid email address.',
+                errorInvalidPhone: 'Please enter a valid phone number.',
+                errorGroupSize: 'Group size must be between 2 and 8 people.',
+
+                // Form notices
+                phone_placeholder: '+81 XX-XXXX-XXXX',
+                required_asterisk: '*',
+
+                // API errors
+                errorGeneral: 'An error occurred. Please try again.',
+                errorNetwork: 'Network error. Please check your connection and try again.',
+                errorCheckout: 'Failed to create checkout session. Please try again.',
+                successRedirect: 'Redirecting to payment...',
+
+                // Footer
+                footerTitle: 'b hotel',
+                footerDesc: 'Experience authentic sushi craftsmanship',
+                footerContact: 'Contact',
+                footerHours: 'Hours',
+                footerHoursTue: 'Tue-Sun: 11AM - 10PM',
+                footerHoursMon: 'Closed Mondays',
+                footerCopy: '© 2025 b hotel. All rights reserved.'
+            },
+            ja: {
+                // Page titles and labels
+                heroLabel: '予約',
+                heroTitle: '体験を予約する',
+                labelDate: '選択した日付',
+                labelName: 'お名前',
+                labelEmail: 'メールアドレス',
+                labelPhone: '電話番号',
+                labelAdults: '大人の人数',
+                labelChildren: 'お子様の人数',
+                labelAllergies: 'アレルギー・特別なリクエスト',
+                labelLanguage: '確認メール言語',
+                allergy_placeholder: 'アレルギーや特別なリクエストについて教えてください...',
+
+                // Button and links
+                backLink: '← カレンダーに戻る',
+                submitBtn: 'お支払いへ進む',
+                processingBtn: '処理中...',
+
+                // Pricing
+                pricingTitle: '料金概要',
+                pricingAdults: '大人',
+                pricingChildren: 'お子様',
+                pricingTotal: '合計',
+
+                // Validation messages
+                groupSizeMessage: 'グループサイズは2～8人である必要があります。',
+                errorRequired: 'この項目は必須です。',
+                errorInvalidEmail: '有効なメールアドレスを入力してください。',
+                errorInvalidPhone: '有効な電話番号を入力してください。',
+                errorGroupSize: 'グループサイズは2～8人である必要があります。',
+
+                // Form notices
+                phone_placeholder: '+81 XX-XXXX-XXXX',
+                required_asterisk: '*',
+
+                // API errors
+                errorGeneral: 'エラーが発生しました。もう一度試してください。',
+                errorNetwork: 'ネットワークエラー。接続を確認して、もう一度試してください。',
+                errorCheckout: 'チェックアウトセッションの作成に失敗しました。もう一度試してください。',
+                successRedirect: 'お支払いページにリダイレクト中...',
+
+                // Footer
+                footerTitle: 'b hotel',
+                footerDesc: '本物の寿司職人の技を体験',
+                footerContact: 'お問い合わせ',
+                footerHours: '営業時間',
+                footerHoursTue: '火～日: 11時～22時',
+                footerHoursMon: '月曜日休業',
+                footerCopy: '© 2025 b hotel. すべての権利を保有。'
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            updatePageTranslations();
+            localStorage.setItem('preferredLanguage', lang);
+            updateLanguageToggle();
+        }
+
+        function updateLanguageToggle() {
+            const enBtn = document.querySelector('.lang-en');
+            const jaBtn = document.querySelector('.lang-ja');
+            enBtn.classList.toggle('active', currentLanguage === 'en');
+            jaBtn.classList.toggle('active', currentLanguage === 'ja');
+        }
+
+        function updatePageTranslations() {
+            const t = TRANSLATIONS[currentLanguage];
+
+            // Hero
+            document.getElementById('heroLabel').textContent = t.heroLabel;
+            document.getElementById('heroTitle').textContent = t.heroTitle;
+
+            // Form labels
+            document.getElementById('labelDate').textContent = t.labelDate;
+            document.getElementById('labelName').textContent = t.labelName + ' ' + t.required_asterisk;
+            document.getElementById('labelEmail').textContent = t.labelEmail + ' ' + t.required_asterisk;
+            document.getElementById('labelPhone').textContent = t.labelPhone;
+            document.getElementById('labelAdults').textContent = t.labelAdults + ' ' + t.required_asterisk;
+            document.getElementById('labelChildren').textContent = t.labelChildren;
+            document.getElementById('labelAllergies').textContent = t.labelAllergies;
+            document.getElementById('labelLanguage').textContent = t.labelLanguage;
+
+            // Placeholders
+            document.getElementById('phone').placeholder = t.phone_placeholder;
+            document.getElementById('allergies').placeholder = t.allergy_placeholder;
+
+            // Pricing summary
+            document.getElementById('pricingTitle').textContent = t.pricingTitle;
+            document.getElementById('pricingAdultsLabel').textContent = t.pricingAdults;
+            document.getElementById('pricingChildrenLabel').textContent = t.pricingChildren;
+            document.getElementById('pricingTotalLabel').textContent = t.pricingTotal;
+
+            // Buttons and links
+            document.getElementById('backLink').textContent = t.backLink;
+            const submitBtnText = document.getElementById('submitBtnText');
+            if (!submitBtnText.closest('button').disabled) {
+                submitBtnText.textContent = t.submitBtn;
+            }
+
+            // Group size notice
+            document.getElementById('groupSizeMessage').textContent = t.groupSizeMessage;
+
+            // Footer
+            document.querySelector('.footer-section h3').textContent = t.footerTitle;
+            document.querySelectorAll('.footer-section p')[0].textContent = t.footerDesc;
+            document.querySelectorAll('.footer-section h4')[0].textContent = t.footerContact;
+            document.querySelectorAll('.footer-section p')[1].textContent = 'info@bhotel.com';
+            document.querySelectorAll('.footer-section p')[2].textContent = '+81 3-XXXX-XXXX';
+            document.querySelectorAll('.footer-section h4')[1].textContent = t.footerHours;
+            document.getElementById('footerHoursTue').textContent = t.footerHoursTue;
+            document.getElementById('footerHoursMon').textContent = t.footerHoursMon;
+            document.getElementById('footerCopy').textContent = t.footerCopy;
+        }
+
+        // ============================================
+        // Initialize on page load
+        // ============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load language preference
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'en';
+            setLanguage(savedLanguage);
+
+            // Parse URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const dateParam = urlParams.get('date');
+            const langParam = urlParams.get('lang');
+
+            if (langParam && (langParam === 'en' || langParam === 'ja')) {
+                setLanguage(langParam);
+            }
+
+            if (dateParam) {
+                loadDateFromURL(dateParam);
+            } else {
+                // Redirect to calendar if no date provided
+                window.location.href = 'index.html';
+            }
+
+            // Initialize form listeners
+            setupFormListeners();
+            updatePricingSummary();
+        });
+
+        // ============================================
+        // Date Handling
+        // ============================================
+        function loadDateFromURL(dateString) {
+            try {
+                const date = new Date(dateString + 'T00:00:00');
+                if (isNaN(date.getTime())) {
+                    throw new Error('Invalid date');
+                }
+                displayDate(date, dateString);
+            } catch (e) {
+                console.error('Invalid date parameter:', dateString);
+                window.location.href = 'index.html';
+            }
+        }
+
+        function displayDate(date, dateString) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = date.toLocaleDateString(
+                currentLanguage === 'ja' ? 'ja-JP' : 'en-US',
+                options
+            );
+
+            document.getElementById('selectedDate').value = formattedDate;
+            document.getElementById('dateValue').value = dateString;
+            document.getElementById('heroDate').textContent = formattedDate;
+        }
+
+        // ============================================
+        // Form Validation and Submission
+        // ============================================
+        function setupFormListeners() {
+            const form = document.getElementById('bookingForm');
+            const adultsInput = document.getElementById('adults');
+            const childrenInput = document.getElementById('children');
+
+            // Update pricing on guest count change
+            adultsInput.addEventListener('change', updatePricingSummary);
+            childrenInput.addEventListener('change', updatePricingSummary);
+
+            // Form submission
+            form.addEventListener('submit', handleFormSubmit);
+
+            // Language toggle
+            document.querySelectorAll('.lang-toggle span[data-lang]').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                });
+            });
+        }
+
+        function updatePricingSummary() {
+            const adults = parseInt(document.getElementById('adults').value) || 0;
+            const children = parseInt(document.getElementById('children').value) || 0;
+            const totalPeople = adults + children;
+
+            const ADULT_PRICE = 9800;
+            const CHILD_PRICE = 5000;
+
+            const adultsTotal = adults * ADULT_PRICE;
+            const childrenTotal = children * CHILD_PRICE;
+            const grandTotal = adultsTotal + childrenTotal;
+
+            // Update pricing display
+            const t = TRANSLATIONS[currentLanguage];
+            document.getElementById('pricingAdultsValue').textContent =
+                `${adults} × ¥${ADULT_PRICE.toLocaleString()} = ¥${adultsTotal.toLocaleString()}`;
+            document.getElementById('pricingChildrenValue').textContent =
+                `${children} × ¥${CHILD_PRICE.toLocaleString()} = ¥${childrenTotal.toLocaleString()}`;
+            document.getElementById('pricingTotalValue').textContent = `¥${grandTotal.toLocaleString()}`;
+
+            // Validate group size
+            const notice = document.getElementById('groupSizeNotice');
+            if (totalPeople < 2 || totalPeople > 8) {
+                notice.style.display = 'block';
+                document.getElementById('errorChildren').textContent =
+                    totalPeople < 2 ? t.errorGroupSize : (totalPeople > 8 ? t.errorGroupSize : '');
+                document.getElementById('errorAdults').textContent =
+                    totalPeople < 2 ? t.errorGroupSize : (totalPeople > 8 ? t.errorGroupSize : '');
+            } else {
+                notice.style.display = 'none';
+                document.getElementById('errorChildren').textContent = '';
+                document.getElementById('errorAdults').textContent = '';
+            }
+        }
+
+        function validateForm() {
+            const t = TRANSLATIONS[currentLanguage];
+            let isValid = true;
+
+            // Validate name
+            const name = document.getElementById('name').value.trim();
+            if (!name) {
+                document.getElementById('errorName').textContent = t.errorRequired;
+                isValid = false;
+            } else {
+                document.getElementById('errorName').textContent = '';
+            }
+
+            // Validate email
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                document.getElementById('errorEmail').textContent = t.errorRequired;
+                isValid = false;
+            } else if (!emailRegex.test(email)) {
+                document.getElementById('errorEmail').textContent = t.errorInvalidEmail;
+                isValid = false;
+            } else {
+                document.getElementById('errorEmail').textContent = '';
+            }
+
+            // Validate phone (if provided)
+            const phone = document.getElementById('phone').value.trim();
+            if (phone && !/^[\d\s\-\+\(\)]+$/.test(phone)) {
+                document.getElementById('errorPhone').textContent = t.errorInvalidPhone;
+                isValid = false;
+            } else {
+                document.getElementById('errorPhone').textContent = '';
+            }
+
+            // Validate group size
+            const adults = parseInt(document.getElementById('adults').value) || 0;
+            const children = parseInt(document.getElementById('children').value) || 0;
+            const totalPeople = adults + children;
+
+            if (totalPeople < 2 || totalPeople > 8) {
+                document.getElementById('errorAdults').textContent = t.errorGroupSize;
+                document.getElementById('errorChildren').textContent = t.errorGroupSize;
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const t = TRANSLATIONS[currentLanguage];
+
+            // Clear previous errors
+            document.getElementById('errorAlert').style.display = 'none';
+            document.getElementById('successAlert').style.display = 'none';
+
+            // Validate form
+            if (!validateForm()) {
+                return;
+            }
+
+            // Disable submit button
+            const submitBtn = document.getElementById('submitBtn');
+            const submitBtnText = document.getElementById('submitBtnText');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+
+            submitBtn.disabled = true;
+            submitBtnText.textContent = t.processingBtn;
+            loadingSpinner.style.display = 'inline-block';
+
+            // Prepare form data
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim() || null,
+                adults: parseInt(document.getElementById('adults').value),
+                children: parseInt(document.getElementById('children').value),
+                date: document.getElementById('dateValue').value,
+                allergies: document.getElementById('allergies').value.trim() || null,
+                language: document.getElementById('language').value
+            };
+
+            try {
+                // Call API to create checkout session
+                if (typeof createCheckoutSession === 'undefined') {
+                    throw new Error('API not loaded');
+                }
+
+                const response = await createCheckoutSession(formData);
+
+                if (!response || !response.url) {
+                    throw new Error(t.errorCheckout);
+                }
+
+                // Show success message
+                document.getElementById('successAlert').style.display = 'block';
+                document.getElementById('successAlertMessage').textContent = t.successRedirect;
+
+                // Redirect to Stripe checkout
+                setTimeout(() => {
+                    window.location.href = response.url;
+                }, 500);
+
+            } catch (error) {
+                console.error('Booking error:', error);
+
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtnText.textContent = t.submitBtn;
+                loadingSpinner.style.display = 'none';
+
+                // Show error message
+                document.getElementById('errorAlert').style.display = 'block';
+                let errorMessage = t.errorGeneral;
+
+                if (error.message === 'Network error') {
+                    errorMessage = t.errorNetwork;
+                } else if (error.message === 'API not loaded') {
+                    errorMessage = 'API script not loaded. Please refresh the page.';
+                } else if (error.message.includes('checkout')) {
+                    errorMessage = t.errorCheckout;
+                }
+
+                document.getElementById('errorAlertMessage').textContent = errorMessage;
+                window.scrollTo(0, 0);
+            }
+        }
+    </script>
+</body>
+</html>

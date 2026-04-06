@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Cancelled - b hotel Sushi Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;600&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="navbar-content">
+                <div class="logo">
+                    <span class="logo-b">b</span> hotel
+                </div>
+                <button class="lang-toggle" id="langToggle">JP / EN</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="payment-cancel-main">
+            <div class="cancel-content">
+                <div class="warning-icon">⚠</div>
+                <h1 class="cancel-title" data-en="Payment Cancelled" data-jp="お支払いがキャンセルされました">Payment Cancelled</h1>
+                <p class="cancel-message" data-en="Your booking has not been completed. No charges have been made." data-jp="予約は完了していません。請求は発生していません。">Your booking has not been completed. No charges have been made.</p>
+
+                <!-- Button Group -->
+                <div class="button-group">
+                    <button class="button button-secondary" onclick="history.back()" data-en="Try Again" data-jp="もう一度試す">Try Again</button>
+                    <a href="index.html" class="button button-primary" data-en="Back to Home" data-jp="ホームに戻る">Back to Home</a>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="footer-copyright">© b hotel — Koban-dori Goju (交番通り五十)</p>
+                <a href="privacy.html" class="footer-link" data-en="Privacy Policy" data-jp="プライバシーポリシー">Privacy Policy</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePageLanguage();
+        });
+
+        function updatePageLanguage() {
+            const lang = getLang();
+            document.querySelectorAll('[data-en][data-jp]').forEach(element => {
+                const text = lang === 'en' ? element.getAttribute('data-en') : element.getAttribute('data-jp');
+                element.textContent = text;
+            });
+            document.documentElement.lang = lang;
+        }
+
+        document.getElementById('langToggle').addEventListener('click', function() {
+            const currentLang = getLang();
+            const newLang = currentLang === 'en' ? 'jp' : 'en';
+            localStorage.setItem('lang', newLang);
+            updatePageLanguage();
+        });
+    </script>
+</body>
+</html>
