@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking - b hotel Dashi & Sushi Experience</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            background-color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Header / Navbar */
+        .navbar {
+            background-color: #3d2c1e;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+
+        .navbar-brand .b-logo {
+            color: #e8a23a;
+            margin-right: 0.25rem;
+        }
+
+        .navbar-controls {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .language-toggle {
+            display: flex;
+            gap: 1rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .language-toggle button {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .language-toggle button.active {
+            color: #e8a23a;
+            border-bottom: 2px solid #e8a23a;
+        }
+
+        .language-toggle button:hover {
+            color: #e8a23a;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(61, 44, 30, 0.85) 0%, rgba(90, 70, 50, 0.85) 100%), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="pattern" x="0" y="0" width="200" height="200" patternUnits="userSpaceOnUse"><rect width="200" height="200" fill="%233d2c1e"/><circle cx="100" cy="100" r="50" fill="%235a4632" opacity="0.3"/></pattern></defs><rect width="1200" height="600" fill="%233d2c1e"/><rect width="1200" height="600" fill="url(%23pattern)"/></svg>');
+            background-attachment: fixed;
+            color: #fff;
+            padding: 5rem 2rem;
+            text-align: center;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-label {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: #e8a23a;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-style: italic;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero {
+                padding: 3rem 1.5rem;
+            }
+        }
+
+        /* Section Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            color: #e8a23a;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            color: #1a1a1a;
+        }
+
+        /* Experience Cards Grid */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .experience-card {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .experience-card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .experience-card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1a1a1a;
+        }
+
+        .experience-card-content {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Pricing Cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background-color: #f9f9f9;
+            padding: 2.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .pricing-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+        }
+
+        .pricing-card-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: #e8a23a;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* Calendar Section */
+        .calendar-container {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-month {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            flex: 1;
+            text-align: center;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .calendar-nav button {
+            background-color: #e8a23a;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .calendar-nav button:hover {
+            background-color: #d49230;
+        }
+
+        .calendar-nav button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Calendar Grid */
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-weekday {
+            text-align: center;
+            font-weight: 600;
+            color: #666;
+            padding: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            background-color: #fff;
+            border: 1px solid #e0e0e0;
+            color: #999;
+            font-size: 0.9rem;
+            position: relative;
+            cursor: default;
+        }
+
+        .calendar-day.empty {
+            background-color: transparent;
+            border: none;
+        }
+
+        .calendar-day.other-month {
+            color: #ccc;
+        }
+
+        .calendar-day.available {
+            cursor: pointer;
+            background-color: #f0f8f0;
+            border-color: #4caf50;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .calendar-day.available::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #4caf50;
+            border-radius: 50%;
+            bottom: 6px;
+            right: 6px;
+        }
+
+        .calendar-day.available:hover {
+            background-color: #e8f5e9;
+            box-shadow: 0 2px 4px rgba(76, 175, 80, 0.2);
+        }
+
+        .calendar-day.few-spots {
+            cursor: pointer;
+            background-color: #fff8f0;
+            border-color: #ff9800;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .calendar-day.few-spots::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #ff9800;
+            border-radius: 50%;
+            bottom: 6px;
+            right: 6px;
+        }
+
+        .calendar-day.few-spots:hover {
+            background-color: #fff5e6;
+            box-shadow: 0 2px 4px rgba(255, 152, 0, 0.2);
+        }
+
+        .calendar-day.full {
+            background-color: #ffebee;
+            border-color: #f44336;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.full::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #f44336;
+            border-radius: 50%;
+            bottom: 6px;
+            right: 6px;
+        }
+
+        /* Calendar Legend */
+        .calendar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e0e0e0;
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .legend-dot.available {
+            background-color: #4caf50;
+        }
+
+        .legend-dot.few {
+            background-color: #ff9800;
+        }
+
+        .legend-dot.full {
+            background-color: #f44336;
+        }
+
+        /* Rules & Cancellation Section */
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .rules-card {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #e8a23a;
+        }
+
+        .rules-card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: #1a1a1a;
+        }
+
+        .rules-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .rules-card li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .rules-card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #e8a23a;
+            font-weight: bold;
+        }
+
+        .cancellation-row {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .cancellation-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .cancellation-period {
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .cancellation-charge {
+            color: #666;
+        }
+
+        .cancellation-charge.charge {
+            color: #f44336;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #3d2c1e;
+            color: #fff;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #e8a23a;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        /* Loading & Error States */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #e0e0e0;
+            border-radius: 50%;
+            border-top-color: #e8a23a;
+            animation: spin 0.6s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .error {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #f44336;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .navbar-controls {
+                gap: 1rem;
+            }
+
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .experience-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .calendar-legend {
+                gap: 1rem;
+            }
+
+            .rules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                gap: 1rem;
+            }
+        }
+
+        /* Hidden content for translations */
+        .ja {
+            display: none;
+        }
+
+        .ja.active {
+            display: inline;
+        }
+
+        .en.active {
+            display: inline;
+        }
+
+        /* Ensure proper spacing */
+        section {
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header / Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span class="b-logo">b</span> hotel
+        </div>
+        <div class="navbar-controls">
+            <div class="language-toggle">
+                <button id="lang-en" class="lang-btn active" data-lang="en">EN</button>
+                <button id="lang-jp" class="lang-btn" data-lang="jp">JP</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-label en active">BOOKING</div>
+        <div class="hero-label ja">予約</div>
+        <h1 class="hero-title">
+            <span class="en active">Dashi & Sushi Experience</span>
+            <span class="ja">出汁と寿司体験</span>
+        </h1>
+        <p class="hero-subtitle">
+            <span class="en active">An authentic Japanese culinary journey at Koban-dori Goju</span>
+            <span class="ja">交番通り五十での本格日本料理体験</span>
+        </p>
+    </section>
+
+    <!-- What's Included Section -->
+    <section class="container">
+        <div class="section-label en active">WHAT'S INCLUDED</div>
+        <div class="section-label ja">体験内容</div>
+        <h2 class="section-title">
+            <span class="en active">Your Experience</span>
+            <span class="ja">あなたの体験</span>
+        </h2>
+
+        <div class="experience-grid">
+            <div class="experience-card">
+                <div class="experience-card-icon">🕐</div>
+                <h3 class="experience-card-title">
+                    <span class="en active">Duration</span>
+                    <span class="ja">所要時間</span>
+                </h3>
+                <p class="experience-card-content">11:00 AM - 1:00 PM<br><span class="en active">(approx. 2 hours)</span><span class="ja">（約2時間）</span></p>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-card-icon">👥</div>
+                <h3 class="experience-card-title">
+                    <span class="en active">Group Size</span>
+                    <span class="ja">グループ人数</span>
+                </h3>
+                <p class="experience-card-content"><span class="en active">2-8 guests per session</span><span class="ja">1セッション2～8名</span></p>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-card-icon">📅</div>
+                <h3 class="experience-card-title">
+                    <span class="en active">Schedule</span>
+                    <span class="ja">スケジュール</span>
+                </h3>
+                <p class="experience-card-content"><span class="en active">Mondays & Thursdays only</span><span class="ja">月曜日・木曜日のみ</span></p>
+            </div>
+
+            <div class="experience-card">
+                <div class="experience-card-icon">🎁</div>
+                <h3 class="experience-card-title">
+                    <span class="en active">Souvenir Set</span>
+                    <span class="ja">お土産セット</span>
+                </h3>
+                <p class="experience-card-content"><span class="en active">Dashi pack, rice, salt & plate</span><span class="ja">出汁パック、米、塩＆皿</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="container">
+        <div class="section-label en active">PRICING</div>
+        <div class="section-label ja">料金</div>
+        <h2 class="section-title">
+            <span class="en active">Per Person</span>
+            <span class="ja">お一人様</span>
+        </h2>
+
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 class="pricing-card-title">
+                    <span class="en active">Adult</span>
+                    <span class="ja">大人</span>
+                </h3>
+                <div class="pricing-card-price">¥9,800</div>
+                <p class="pricing-card-label">
+                    <span class="en active">per person</span>
+                    <span class="ja">お一人様</span>
+                </p>
+            </div>
+
+            <div class="pricing-card">
+                <h3 class="pricing-card-title">
+                    <span class="en active">Child</span>
+                    <span class="ja">お子様</span>
+                </h3>
+                <div class="pricing-card-price">¥5,000</div>
+                <p class="pricing-card-label">
+                    <span class="en active">Elementary & under</span>
+                    <span class="ja">小学生以下一名</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Availability / Calendar Section -->
+    <section class="container">
+        <div class="section-label en active">SELECT A DATE</div>
+        <div class="section-label ja">日付を選択</div>
+        <h2 class="section-title">
+            <span class="en active">Availability</span>
+            <span class="ja">空き状況</span>
+        </h2>
+
+        <div id="calendar-error" class="error" style="display: none;"></div>
+        <div id="calendar-loading" class="loading" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p style="margin-top: 0.5rem;">
+                <span class="en active">Loading availability...</span>
+                <span class="ja">空き状況を読み込み中...</span>
+            </p>
+        </div>
+
+        <div class="calendar-container" id="calendar-container">
+            <div class="calendar-header">
+                <button class="calendar-nav" id="prev-month" title="Previous month">&larr;</button>
+                <h3 class="calendar-month" id="calendar-month-year"></h3>
+                <button class="calendar-nav" id="next-month" title="Next month">&rarr;</button>
+            </div>
+
+            <div class="calendar-weekdays">
+                <div class="calendar-weekday">
+                    <span class="en active">SUN</span>
+                    <span class="ja">日</span>
+                </div>
+                <div class="calendar-weekday">
+                    <span class="en active">MON</span>
+                    <span class="ja">月</span>
+                </div>
+                <div class="calendar-weekday">
+                    <span class="en active">TUE</span>
+                    <span class="ja">火</span>
+                </div>
+                <div class="calendar-weekday">
+                    <span class="en active">WED</span>
+                    <span class="ja">水</span>
+                </div>
+                <div class="calendar-weekday">
+                    <span class="en active">THU</span>
+                    <span class="ja">木</span>
+                </div>
+                <div class="calendar-weekday">
+                    <span class="en active">FRI</span>
+                    <span class="ja">金</span>
+                </div>
+                <div class="calendar-weekday">
+                    <span class="en active">SAT</span>
+                    <span class="ja">土</span>
+                </div>
+            </div>
+
+            <div class="calendar-grid" id="calendar-grid">
+                <!-- Generated by JavaScript -->
+            </div>
+
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <span class="legend-dot available"></span>
+                    <span>
+                        <span class="en active">Available</span>
+                        <span class="ja">空きあり</span>
+                    </span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot few"></span>
+                    <span>
+                        <span class="en active">Few spots</span>
+                        <span class="ja">残りわずか</span>
+                    </span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-dot full"></span>
+                    <span>
+                        <span class="en active">Full</span>
+                        <span class="ja">満席</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Important Information Section -->
+    <section class="container">
+        <div class="section-label en active">IMPORTANT INFORMATION</div>
+        <div class="section-label ja">重要情報</div>
+        <h2 class="section-title">
+            <span class="en active">Rules & Cancellation Policy</span>
+            <span class="ja">ルール＆キャンセルポリシー</span>
+        </h2>
+
+        <div class="rules-grid">
+            <div class="rules-card">
+                <h3 class="rules-card-title">
+                    <span class="en active">Booking Rules</span>
+                    <span class="ja">予約ルール</span>
+                </h3>
+                <ul>
+                    <li>
+                        <strong><span class="en active">Available on</span><span class="ja">利用可能日</span>:</strong> <span class="en active">Monday & Thursday only</span><span class="ja">月曜日・木曜日のみ</span>
+                    </li>
+                    <li>
+                        <strong><span class="en active">Time</span><span class="ja">時間</span>:</strong> 11:00 AM - 1:00 PM
+                    </li>
+                    <li>
+                        <strong><span class="en active">Group Size</span><span class="ja">グループ人数</span>:</strong> <span class="en active">2-8 guests</span><span class="ja">2～8名</span>
+                    </li>
+                    <li>
+                        <strong><span class="en active">Booking Deadline</span><span class="ja">予約期限</span>:</strong> <span class="en active">3 days before at 11:00 AM JST</span><span class="ja">3日前の午前11時（日本時間）</span>
+                    </li>
+                    <li>
+                        <strong><span class="en active">Allergies</span><span class="ja">アレルギー</span>:</strong> <span class="en active">Please inform us of any dietary restrictions</span><span class="ja">食物アレルギーがあればお知らせください</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="rules-card">
+                <h3 class="rules-card-title">
+                    <span class="en active">Cancellation Policy</span>
+                    <span class="ja">キャンセルポリシー</span>
+                </h3>
+                <div class="cancellation-row">
+                    <div class="cancellation-period">
+                        <span class="en active">3+ days before (before 11:00 AM JST)</span>
+                        <span class="ja">3日以上前（午前11時まで日本時間）</span>
+                    </div>
+                    <div class="cancellation-charge">
+                        <span class="en active">Free cancellation</span>
+                        <span class="ja">無料キャンセル</span>
+                    </div>
+                </div>
+                <div class="cancellation-row">
+                    <div class="cancellation-period">
+                        <span class="en active">2 days before - day of booking</span>
+                        <span class="ja">2日前～予約日当日</span>
+                    </div>
+                    <div class="cancellation-charge charge">
+                        <span class="en active">100% charge</span>
+                        <span class="ja">100% の料金がかかります</span>
+                    </div>
+                </div>
+                <div class="cancellation-row">
+                    <div class="cancellation-period">
+                        <span class="en active">Refund</span>
+                        <span class="ja">返金</span>
+                    </div>
+                    <div class="cancellation-charge">
+                        <span class="en active">Processed within a few business days</span>
+                        <span class="ja">数営業日以内に処理されます</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">© b hotel — Koban-dori Goju (交番通り五十)</p>
+            <div class="footer-links">
+                <a href="privacy.html">
+                    <span class="en active">Privacy Policy</span>
+                    <span class="ja">プライバシーポリシー</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script>
+        // State management
+        let currentMonth = new Date();
+        let currentLang = 'en';
+        let availabilityData = {};
+
+        // Language toggle
+        const langButtons = document.querySelectorAll('.lang-btn');
+        langButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const newLang = button.dataset.lang;
+                setLanguage(newLang);
+            });
+        });
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('sushi-booking-lang', lang);
+
+            // Update button states
+            langButtons.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update visible content
+            document.querySelectorAll('.en, .ja').forEach(el => {
+                el.classList.toggle('active',
+                    (lang === 'en' && el.classList.contains('en')) ||
+                    (lang === 'jp' && el.classList.contains('ja'))
+                );
+            });
+        }
+
+        // Initialize language from localStorage
+        const savedLang = localStorage.getItem('sushi-booking-lang') || 'en';
+        setLanguage(savedLang);
+
+        // Calendar functionality
+        const calendarMonthYear = document.getElementById('calendar-month-year');
+        const calendarGrid = document.getElementById('calendar-grid');
+        const prevMonthBtn = document.getElementById('prev-month');
+        const nextMonthBtn = document.getElementById('next-month');
+        const calendarLoading = document.getElementById('calendar-loading');
+        const calendarError = document.getElementById('calendar-error');
+
+        prevMonthBtn.addEventListener('click', () => {
+            currentMonth.setMonth(currentMonth.getMonth() - 1);
+            renderCalendar();
+        });
+
+        nextMonthBtn.addEventListener('click', () => {
+            currentMonth.setMonth(currentMonth.getMonth() + 1);
+            renderCalendar();
+        });
+
+        function renderCalendar() {
+            const year = currentMonth.getFullYear();
+            const month = currentMonth.getMonth();
+
+            // Update month/year display
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            const monthNamesJa = [
+                '1月', '2月', '3月', '4月', '5月', '6月',
+                '7月', '8月', '9月', '10月', '11月', '12月'
+            ];
+
+            const monthText = currentLang === 'en'
+                ? `${monthNames[month]} ${year}`
+                : `${year}年${monthNamesJa[month]}`;
+            calendarMonthYear.textContent = monthText;
+
+            // Clear calendar
+            calendarGrid.innerHTML = '';
+
+            // Get first day of month and number of days
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+            // Add empty cells for days before month starts
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day empty';
+                calendarGrid.appendChild(emptyDay);
+            }
+
+            // Add days of month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+                dayEl.textContent = day;
+
+                // Check if date is available
+                const dateData = availabilityData[dateStr];
+                if (dateData) {
+                    if (dateData.status === 'available') {
+                        dayEl.classList.add('available');
+                        dayEl.addEventListener('click', () => {
+                            navigateToBooking(dateStr);
+                        });
+                    } else if (dateData.status === 'few') {
+                        dayEl.classList.add('few-spots');
+                        dayEl.addEventListener('click', () => {
+                            navigateToBooking(dateStr);
+                        });
+                    } else if (dateData.status === 'full') {
+                        dayEl.classList.add('full');
+                    }
+                }
+
+                calendarGrid.appendChild(dayEl);
+            }
+        }
+
+        function navigateToBooking(dateStr) {
+            const langCode = currentLang === 'jp' ? 'ja' : 'en';
+            window.location.href = `booking.html?date=${dateStr}&lang=${langCode}`;
+        }
+
+        // Load availability data from API
+        async function loadAvailability() {
+            calendarLoading.style.display = 'block';
+            calendarError.style.display = 'none';
+
+            try {
+                // Call getAvailability from api.js
+                if (typeof getAvailability !== 'function') {
+                    throw new Error('API function not available');
+                }
+
+                availabilityData = await getAvailability();
+                calendarLoading.style.display = 'none';
+                renderCalendar();
+            } catch (error) {
+                console.error('Failed to load availability:', error);
+                calendarLoading.style.display = 'none';
+                calendarError.style.display = 'block';
+                calendarError.textContent = currentLang === 'en'
+                    ? 'Failed to load availability. Please refresh the page.'
+                    : 'ご利用いただけません。ページを更新してください。';
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAvailability();
+        });
+    </script>
+</body>
+</html>
