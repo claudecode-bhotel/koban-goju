@@ -511,7 +511,7 @@
         }
 
         .rules-card li::before {
-            content: '&#8226;';
+            content: '\2022';
             position: absolute;
             left: 0;
             color: #e8a23a;
@@ -768,6 +768,9 @@
         }
 
         /* Hidden content for translations */
+        .en {
+            display: none;
+        }
         .ja {
             display: none;
         }
@@ -1147,7 +1150,7 @@
             const monthText = currentLang === 'en'
                 ? `${monthNames[month]} ${year}`
                 : `${year}&#24180;${monthNamesJa[month]}`;
-            calendarMonthYear.textContent = monthText;
+            calendarMonthYear.innerHTML = monthText;
 
             // Clear calendar
             calendarGrid.innerHTML = '';
@@ -1224,7 +1227,7 @@
                 console.error('Failed to load availability:', error);
                 calendarLoading.style.display = 'none';
                 calendarError.style.display = 'block';
-                calendarError.textContent = currentLang === 'en'
+                calendarError.innerHTML = currentLang === 'en'
                     ? 'Failed to load availability. Please refresh the page.'
                     : '&#12372;&#21033;&#29992;&#12356;&#12383;&#12384;&#12369;&#12414;&#12379;&#12435;&#12290;&#12506;&#12540;&#12472;&#12434;&#26356;&#26032;&#12375;&#12390;&#12367;&#12384;&#12373;&#12356;&#12290;';
             }
