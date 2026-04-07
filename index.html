@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?famil=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         html, body {
             height: 100%;
@@ -767,7 +767,9 @@
             }
         }
 
-        /* Hidden content for translations */
+        /* Japanese font: M PLUS Rounded 1c (free alternative to Tsukushi A Round Gothic) */
+    .ja.active, .ja.active * { font-family: 'M PLUS Rounded 1c', sans-serif !important; }
+    /* Hidden content for translations */
         .en {
             display: none !important;
         }
@@ -821,68 +823,20 @@
         </p>
     </section>
 
-    <!-- What's Included Section -->
-    <section class="container">
-        <div class="section-label en active">WHAT'S INCLUDED</div>
-        <div class="section-label ja">&#20307;&#39443;&#20869;&#23481;</div>
-        <h2 class="section-title">
-            <span class="en active">Your Experience</span>
-            <span class="ja">&#12354;&#12394;&#12383;&#12398;&#20307;&#39443;</span>
-        </h2>
-
-        <div class="experience-grid">
-            <div class="experience-card">
-                <div class="experience-card-icon">&#128336;</div>
-                <h3 class="experience-card-title">
-                    <span class="en active">Duration</span>
-                    <span class="ja">&#25152;&#35201;&#26178;&#38291;</span>
-                </h3>
-                <p class="experience-card-content">11:00 AM - 1:00 PM<br><span class="en active">(approx. 2 hours)</span><span class="ja">&#65288;&#32004;2&#26178;&#38291;&#65289;</span></p>
-            </div>
-
-            <div class="experience-card">
-                <div class="experience-card-icon">&#128101;</div>
-                <h3 class="experience-card-title">
-                    <span class="en active">Group Size</span>
-                    <span class="ja">&#12464;&#12523;&#12540;&#12503;&#20154;&#25968;</span>
-                </h3>
-                <p class="experience-card-content"><span class="en active">2-8 guests per session</span><span class="ja">1&#12475;&#12483;&#12471;&#12519;&#12531;2&#65374;8&#21517;</span></p>
-            </div>
-
-            <div class="experience-card">
-                <div class="experience-card-icon">&#128197;</div>
-                <h3 class="experience-card-title">
-                    <span class="en active">Schedule</span>
-                    <span class="ja">&#12473;&#12465;&#12472;&#12517;&#12540;&#12523;</span>
-                </h3>
-                <p class="experience-card-content"><span class="en active">Mondays & Thursdays only</span><span class="ja">&#26376;&#26332;&#26085;&#12539;&#26408;&#26332;&#26085;&#12398;&#12415;</span></p>
-            </div>
-
-            <div class="experience-card">
-                <div class="experience-card-icon">&#127873;</div>
-                <h3 class="experience-card-title">
-                    <span class="en active">Souvenir Set</span>
-                    <span class="ja">&#12362;&#22303;&#29987;&#12475;&#12483;&#12488;</span>
-                </h3>
-                <p class="experience-card-content"><span class="en active">Dashi pack, rice, salt & plate</span><span class="ja">&#20986;&#27713;&#12497;&#12483;&#12463;&#12289;&#31859;&#12289;&#22633;&#65286;&#30399;</span></p>
-            </div>
-        </div>
-    </section>
-
     <!-- Pricing Section -->
     <section class="container">
         <div class="section-label en active">PRICING</div>
         <div class="section-label ja">&#26009;&#37329;</div>
         <h2 class="section-title">
-            <span class="en active">Per Person</span>
-            <span class="ja">&#12362;&#19968;&#20154;&#27096;</span>
+            <span class="en active">Pricing</span>
+            <span class="ja">&#20516;&#27573;</span>
         </h2>
 
         <div class="pricing-grid">
             <div class="pricing-card">
                 <h3 class="pricing-card-title">
                     <span class="en active">Adult</span>
-                    <span class="ja">&#22823;&#20154;</span>
+                    <span class="ja">&#22823;&#20154;1&#21517;&#27096;</span>
                 </h3>
                 <div class="pricing-card-price">&#165;9,800</div>
                 <p class="pricing-card-label">
@@ -894,12 +848,12 @@
             <div class="pricing-card">
                 <h3 class="pricing-card-title">
                     <span class="en active">Child</span>
-                    <span class="ja">&#12362;&#23376;&#27096;</span>
+                    <span class="ja">&#23376;&#20379;1&#21517;&#27096;&#65288;&#23567;&#23398;&#29983;&#20197;&#19979;&#65289;</span>
                 </h3>
                 <div class="pricing-card-price">&#165;5,000</div>
                 <p class="pricing-card-label">
                     <span class="en active">Elementary & under</span>
-                    <span class="ja">&#23567;&#23398;&#29983;&#20197;&#19979;&#19968;&#21517;</span>
+                    <span class="ja">&#23567;&#23398;&#29983;&#20197;&#19979;</span>
                 </p>
             </div>
         </div>
@@ -910,8 +864,8 @@
         <div class="section-label en active">SELECT A DATE</div>
         <div class="section-label ja">&#26085;&#20184;&#12434;&#36984;&#25246;</div>
         <h2 class="section-title">
-            <span class="en active">Availability</span>
-            <span class="ja">&#31354;&#12365;&#29366;&#27841;</span>
+            <span class="en active">Select a Date</span>
+            <span class="ja">&#26085;&#20184;&#12434;&#36984;&#25246;</span>
         </h2>
 
         <div id="calendar-error" class="error" style="display: none;"></div>
@@ -1020,6 +974,10 @@
                         <strong><span class="en active">Booking Deadline</span><span class="ja">&#20104;&#32004;&#26399;&#38480;</span>:</strong> <span class="en active">3 days before at 11:00 AM JST</span><span class="ja">3&#26085;&#21069;&#12398;&#21320;&#21069;11&#26178;&#65288;&#26085;&#26412;&#26178;&#38291;&#65289;</span>
                     </li>
                     <li>
+                  <strong><span class="en active">Punctuality</span><span class="ja">&#26178;&#38291;&#21097;&#23432;</span>:</strong>
+                  <span class="en active">Please arrive on time. Guests arriving more than 15 minutes late may not be able to participate, as it may affect other guests’ experience.</span><span class="ja">&#38283;&#22987;&#26178;&#38291;&#12398;&#21097;&#23432;&#12434;&#12362;&#39000;&#12356;&#12356;&#12383;&#12375;&#12414;&#12377;&#12290;&#20182;&#12398;&#12362;&#23458;&#27096;&#12398;&#12372;&#20307;&#39443;&#12395;&#12418;&#24481;&#38911;&#12364;&#29983;&#12376;&#12414;&#12377;&#12383;&#12417;&#12289;15&#20998;&#20197;&#19978;&#12398;&#36941;&#21040;&#12398;&#22580;&#21512;&#12399;&#12469;&#12540;&#12499;&#12473;&#12398;&#12372;&#25552;&#20379;&#12364;&#12391;&#12365;&#12363;&#12397;&#12414;&#12377;&#12398;&#12391;&#20104;&#12417;&#12372;&#20102;&#25215;&#12367;&#12384;&#12373;&#12356;&#12290;</span>
+                </li>
+                <li>
                         <strong><span class="en active">Allergies</span><span class="ja">&#12450;&#12524;&#12523;&#12462;&#12540;</span>:</strong> <span class="en active">Please inform us of any dietary restrictions</span><span class="ja">&#39135;&#29289;&#12450;&#12524;&#12523;&#12462;&#12540;&#12364;&#12354;&#12428;&#12400;&#12362;&#30693;&#12425;&#12379;&#12367;&#12384;&#12373;&#12356;</span>
                     </li>
                 </ul>

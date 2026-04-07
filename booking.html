@@ -4,8 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserve Your Experience | b hotel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+  <style>
+    :lang(ja), .lang-ja.active { font-family: 'M PLUS Rounded 1c', sans-serif; }
+    .guest-counter-section { margin-bottom: 24px; border: 1px solid #e8e0d6; border-radius: 8px; overflow: hidden; background: #fff; }
+    .guest-counter-label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 10px; font-family: 'Inter', sans-serif; color: #3d2c1e; }
+    .guest-counter-row { display: flex; justify-content: space-between; align-items: center; padding: 18px 20px; border-bottom: 1px solid #f0ebe5; }
+    .guest-counter-row:last-child { border-bottom: none; }
+    .guest-info { display: flex; flex-direction: column; }
+    .guest-type { font-weight: 600; font-size: 15px; color: #3d2c1e; font-family: 'Inter', sans-serif; }
+    .guest-price-label { color: #6b5c50; font-size: 13px; font-family: 'Inter', sans-serif; margin-top: 2px; }
+    .counter-control { display: flex; align-items: center; gap: 16px; }
+    .counter-btn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #d4c8bc; background: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: #3d2c1e; line-height: 1; }
+    .counter-btn:hover { background: #f0e8dd; border-color: #e8a23a; }
+    .counter-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .counter-value { font-size: 18px; font-weight: 600; min-width: 28px; text-align: center; }
+    .payment-notice-box { background: #fff8e6; border: 1px solid #e8a23a; border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; font-size: 14px; font-family: 'Inter', sans-serif; color: #5a3d00; line-height: 1.6; }
+    .consent-text { font-size: 13px; color: #5a4a3e; font-family: 'Inter', sans-serif; line-height: 1.7; margin-bottom: 10px; }
+    .stripe-notice { font-size: 12px; color: #888; font-family: 'Inter', sans-serif; margin-bottom: 20px; text-align: center; }
+  </style>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -129,8 +147,12 @@
                 </div>
 
                 <!-- Submit Button -->
-                <button type="submit" class="btn btn-primary" id="submitBtn">
-                    <span id="submitBtnText">Proceed to Payment</span>
+                <!-- Payment Notice -->
+        <div class="payment-notice-box" id="paymentNoticeBox">Today, only your card details will be registered. Payment will be automatically charged 3 days before your experience. Free cancellation up to 3 days before.</div>
+        <p class="consent-text" id="consentText">By proceeding, you agree to register your card for deferred payment. Your card will be automatically charged 3 days before your experience date. Cancellation is free up to 3 days before. No refunds within 3 days due to ingredient preparation.</p>
+        <p class="stripe-notice" id="stripeNotice">Card information is securely managed by Stripe. b hotel does not store your card details.</p>
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <span id="submitBtnText">Register Card &amp; Confirm Booking</span>
                     <span class="loading-spinner" id="loadingSpinner" style="display: none;"></span>
                 </button>
             </form>
