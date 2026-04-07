@@ -9,6 +9,53 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?famil=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+        button.calendar-nav {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #e8a23a;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin-bottom: 0;
+            gap: 0;
+            flex-shrink: 0;
+        }
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-bottom: 0;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            max-width: none;
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            .hero { background-attachment: scroll; padding: 3rem 1rem; min-height: auto; }
+            .hero-title { font-size: 2rem; }
+            .navbar { padding: 0.75rem 1rem; flex-wrap: wrap; }
+            .navbar-brand { font-size: 1.4rem; }
+            .section { padding: 2rem 1rem; }
+            .calendar-weekdays, .calendar-grid { gap: 2px; }
+            .calendar-day { min-height: 36px; font-size: 0.85rem; padding: 4px 2px; }
+        }
+        @media (max-width: 380px) {
+            .hero-title { font-size: 1.6rem; }
+            .calendar-day { min-height: 30px; font-size: 0.75rem; padding: 2px 1px; }
+        }
         * {
             margin: 0;
             padding: 0;
@@ -464,7 +511,7 @@
         }
 
         .rules-card li::before {
-            content: 'â¢';
+            content: '&#8226;';
             position: absolute;
             left: 0;
             color: #e8a23a;
@@ -760,61 +807,61 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-label en active">BOOKING</div>
-        <div class="hero-label ja">äºç´</div>
+        <div class="hero-label ja">&#20104;&#32004;</div>
         <h1 class="hero-title">
             <span class="en active">Dashi & Sushi Experience</span>
-            <span class="ja">åºæ±ã¨å¯¿å¸ä½é¨</span>
+            <span class="ja">&#20986;&#27713;&#12392;&#23551;&#21496;&#20307;&#39443;</span>
         </h1>
         <p class="hero-subtitle">
             <span class="en active">An authentic Japanese culinary journey at Koban-dori Goju</span>
-            <span class="ja">äº¤çªéãäºåã§ã®æ¬æ ¼æ¥æ¬æçä½é¨</span>
+            <span class="ja">&#20132;&#30058;&#36890;&#12426;&#20116;&#21313;&#12391;&#12398;&#26412;&#26684;&#26085;&#26412;&#26009;&#29702;&#20307;&#39443;</span>
         </p>
     </section>
 
     <!-- What's Included Section -->
     <section class="container">
         <div class="section-label en active">WHAT'S INCLUDED</div>
-        <div class="section-label ja">ä½é¨åå®¹</div>
+        <div class="section-label ja">&#20307;&#39443;&#20869;&#23481;</div>
         <h2 class="section-title">
             <span class="en active">Your Experience</span>
-            <span class="ja">ããªãã®ä½é¨</span>
+            <span class="ja">&#12354;&#12394;&#12383;&#12398;&#20307;&#39443;</span>
         </h2>
 
         <div class="experience-grid">
             <div class="experience-card">
-                <div class="experience-card-icon">ð</div>
+                <div class="experience-card-icon">&#128336;</div>
                 <h3 class="experience-card-title">
                     <span class="en active">Duration</span>
-                    <span class="ja">æè¦æé</span>
+                    <span class="ja">&#25152;&#35201;&#26178;&#38291;</span>
                 </h3>
-                <p class="experience-card-content">11:00 AM - 1:00 PM<br><span class="en active">(approx. 2 hours)</span><span class="ja">ï¼ç´2æéï¼</span></p>
+                <p class="experience-card-content">11:00 AM - 1:00 PM<br><span class="en active">(approx. 2 hours)</span><span class="ja">&#65288;&#32004;2&#26178;&#38291;&#65289;</span></p>
             </div>
 
             <div class="experience-card">
-                <div class="experience-card-icon">ð¥</div>
+                <div class="experience-card-icon">&#128101;</div>
                 <h3 class="experience-card-title">
                     <span class="en active">Group Size</span>
-                    <span class="ja">ã°ã«ã¼ãäººæ°</span>
+                    <span class="ja">&#12464;&#12523;&#12540;&#12503;&#20154;&#25968;</span>
                 </h3>
-                <p class="experience-card-content"><span class="en active">2-8 guests per session</span><span class="ja">1ã»ãã·ã§ã³2ï½8å</span></p>
+                <p class="experience-card-content"><span class="en active">2-8 guests per session</span><span class="ja">1&#12475;&#12483;&#12471;&#12519;&#12531;2&#65374;8&#21517;</span></p>
             </div>
 
             <div class="experience-card">
-                <div class="experience-card-icon">ð</div>
+                <div class="experience-card-icon">&#128197;</div>
                 <h3 class="experience-card-title">
                     <span class="en active">Schedule</span>
-                    <span class="ja">ã¹ã±ã¸ã¥ã¼ã«</span>
+                    <span class="ja">&#12473;&#12465;&#12472;&#12517;&#12540;&#12523;</span>
                 </h3>
-                <p class="experience-card-content"><span class="en active">Mondays & Thursdays only</span><span class="ja">æææ¥ã»æ¨ææ¥ã®ã¿</span></p>
+                <p class="experience-card-content"><span class="en active">Mondays & Thursdays only</span><span class="ja">&#26376;&#26332;&#26085;&#12539;&#26408;&#26332;&#26085;&#12398;&#12415;</span></p>
             </div>
 
             <div class="experience-card">
-                <div class="experience-card-icon">ð</div>
+                <div class="experience-card-icon">&#127873;</div>
                 <h3 class="experience-card-title">
                     <span class="en active">Souvenir Set</span>
-                    <span class="ja">ãåç£ã»ãã</span>
+                    <span class="ja">&#12362;&#22303;&#29987;&#12475;&#12483;&#12488;</span>
                 </h3>
-                <p class="experience-card-content"><span class="en active">Dashi pack, rice, salt & plate</span><span class="ja">åºæ±ããã¯ãç±³ãå¡©ï¼ç¿</span></p>
+                <p class="experience-card-content"><span class="en active">Dashi pack, rice, salt & plate</span><span class="ja">&#20986;&#27713;&#12497;&#12483;&#12463;&#12289;&#31859;&#12289;&#22633;&#65286;&#30399;</span></p>
             </div>
         </div>
     </section>
@@ -822,34 +869,34 @@
     <!-- Pricing Section -->
     <section class="container">
         <div class="section-label en active">PRICING</div>
-        <div class="section-label ja">æé</div>
+        <div class="section-label ja">&#26009;&#37329;</div>
         <h2 class="section-title">
             <span class="en active">Per Person</span>
-            <span class="ja">ãä¸äººæ§</span>
+            <span class="ja">&#12362;&#19968;&#20154;&#27096;</span>
         </h2>
 
         <div class="pricing-grid">
             <div class="pricing-card">
                 <h3 class="pricing-card-title">
                     <span class="en active">Adult</span>
-                    <span class="ja">å¤§äºº</span>
+                    <span class="ja">&#22823;&#20154;</span>
                 </h3>
-                <div class="pricing-card-price">Â¥9,800</div>
+                <div class="pricing-card-price">&#165;9,800</div>
                 <p class="pricing-card-label">
                     <span class="en active">per person</span>
-                    <span class="ja">ãä¸äººæ§</span>
+                    <span class="ja">&#12362;&#19968;&#20154;&#27096;</span>
                 </p>
             </div>
 
             <div class="pricing-card">
                 <h3 class="pricing-card-title">
                     <span class="en active">Child</span>
-                    <span class="ja">ãå­æ§</span>
+                    <span class="ja">&#12362;&#23376;&#27096;</span>
                 </h3>
-                <div class="pricing-card-price">Â¥5,000</div>
+                <div class="pricing-card-price">&#165;5,000</div>
                 <p class="pricing-card-label">
                     <span class="en active">Elementary & under</span>
-                    <span class="ja">å°å­¦çä»¥ä¸ä¸å</span>
+                    <span class="ja">&#23567;&#23398;&#29983;&#20197;&#19979;&#19968;&#21517;</span>
                 </p>
             </div>
         </div>
@@ -858,10 +905,10 @@
     <!-- Availability / Calendar Section -->
     <section class="container">
         <div class="section-label en active">SELECT A DATE</div>
-        <div class="section-label ja">æ¥ä»ãé¸æ</div>
+        <div class="section-label ja">&#26085;&#20184;&#12434;&#36984;&#25246;</div>
         <h2 class="section-title">
             <span class="en active">Availability</span>
-            <span class="ja">ç©ºãç¶æ³</span>
+            <span class="ja">&#31354;&#12365;&#29366;&#27841;</span>
         </h2>
 
         <div id="calendar-error" class="error" style="display: none;"></div>
@@ -869,7 +916,7 @@
             <div class="loading-spinner"></div>
             <p style="margin-top: 0.5rem;">
                 <span class="en active">Loading availability...</span>
-                <span class="ja">ç©ºãç¶æ³ãèª­ã¿è¾¼ã¿ä¸­...</span>
+                <span class="ja">&#31354;&#12365;&#29366;&#27841;&#12434;&#35501;&#12415;&#36796;&#12415;&#20013;...</span>
             </p>
         </div>
 
@@ -883,31 +930,31 @@
             <div class="calendar-weekdays">
                 <div class="calendar-weekday">
                     <span class="en active">SUN</span>
-                    <span class="ja">æ¥</span>
+                    <span class="ja">&#26085;</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">MON</span>
-                    <span class="ja">æ</span>
+                    <span class="ja">&#26376;</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">TUE</span>
-                    <span class="ja">ç«</span>
+                    <span class="ja">&#28779;</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">WED</span>
-                    <span class="ja">æ°´</span>
+                    <span class="ja">&#27700;</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">THU</span>
-                    <span class="ja">æ¨</span>
+                    <span class="ja">&#26408;</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">FRI</span>
-                    <span class="ja">é</span>
+                    <span class="ja">&#37329;</span>
                 </div>
                 <div class="calendar-weekday">
                     <span class="en active">SAT</span>
-                    <span class="ja">å</span>
+                    <span class="ja">&#22303;</span>
                 </div>
             </div>
 
@@ -920,21 +967,21 @@
                     <span class="legend-dot available"></span>
                     <span>
                         <span class="en active">Available</span>
-                        <span class="ja">ç©ºããã</span>
+                        <span class="ja">&#31354;&#12365;&#12354;&#12426;</span>
                     </span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-dot few"></span>
                     <span>
                         <span class="en active">Few spots</span>
-                        <span class="ja">æ®ãããã</span>
+                        <span class="ja">&#27531;&#12426;&#12431;&#12378;&#12363;</span>
                     </span>
                 </div>
                 <div class="legend-item">
                     <span class="legend-dot full"></span>
                     <span>
                         <span class="en active">Full</span>
-                        <span class="ja">æºå¸­</span>
+                        <span class="ja">&#28288;&#24109;</span>
                     </span>
                 </div>
             </div>
@@ -944,33 +991,33 @@
     <!-- Important Information Section -->
     <section class="container">
         <div class="section-label en active">IMPORTANT INFORMATION</div>
-        <div class="section-label ja">éè¦æå ±</div>
+        <div class="section-label ja">&#37325;&#35201;&#24773;&#22577;</div>
         <h2 class="section-title">
             <span class="en active">Rules & Cancellation Policy</span>
-            <span class="ja">ã«ã¼ã«ï¼ã­ã£ã³ã»ã«ããªã·ã¼</span>
+            <span class="ja">&#12523;&#12540;&#12523;&#65286;&#12461;&#12515;&#12531;&#12475;&#12523;&#12509;&#12522;&#12471;&#12540;</span>
         </h2>
 
         <div class="rules-grid">
             <div class="rules-card">
                 <h3 class="rules-card-title">
                     <span class="en active">Booking Rules</span>
-                    <span class="ja">äºç´ã«ã¼ã«</span>
+                    <span class="ja">&#20104;&#32004;&#12523;&#12540;&#12523;</span>
                 </h3>
                 <ul>
                     <li>
-                        <strong><span class="en active">Available on</span><span class="ja">å©ç¨å¯è½æ¥</span>:</strong> <span class="en active">Monday & Thursday only</span><span class="ja">æææ¥ã»æ¨ææ¥ã®ã¿</span>
+                        <strong><span class="en active">Available on</span><span class="ja">&#21033;&#29992;&#21487;&#33021;&#26085;</span>:</strong> <span class="en active">Monday & Thursday only</span><span class="ja">&#26376;&#26332;&#26085;&#12539;&#26408;&#26332;&#26085;&#12398;&#12415;</span>
                     </li>
                     <li>
-                        <strong><span class="en active">Time</span><span class="ja">æé</span>:</strong> 11:00 AM - 1:00 PM
+                        <strong><span class="en active">Time</span><span class="ja">&#26178;&#38291;</span>:</strong> 11:00 AM - 1:00 PM
                     </li>
                     <li>
-                        <strong><span class="en active">Group Size</span><span class="ja">ã°ã«ã¼ãäººæ°</span>:</strong> <span class="en active">2-8 guests</span><span class="ja">2ï½8å</span>
+                        <strong><span class="en active">Group Size</span><span class="ja">&#12464;&#12523;&#12540;&#12503;&#20154;&#25968;</span>:</strong> <span class="en active">2-8 guests</span><span class="ja">2&#65374;8&#21517;</span>
                     </li>
                     <li>
-                        <strong><span class="en active">Booking Deadline</span><span class="ja">äºç´æé</span>:</strong> <span class="en active">3 days before at 11:00 AM JST</span><span class="ja">3æ¥åã®åå11æï¼æ¥æ¬æéï¼</span>
+                        <strong><span class="en active">Booking Deadline</span><span class="ja">&#20104;&#32004;&#26399;&#38480;</span>:</strong> <span class="en active">3 days before at 11:00 AM JST</span><span class="ja">3&#26085;&#21069;&#12398;&#21320;&#21069;11&#26178;&#65288;&#26085;&#26412;&#26178;&#38291;&#65289;</span>
                     </li>
                     <li>
-                        <strong><span class="en active">Allergies</span><span class="ja">ã¢ã¬ã«ã®ã¼</span>:</strong> <span class="en active">Please inform us of any dietary restrictions</span><span class="ja">é£ç©ã¢ã¬ã«ã®ã¼ãããã°ãç¥ãããã ãã</span>
+                        <strong><span class="en active">Allergies</span><span class="ja">&#12450;&#12524;&#12523;&#12462;&#12540;</span>:</strong> <span class="en active">Please inform us of any dietary restrictions</span><span class="ja">&#39135;&#29289;&#12450;&#12524;&#12523;&#12462;&#12540;&#12364;&#12354;&#12428;&#12400;&#12362;&#30693;&#12425;&#12379;&#12367;&#12384;&#12373;&#12356;</span>
                     </li>
                 </ul>
             </div>
@@ -978,36 +1025,36 @@
             <div class="rules-card">
                 <h3 class="rules-card-title">
                     <span class="en active">Cancellation Policy</span>
-                    <span class="ja">ã­ã£ã³ã»ã«ããªã·ã¼</span>
+                    <span class="ja">&#12461;&#12515;&#12531;&#12475;&#12523;&#12509;&#12522;&#12471;&#12540;</span>
                 </h3>
                 <div class="cancellation-row">
                     <div class="cancellation-period">
                         <span class="en active">3+ days before (before 11:00 AM JST)</span>
-                        <span class="ja">3æ¥ä»¥ä¸åï¼åå11æã¾ã§æ¥æ¬æéï¼</span>
+                        <span class="ja">3&#26085;&#20197;&#19978;&#21069;&#65288;&#21320;&#21069;11&#26178;&#12414;&#12391;&#26085;&#26412;&#26178;&#38291;&#65289;</span>
                     </div>
                     <div class="cancellation-charge">
                         <span class="en active">Free cancellation</span>
-                        <span class="ja">ç¡æã­ã£ã³ã»ã«</span>
+                        <span class="ja">&#28961;&#26009;&#12461;&#12515;&#12531;&#12475;&#12523;</span>
                     </div>
                 </div>
                 <div class="cancellation-row">
                     <div class="cancellation-period">
                         <span class="en active">2 days before - day of booking</span>
-                        <span class="ja">2æ¥åï½äºç´æ¥å½æ¥</span>
+                        <span class="ja">2&#26085;&#21069;&#65374;&#20104;&#32004;&#26085;&#24403;&#26085;</span>
                     </div>
                     <div class="cancellation-charge charge">
                         <span class="en active">100% charge</span>
-                        <span class="ja">100% ã®æéããããã¾ã</span>
+                        <span class="ja">100% &#12398;&#26009;&#37329;&#12364;&#12363;&#12363;&#12426;&#12414;&#12377;</span>
                     </div>
                 </div>
                 <div class="cancellation-row">
                     <div class="cancellation-period">
                         <span class="en active">Refund</span>
-                        <span class="ja">è¿é</span>
+                        <span class="ja">&#36820;&#37329;</span>
                     </div>
                     <div class="cancellation-charge">
                         <span class="en active">Processed within a few business days</span>
-                        <span class="ja">æ°å¶æ¥­æ¥ä»¥åã«å¦çããã¾ã</span>
+                        <span class="ja">&#25968;&#21942;&#26989;&#26085;&#20197;&#20869;&#12395;&#20966;&#29702;&#12373;&#12428;&#12414;&#12377;</span>
                     </div>
                 </div>
             </div>
@@ -1017,11 +1064,11 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
-            <p class="footer-text">Â© b hotel â Koban-dori Goju (äº¤çªéãäºå)</p>
+            <p class="footer-text">&#169; b hotel &#8212; Koban-dori Goju (&#20132;&#30058;&#36890;&#12426;&#20116;&#21313;)</p>
             <div class="footer-links">
                 <a href="privacy.html">
                     <span class="en active">Privacy Policy</span>
-                    <span class="ja">ãã©ã¤ãã·ã¼ããªã·ã¼</span>
+                    <span class="ja">&#12503;&#12521;&#12452;&#12496;&#12471;&#12540;&#12509;&#12522;&#12471;&#12540;</span>
                 </a>
             </div>
         </div>
@@ -1093,13 +1140,13 @@
                 'July', 'August', 'September', 'October', 'November', 'December'
             ];
             const monthNamesJa = [
-                '1æ', '2æ', '3æ', '4æ', '5æ', '6æ',
-                '7æ', '8æ', '9æ', '10æ', '11æ', '12æ'
+                '1&#26376;', '2&#26376;', '3&#26376;', '4&#26376;', '5&#26376;', '6&#26376;',
+                '7&#26376;', '8&#26376;', '9&#26376;', '10&#26376;', '11&#26376;', '12&#26376;'
             ];
 
             const monthText = currentLang === 'en'
                 ? `${monthNames[month]} ${year}`
-                : `${year}å¹´${monthNamesJa[month]}`;
+                : `${year}&#24180;${monthNamesJa[month]}`;
             calendarMonthYear.textContent = monthText;
 
             // Clear calendar
@@ -1179,7 +1226,7 @@
                 calendarError.style.display = 'block';
                 calendarError.textContent = currentLang === 'en'
                     ? 'Failed to load availability. Please refresh the page.'
-                    : 'ãå©ç¨ããã ãã¾ããããã¼ã¸ãæ´æ°ãã¦ãã ããã';
+                    : '&#12372;&#21033;&#29992;&#12356;&#12383;&#12384;&#12369;&#12414;&#12379;&#12435;&#12290;&#12506;&#12540;&#12472;&#12434;&#26356;&#26032;&#12375;&#12390;&#12367;&#12384;&#12373;&#12356;&#12290;';
             }
         }
 
