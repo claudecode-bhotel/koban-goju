@@ -92,7 +92,294 @@
         .back-link {
             display: inline-block;
             font-size: 12px;
-            color: #aaa;
+            color: #999;
+            text-decoration: none;
+            margin-bottom: 24px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #666; }
+
+        /* ============================================
+           FORM SECTIONS
+        ============================================ */
+        .form-section {
+            margin-bottom: 32px;
+            padding: 24px;
+            border: 1px solid #f0f0f0;
+            border-radius: 4px;
+            background: #fafafa;
+        }
+        .form-section-title {
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .form-field {
+            margin-bottom: 16px;
+        }
+        .form-field:last-child { margin-bottom: 0; }
+        .form-label {
+            display: block;
+            font-size: 13px;
+            color: #3d2c1e;
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            font-size: 13px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            color: #3d2c1e;
+            background: #fff;
+            transition: border-color 0.2s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: #999;
+        }
+        .form-input::placeholder { color: #aaa; }
+
+        /* ============================================
+           DATE & TIME PICKERS
+        ============================================ */
+        .date-input { cursor: pointer; }
+        .time-input-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        .time-input-group input { width: 100%; }
+
+        /* ============================================
+           CHECKBOX
+        ============================================ */
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        .checkbox-label input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        /* ============================================
+           COUNTER
+        ============================================ */
+        .counter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .counter-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: #fff;
+            color: #3d2c1e;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .counter-btn:hover {
+            background: #f5f5f5;
+            border-color: #999;
+        }
+        .counter-input {
+            width: 50px;
+            text-align: center;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .counter-label {
+            flex: 1;
+            font-size: 13px;
+        }
+
+        /* ============================================
+           PRICE & TOTAL
+        ============================================ */
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 10px;
+            color: #3d2c1e;
+        }
+        .price-row.total {
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* ============================================
+           BUTTON
+        ============================================ */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+        .btn-primary {
+            background: #3d2c1e;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background: #2a1f15;
+        }
+        .btn-primary:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* ============================================
+           SUCCESS MESSAGE
+        ============================================ */
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            display: none;
+        }
+        .success-message.visible { display: block; }
+
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 600px) {
+            .page-wrapper {
+                padding: 20px 16px 40px;
+            }
+            .page-header {
+                padding: 40px 0 20px;
+            }
+            .form-section {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Language Toggle -->
+        <div class="lang-toggle-wrap">
+            <button class="lang-toggle">
+                <span class="lang-en active">EN</span>
+                <span class="lang-separator">|</span>
+                <span class="lang-ja">JP</span>
+            </button>
+        </div>
+
+        <!-- Header -->
+        <div class="page-header">
+            <div class="brand-name"><span class="logo-b">b</span> hotel</div>
+            <div class="experience-sub">RESERVATION</div>
+            <a href="#" class="back-link">&larr; Back</a>
+        </div>
+
+        <!-- Main Form -->
+        <form id="reservationForm">
+            <!-- 1. Guest Information -->
+            <div class="form-section">
+                <div class="form-section-title">Guest Information</div>
+                <div class="form-field">
+                    <label class="form-label" data-en="Guest Name" data-jp="ゲスト名">Guest Name</label>
+                    <input type="text" id="guestName" class="form-input" placeholder="" required>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" data-en="Email Address" data-jp="メールアドレス">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="" required>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" data-en="Phone Number" data-jp="電話番号">Phone Number</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="" required>
+                </div>
+            </div>
+
+            <!-- 2. Stay Details -->
+            <div class="form-section">
+                <div class="form-section-title">Stay Details</div>
+                <div class="form-field">
+                    <label class="form-label" data-en="Check-in Date" data-jp="チェックイン日">Check-in Date</label>
+                    <input type="date" id="checkInDate" class="form-input date-input" required>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" data-en="Check-out Date" data-jp="チェックアウト日">Check-out Date</label>
+                    <input type="date" id="checkOutDate" class="form-input date-input" required>
+                </div>
+            </div>
+
+            <!-- 3. Room Selection & Pricing -->
+            <div class="form-section">
+                <div class="form-section-title">Room &amp; Guests</div>
+                <div class="form-field">
+                    <label class="form-label" data-en="Room Type" data-jp="ルームタイプ">Room Type</label>
+                    <select id="roomType" class="form-input" required>
+                        <option value="">Select Room Type</option>
+                        <option value="deluxe">Deluxe Room</option>
+                        <option value="premium">Premium Suite</option>
+                        <option value="suite">Luxury Suite</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label class="form-label" data-en="Number of Guests" data-jp="ゲスト数">Number of Guests</label>
+                    <div class="counter">
+                        <button type="button" class="counter-btn" id="decreaseGuests">−</button>
+                        <input type="number" id="numGuests" class="counter-input" value="1" min="1" max="6" required>
+                        <button type="button" class="counter-btn" id="increaseGuests">+</button>
+                        <span class="counter-label" data-en="guest(s)" data-jp="名"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Special Requests -->
+            <div class="form-section">
+                <div class="form-section-title">Special Requests</div>
+                <div class="form-field">
+                    <label class="form-label" data-en="Allergies / Special Requests" data-jp="アレルギー・特別なリクエスト">Allergies / Special Requests</label>
+                    <textarea id="specialRequests" class="form-input" style="min-height: 80px; resize: vertical;" placeholder=""></textarea>
+                </div>
+            </div>
+
+            <!-- 5. Payment Notice (Read-only) -->
+            <div class="form-section" style="background: #fff8f0; border-color: #ffe0cc;">
+                <div class="form-section-title" data-en="Payment" data-jp="お支払い">Payment</div>
+                <div style="font-size: 12px; color: #666; line-height: 1.6;" data-en="Payment will be processed upon confirmation of your reservation. You will receive a confirmation email with full payment details." data-jp="ご予約確認時にお支払い手続きが行われます。確認メールに詳細なお支払い情報が記載されます。">Payment will be processed upon confirmation of your reservation. You will receive a confirmation email with full payment details.</div>
+            </div>
+
+            <!-- Success Message -->
+            <div class="success-message" id="successMessage"></div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary" data-en="COMPLETE RESERVATION" data-jp="予約を完了">COMPLETE RESERVATION</button>
+        </form>
+    </div>
+
+    <s color: #aaa;
             text-decoration: none;
             margin-bottom: 24px;
             letter-spacing: 0.02em;
@@ -476,26 +763,9 @@
             </div>
         </div>
 
-        <!-- DIETARY REQUIREMENTS -->
-        <div class="form-section">
-            <div class="section-title" id="sectionAllergies">DIETARY REQUIREMENTS</div>
-            <div class="form-field">
-                <label class="field-label" for="allergies" id="labelAllergies">ALLERGIES / SPECIAL REQUESTS</label>
-                <textarea id="allergies" class="form-input" rows="2" id="allergiesField"></textarea>
-            </div>
-        </div>
-
-        <!-- CONFIRMATION LANGUAGE -->
-        <div class="form-section" style="margin-bottom:28px;">
-            <div class="section-title" id="sectionLang">CONFIRMATION</div>
-            <div class="form-field">
-                <label class="field-label" for="language" id="labelLanguage">CONFIRMATION LANGUAGE</label>
-                <select id="language" class="form-input">
-                    <option value="en">English</option>
-                    <option value="ja">日本語</option>
-                </select>
-            </div>
-        </div>
+        <!-- Hidden fields (removed from UI but needed for form submission) -->
+        <textarea id="allergies" style="display:none"></textarea>
+        <input type="hidden" id="language" value="en">
 
         <!-- PRICE SUMMARY -->
         <div class="price-summary">
@@ -524,19 +794,17 @@
 
         <!-- Charge notice -->
         <div class="charge-notice" id="paymentNoticeBox">
-            <p id="consentText">Your card will not be charged today. We will register your card securely for payment at the time of your experience.</p>
+            <p id="consentText">Today, we only register your card details. Your card will be automatically charged at 11:00 AM, 3 days before your experience. Free cancellation up to 3 days before.</p>
         </div>
 
         <!-- Consent -->
-        <p class="consent-text" id="stripeNotice">By submitting, you agree to our cancellation policy. Secure payment registration powered by Stripe.</p>
+        <p class="consent-text" id="stripeNotice">By proceeding, you agree to register your card for future payment. Your card will be automatically charged 3 days before your experience. Free cancellation up to 3 days before; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.</p>
 
         <!-- Submit -->
         <button type="submit" class="submit-btn" id="submitBtn">
             <span id="submitBtnText">PROCEED TO PAYMENT</span>
             <span id="loadingSpinner">...</span>
         </button>
-
-        <div class="stripe-footer">Secure card registration powered by Stripe</div>
     </form>
 
 </div><!-- /.page-wrapper -->
@@ -557,7 +825,6 @@
             labelAdults: 'Adults',
             labelChildren: 'Children under 12',
             labelAllergies: 'Allergies / Special Requests',
-            labelLanguage: 'Confirmation Language',
             allergy_placeholder: 'Please let us know about any dietary restrictions or special requests...',
             backLink: '← Back to dates',
             submitBtn: 'PROCEED TO PAYMENT',
@@ -577,13 +844,11 @@
             errorNetwork: 'Network error. Please check your connection and try again.',
             errorCheckout: 'Failed to create checkout session. Please try again.',
             successRedirect: 'Redirecting to payment...',
-            consentText: 'Your card will not be charged today. We will register your card securely for payment at the time of your experience.',
-            stripeNotice: 'By submitting, you agree to our cancellation policy. Secure payment registration powered by Stripe.',
+            consentText: 'Today, we only register your card details. Your card will be automatically charged at 11:00 AM, 3 days before your experience. Free cancellation up to 3 days before.',
+            stripeNotice: 'By proceeding, you agree to register your card for future payment. Your card will be automatically charged 3 days before your experience. Free cancellation up to 3 days before; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.',
             experienceSub: 'SUSHI EXPERIENCE',
             sectionGuest: 'GUEST INFORMATION',
             sectionGuests: 'NUMBER OF GUESTS',
-            sectionAllergies: 'DIETARY REQUIREMENTS',
-            sectionLang: 'CONFIRMATION',
             footerTitle: 'b hotel',
             footerDesc: 'Experience authentic sushi craftsmanship',
             footerContact: 'Contact',
@@ -602,7 +867,6 @@
             labelAdults: '大人',
             labelChildren: '子供（12歳以下）',
             labelAllergies: 'アレルギー・特別なリクエスト',
-            labelLanguage: '確認メール言語',
             allergy_placeholder: 'アレルギーや特別なリクエストについて教えてください...',
             backLink: '← 日程一覧に戻る',
             submitBtn: 'お支払いへ進む',
@@ -622,13 +886,11 @@
             errorNetwork: 'ネットワークエラー。接続を確認して、もう一度試してください。',
             errorCheckout: 'チェックアウトセッションの作成に失敗しました。もう一度試してください。',
             successRedirect: 'お支払いページにリダイレクト中...',
-            consentText: '本日カードに請求はありません。体験当日のお支払いのためにカードを安全に登録します。',
-            stripeNotice: '送信することで、キャンセルポリシーに同意したことになります。Stripeによる安全なカード登録。',
+            consentText: '本日はカード情報の登録のみです。体験日の3日前午前11時に自動決済されます。3日前までキャンセル無料です。',
+            stripeNotice: '次に進むことで、後日決済用のカード登録に同意されたものとします。体験日の3日前にカードへ自動決済されます。3日前までキャンセル無料。3日以内は食材準備のため返金不可。カード情報はStripeにより安全に管理されます。b hotelではカード情報を保持しません。',
             experienceSub: '寿司体験',
             sectionGuest: 'お客様情報',
             sectionGuests: 'ゲスト人数',
-            sectionAllergies: '食事制限',
-            sectionLang: '確認',
             footerTitle: 'b hotel',
             footerDesc: '本物の寿司職人の技を体験',
             footerContact: 'お問い合わせ',
@@ -664,8 +926,6 @@
             labelPhone: t.labelPhone,
             labelAdults: t.labelAdults,
             labelChildren: t.labelChildren,
-            labelAllergies: t.labelAllergies,
-            labelLanguage: t.labelLanguage,
             pricingTitle: t.pricingTitle,
             pricingTotalLabel: t.pricingTotal,
             submitBtnText: t.submitBtn,
@@ -674,8 +934,6 @@
             experienceSub: t.experienceSub,
             sectionGuest: t.sectionGuest,
             sectionGuests: t.sectionGuests,
-            sectionAllergies: t.sectionAllergies,
-            sectionLang: t.sectionLang,
             groupSizeMessage: t.groupSizeMessage
         };
         for (const [id, text] of Object.entries(map)) {
@@ -683,9 +941,11 @@
             if (el) el.textContent = text;
         }
 
+        // Update hidden language field
+        const langInput = document.getElementById('language');
+        if (langInput) langInput.value = lang;
+
         // Placeholder
-        const allergies = document.getElementById('allergies');
-        if (allergies) allergies.placeholder = t.allergy_placeholder;
         const phone = document.getElementById('phone');
         if (phone) phone.placeholder = t.phone_placeholder;
 
