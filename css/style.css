@@ -414,8 +414,8 @@ a:hover { text-decoration: underline; }
 }
 
 .btn-primary {
-  background: #e8a23a;
-  color: #3d2c1e;
+  background: #3d2c1e;
+  color: #fff;
   border: none;
   border-radius: 8px;
   padding: 14px 32px;
@@ -428,7 +428,7 @@ a:hover { text-decoration: underline; }
 }
 
 .btn-primary:hover {
-  background: #d4912e;
+  background: #5a3d28;
 }
 
 .btn-primary:disabled {
