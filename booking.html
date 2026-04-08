@@ -474,6 +474,8 @@
             <div class="group-notice" id="groupSizeNotice">
                 <p id="groupSizeMessage"></p>
             </div>
+            <div id="capacityInfo" style="display:none;background:#fef9f0;border:1px solid #e8a23a;border-radius:6px;padding:8px 14px;margin-top:8px;font-size:13px;color:#5a3d00;"></div>
+            <div id="soldOutNotice" style="display:none;background:#ffebee;border:1px solid #ef9a9a;border-radius:6px;padding:8px 14px;margin-top:8px;font-size:13px;color:#c62828;"></div>
         </div>
 
         <!-- Hidden fields (removed from UI but needed for form submission) -->
@@ -674,6 +676,8 @@
     // ============================================
     const ADULT_PRICE = 9800;
     const CHILD_PRICE = 5000;
+    const MAX_CAPACITY = 8;
+    let remainingCapacity = MAX_CAPACITY;
 
     function getAdults() { return parseInt(document.getElementById('adults').value) || 2; }
     function getChildren() { return parseInt(document.getElementById('children').value) || 0; }
@@ -726,7 +730,7 @@
         const total = getAdults() + getChildren();
         const notice = document.getElementById('groupSizeNotice');
         const msg = document.getElementById('groupSizeMessage');
-        if (total < 2 || total > 8) {
+        if (total < 2 || total > Math.min(MAX_CAPACITY, remainingCapacity)) {
             msg.textContent = t.groupSizeMessage;
             notice.classList.add('visible');
             return false;
@@ -789,9 +793,43 @@
     // ============================================
     // Initialization
     // ============================================
+    async function loadCapacityForDate(dateStr) {
+        const infoEl = document.getElementById('capacityInfo');
+        const soldOutEl = document.getElementById('soldOutNotice');
+        const submitBtn = document.querySelector('button[type="submit"], .submit-btn, #submitBtn');
+        try {
+            if (typeof getAvailability !== 'undefined') {
+                const avail = await getAvailability();
+                let remaining = MAX_CAPACITY;
+                if (avail && avail.dates) {
+                    const entry = avail.dates.find(d => d.date === dateStr);
+                    if (entry !== undefined) remaining = entry.remaining;
+                } else if (avail && typeof avail[dateStr] !== 'undefined') {
+                    remaining = avail[dateStr];
+                }
+                remainingCapacity = Math.max(0, remaining);
+            }
+        } catch(e) { remainingCapacity = MAX_CAPACITY; }
+
+        if (remainingCapacity <= 0) {
+            if (soldOutEl) { soldOutEl.textContent = currentLang === 'ja' ? 'この日は満席です。別の日をお選びください。' : 'This date is fully booked.'; soldOutEl.style.display = 'block'; }
+            if (infoEl) infoEl.style.display = 'none';
+            if (submitBtn) submitBtn.disabled = true;
+        } else {
+            if (soldOutEl) soldOutEl.style.display = 'none';
+            if (remainingCapacity < MAX_CAPACITY) {
+                if (infoEl) { infoEl.textContent = currentLang === 'ja' ? 'この日の残り枠：' + remainingCapacity + '名' : remainingCapacity + ' spot' + (remainingCapacity === 1 ? '' : 's') + ' remaining.'; infoEl.style.display = 'block'; }
+            } else {
+                if (infoEl) infoEl.style.display = 'none';
+            }
+            if (submitBtn) submitBtn.disabled = false;
+        }
+    }
+
     function init() {
         const urlParams = new URLSearchParams(window.location.search);
         const dateParam = urlParams.get('date');
+        if (dateParam) loadCapacityForDate(dateParam);
         const langParam = urlParams.get('lang');
 
         // Redirect if no date
