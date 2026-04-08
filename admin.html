@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>予約管理 — b hotel スタッフ用</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Inter:wght@300;400;600&family=Noto+Serif+JP:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brown-dark: #3d2b1f;
+      --brown-mid: #5c3d2e;
+      --gold: #e8a23a;
+      --gold-light: #f0c070;
+      --cream: #faf6f0;
+      --text-dark: #2c1810;
+      --text-mid: #5c3d2e;
+      --border: #d4b896;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Noto Serif JP', serif; background: var(--cream); color: var(--text-dark); min-height: 100vh; }
+    /* Navbar */
+    .navbar { background: var(--brown-dark); padding: 0 2rem; height: 60px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+    .navbar-content { display: flex; align-items: center; gap: 1rem; width: 100%; }
+    .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #fff; letter-spacing: 0.1em; }
+    .logo-b { color: var(--gold); font-size: 1.8rem; font-weight: 700; }
+    .admin-badge { background: var(--gold); color: var(--brown-dark); font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 3px; letter-spacing: 0.12em; margin-left: 0.5rem; }
+    /* Layout */
+    .admin-container { max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+    .admin-header { margin-bottom: 1.75rem; }
+    .admin-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; color: var(--brown-dark); margin-bottom: 0.2rem; }
+    .admin-subtitle { font-size: 0.82rem; color: var(--text-mid); letter-spacing: 0.05em; }
+    /* Summary cards */
+    .summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    @media (max-width: 768px) { .summary-row { grid-template-columns: repeat(2, 1fr); } }
+    .summary-card { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem 1.25rem; }
+    .summary-num { font-family: 'Cormorant Garamond', serif; font-size: 2.2rem; color: var(--brown-dark); line-height: 1; font-weight: 600; }
+    .summary-label { font-size: 0.73rem; color: var(--text-mid); margin-top: 0.3rem; }
+    /* Two-column grid */
+    .admin-grid { display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; align-items: start; }
+    @media (max-width: 960px) { .admin-grid { grid-template-columns: 1fr; } }
+    /* Card */
+    .card { background: #fff; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .card-header { background: var(--brown-dark); color: #fff; padding: 0.9rem 1.25rem; display: flex; align-items: center; justify-content: space-between; }
+    .card-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; }
+    .card-body { padding: 1.25rem; }
+    /* Calendar */
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+    .cal-day-name { text-align: center; font-size: 0.68rem; color: var(--text-mid); padding: 4px 0 6px; font-weight: 600; letter-spacing: 0.05em; }
+    .cal-day-name:first-child { color: #c0392b; }
+    .cal-day-name:last-child { color: #2980b9; }
+    .cal-cell { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 6px; font-size: 0.8rem; cursor: default; transition: background 0.12s; }
+    .cal-cell.has-booking { cursor: pointer; }
+    .cal-cell:hover.has-booking { background: #f5ede0; }
+    .cal-cell.sun { color: #c0392b; }
+    .cal-cell.sat { color: #2980b9; }
+    .cal-cell.booked { background: var(--brown-dark); color: #fff !important; }
+    .cal-cell.booked:hover { background: var(--brown-mid) !important; }
+    .cal-badge { background: var(--gold); color: var(--brown-dark); font-size: 0.58rem; font-weight: 700; border-radius: 8px; padding: 0 5px; line-height: 1.5; margin-top: 1px; }
+    .cal-cell.today-cell { outline: 2px solid var(--gold); outline-offset: -2px; border-radius: 6px; }
+    .cal-legend { margin-top: 1rem; font-size: 0.72rem; color: var(--text-mid); display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .cal-legend-item { display: flex; align-items: center; gap: 5px; }
+    /* Filter bar */
+    .filter-bar { display: flex; gap: 0.5rem; margin-bottom: 0; flex-wrap: wrap; }
+    .filter-btn { padding: 0.32rem 0.9rem; border: 1px solid var(--border); border-radius: 20px; font-size: 0.78rem; cursor: pointer; background: #fff; color: var(--text-mid); font-family: inherit; transition: all 0.15s; }
+    .filter-btn.active, .filter-btn:hover { background: var(--brown-dark); color: #fff; border-color: var(--brown-dark); }
+    /* Table */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    thead th { background: var(--brown-dark); color: rgba(255,255,255,0.9); padding: 0.65rem 1rem; text-align: left; font-weight: 400; white-space: nowrap; font-size: 0.8rem; letter-spacing: 0.04em; }
+    tbody tr { border-bottom: 1px solid #f0e8dc; }
+    tbody tr:hover { background: #fdf7f0; }
+    tbody tr.row-highlight { background: #fdf2e3; }
+    tbody td { padding: 0.75rem 1rem; vertical-align: middle; }
+    .td-date { font-weight: 700; color: var(--brown-dark); white-space: nowrap; }
+    .td-name-primary { font-weight: 600; font-size: 0.9rem; }
+    .td-name-sub { font-size: 0.75rem; color: #888; margin-top: 1px; }
+    .td-amount { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; color: var(--brown-dark); white-space: nowrap; font-weight: 600; }
+    .status-badge { display: inline-block; padding: 3px 9px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; }
+    .status-confirmed { background: #e8f5e9; color: #2e7d32; }
+    .allergy-tag { display: inline-block; background: #fff3e0; color: #bf360c; border: 1px solid #ffcc80; padding: 1px 7px; border-radius: 3px; font-size: 0.72rem; }
+    .none-text { color: #bbb; font-size: 0.8rem; }
+    /* Footer */
+    .footer { background: var(--brown-dark); color: rgba(255,255,255,0.45); text-align: center; padding: 1.25rem; font-size: 0.78rem; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-content">
+    <div class="logo"><span class="logo-b">b</span> hotel</div>
+    <span class="admin-badge">STAFF ONLY</span>
+  </div>
+</nav>
+
+<div class="admin-container">
+  <div class="admin-header">
+    <h1 class="admin-title">予約管理 — 寿司体験</h1>
+    <p class="admin-subtitle">Dashi &amp; Sushi Experience / Koban-dori Goju（交番通り五十）</p>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary-row">
+    <div class="summary-card">
+      <div class="summary-num" id="statBookings">6</div>
+      <div class="summary-label">今月の予約件数</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-num" id="statGuests">20</div>
+      <div class="summary-label">合計人数</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-num" id="statRevenue">¥423,500</div>
+      <div class="summary-label">合計金額（確定分）</div>
+    </div>
+    <div class="summary-card">
+      <div class="summary-num">2</div>
+      <div class="summary-label">開催日（今月）</div>
+    </div>
+  </div>
+
+  <div class="admin-grid">
+    <!-- Calendar -->
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <h2>📅 2026年 4月</h2>
+        </div>
+        <div class="card-body">
+          <div class="cal-grid" id="calGrid">
+            <div class="cal-day-name">日</div>
+            <div class="cal-day-name">月</div>
+            <div class="cal-day-name">火</div>
+            <div class="cal-day-name">水</div>
+            <div class="cal-day-name">木</div>
+            <div class="cal-day-name">金</div>
+            <div class="cal-day-name">土</div>
+          </div>
+          <div class="cal-legend">
+            <div class="cal-legend-item">
+              <span style="width:12px;height:12px;border-radius:3px;background:var(--brown-dark);display:inline-block;"></span>
+              <span>開催日（予約あり）</span>
+            </div>
+            <div class="cal-legend-item">
+              <span style="width:12px;height:12px;border-radius:50%;border:2px solid var(--gold);display:inline-block;"></span>
+              <span>本日</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reservation List -->
+    <div>
+      <div class="card">
+        <div class="card-header">
+          <h2>📋 予約リスト（2026年4月）</h2>
+        </div>
+        <div class="card-body" style="padding: 1rem 1.25rem 0.75rem;">
+          <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterDate('all', this)">すべて (6)</button>
+            <button class="filter-btn" onclick="filterDate('0409', this)">4/9 木曜 (3)</button>
+            <button class="filter-btn" onclick="filterDate('0427', this)">4/27 月曜 (3)</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>日付</th>
+                <th>お名前</th>
+                <th>連絡先</th>
+                <th>人数</th>
+                <th>アレルギー</th>
+                <th>金額</th>
+                <th>状態</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  © b hotel — Koban-dori Goju スタッフ専用ページ
+</footer>
+
+<script>
+const RESERVATIONS = [
+  { date: '2026-04-09', label: '4/9 (木)', name: '山本 恵子', email: 'keiko@example.com', phone: '080-1234-5678', adults: 2, children: 0, allergies: 'なし', amount: 44000 },
+  { date: '2026-04-09', label: '4/9 (木)', name: '田中 博',   email: 'hiroshi@example.com', phone: '090-2345-6789', adults: 4, children: 1, allergies: 'えび・かに', amount: 99000 },
+  { date: '2026-04-09', label: '4/9 (木)', name: '鈴木 友紀', email: 'yuki@example.com',    phone: '070-3456-7890', adults: 2, children: 2, allergies: 'なし', amount: 60500 },
+  { date: '2026-04-27', label: '4/27 (月)', name: '中村 聡',  email: 'satoshi@example.com', phone: '080-4567-8901', adults: 3, children: 0, allergies: 'なし', amount: 66000 },
+  { date: '2026-04-27', label: '4/27 (月)', name: '伊藤 絵美', email: 'emi@example.com',    phone: '090-5678-9012', adults: 2, children: 0, allergies: 'グルテン不使用', amount: 44000 },
+  { date: '2026-04-27', label: '4/27 (月)', name: '小林 龍',  email: 'ryu@example.com',     phone: '070-6789-0123', adults: 4, children: 2, allergies: 'なし', amount: 110000 }
+];
+
+const BOOKED_DATES = { 9: 3, 27: 3 };
+const TODAY_DAY = 8; // April 8, 2026
+
+// Build April 2026 calendar
+function buildCalendar() {
+  const grid = document.getElementById('calGrid');
+  // April 1, 2026 is a Wednesday (index 3, Sun=0)
+  const startDay = 3;
+  const daysInMonth = 30;
+
+  for (let i = 0; i < startDay; i++) {
+    const empty = document.createElement('div');
+    grid.appendChild(empty);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement('div');
+    const dow = (startDay + d - 1) % 7; // day of week
+    let cls = 'cal-cell';
+    if (dow === 0) cls += ' sun';
+    if (dow === 6) cls += ' sat';
+    if (d === TODAY_DAY) cls += ' today-cell';
+    if (BOOKED_DATES[d]) { cls += ' booked has-booking'; }
+    cell.className = cls;
+
+    const dayNum = document.createElement('span');
+    dayNum.textContent = d;
+    cell.appendChild(dayNum);
+
+    if (BOOKED_DATES[d]) {
+      const badge = document.createElement('span');
+      badge.className = 'cal-badge';
+      badge.textContent = BOOKED_DATES[d] + '件';
+      cell.appendChild(badge);
+      const key = d === 9 ? '0409' : '0427';
+      cell.addEventListener('click', () => {
+        const btns = document.querySelectorAll('.filter-btn');
+        btns.forEach(b => b.classList.remove('active'));
+        const btn = document.querySelector(`.filter-btn[onclick*="${key}"]`);
+        if (btn) btn.classList.add('active');
+        filterDate(key, null);
+      });
+    }
+    grid.appendChild(cell);
+  }
+}
+
+function renderTable(data) {
+  const tbody = document.getElementById('tableBody');
+  tbody.innerHTML = '';
+  data.forEach(r => {
+    const tr = document.createElement('tr');
+    const allergyHtml = r.allergies === 'なし'
+      ? '<span class="none-text">なし</span>'
+      : `<span class="allergy-tag">${r.allergies}</span>`;
+    tr.innerHTML = `
+      <td class="td-date">${r.label}</td>
+      <td>
+        <div class="td-name-primary">${r.name}</div>
+      </td>
+      <td>
+        <div style="font-size:0.8rem;">${r.email}</div>
+        <div class="td-name-sub">${r.phone}</div>
+      </td>
+      <td style="white-space:nowrap;">
+        大人 <strong>${r.adults}</strong>名<br>
+        <span style="font-size:0.75rem;color:#888;">子ども ${r.children}名</span>
+      </td>
+      <td>${allergyHtml}</td>
+      <td class="td-amount">¥${r.amount.toLocaleString('ja-JP')}</td>
+      <td><span class="status-badge status-confirmed">確定</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+
+  // Update summary stats
+  const total = data.reduce((s, r) => s + r.amount, 0);
+  const guests = data.reduce((s, r) => s + r.adults + r.children, 0);
+  document.getElementById('statBookings').textContent = data.length;
+  document.getElementById('statGuests').textContent = guests;
+  document.getElementById('statRevenue').textContent = '¥' + total.toLocaleString('ja-JP');
+}
+
+function filterDate(key, btn) {
+  if (btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  let filtered = RESERVATIONS;
+  if (key === '0409') filtered = RESERVATIONS.filter(r => r.date === '2026-04-09');
+  if (key === '0427') filtered = RESERVATIONS.filter(r => r.date === '2026-04-27');
+  renderTable(filtered);
+}
+
+buildCalendar();
+renderTable(RESERVATIONS);
+</script>
+</body>
+</html>
