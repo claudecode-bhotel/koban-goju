@@ -4,7 +4,7 @@
 // ãã®ãã¡ã¤ã«ã® API_BASE ã Apps Script ã®ããã­ã¤URLã«è¨­å®ãã¦ãã ããã
 // ä¾: https://script.google.com/macros/s/YOUR_DEPLOY_ID/exec
 
-const API_BASE = 'https://script.google.com/macros/s/AKfycbyEJPAMm8kZ5bbMylSt5FBQFg-D_-93aabQ76fD6j-qvzY13QEwUk-rJi-cxF9iLPee/exec';
+const API_BASE = 'https://script.google.com/macros/s/AKfycby1x4Zn8xqZc1B1lAyjNpeYVe_tuIzw_Po_epmLnWl4Ld_m0cp2NCe6c_RYVRObzkZl/exec';
 
 // --- GET Request ---
 async function apiGet(action) {
