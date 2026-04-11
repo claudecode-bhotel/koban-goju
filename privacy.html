@@ -8,68 +8,214 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Inter', sans-serif; color: #3d2c1e; background: #faf7f2; line-height: 1.6; }
-    .navbar { background: #3d2c1e; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; width: 100%; }
-    .navbar-inner { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 900px; margin: 0 auto; }
-    .logo { color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; letter-spacing: 1px; }
-    .logo-b { color: #e8a23a; }
-    .lang-btn { background: transparent; border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; color: rgba(255,255,255,0.8); padding: 6px 16px; font-size: 13px; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s; }
-    .lang-btn:hover { background: rgba(255,255,255,0.1); }
+
+    .navbar {
+      background: #3d2c1e;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+    }
+    .navbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .logo {
+      color: #fff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-decoration: none;
+    }
+    .logo-b { color: #e8a23a; font-style: italic; }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 20px;
+      color: rgba(255,255,255,0.85);
+      padding: 5px 16px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.2s;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,0.12); }
+
     .privacy-main { max-width: 760px; margin: 0 auto; padding: 48px 24px 80px; }
-    .legal-label { text-transform: uppercase; letter-spacing: 4px; font-size: 11px; color: #e8a23a; margin-bottom: 10px; font-weight: 600; }
-    .privacy-title { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 600; margin-bottom: 40px; color: #3d2c1e; line-height: 1.2; }
+    .legal-label {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 11px;
+      color: #e8a23a;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .privacy-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      color: #3d2c1e;
+      line-height: 1.2;
+    }
     .privacy-section { margin-bottom: 36px; }
-    .section-heading { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 12px; color: #3d2c1e; padding-bottom: 8px; border-bottom: 1px solid #e8e0d6; }
-    .section-text { font-size: 15px; color: #5a4a3e; line-height: 1.8; font-family: 'Inter', sans-serif; }
-    .footer { background: #3d2c1e; color: rgba(255,255,255,0.6); text-align: center; padding: 28px 24px; font-size: 13px; font-family: 'Inter', sans-serif; }
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #3d2c1e;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e8e0d6;
+    }
+    .section-text {
+      font-size: 15px;
+      color: #5a4a3e;
+      line-height: 1.85;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .footer {
+      background: #3d2c1e;
+      color: rgba(255,255,255,0.6);
+      text-align: center;
+      padding: 28px 24px;
+      font-size: 13px;
+    }
     .footer a { color: rgba(255,255,255,0.8); text-decoration: none; margin-left: 16px; }
-    @media (max-width: 600px) { .privacy-title { font-size: 28px; } .privacy-main { padding: 32px 16px 60px; } }
+    .footer a:hover { color: #fff; }
+
+    @media (max-width: 600px) {
+      .privacy-title { font-size: 28px; }
+      .privacy-main { padding: 32px 16px 60px; }
+    }
   </style>
 </head>
 <body>
-<nav class="navbar">
-  <div class="navbar-inner">
-    <div class="logo"><span class="logo-b">b</span> hotel</div>
-    <button class="lang-btn" id="langToggle">JP / EN</button>
-  </div>
-</nav>
-<main class="privacy-main">
-  <h1 class="privacy-title" id="privacyTitle">Privacy Policy</h1>
-  <div class="privacy-content">
-    <section class="privacy-section">
-      <h2 class="section-heading" id="s1Title">Information We Collect</h2>
-      <p class="section-text" id="s1Text">When you book the Dashi &amp; Sushi Experience, we collect personal information including your full name, email address, phone number, and booking details such as your preferred date and number of guests. Payment information is securely processed through Stripe and is not stored directly on our servers.</p>
-    </section>
-    <section class="privacy-section">
-      <h2 class="section-heading" id="s2Title">How We Use Your Information</h2>
-      <p class="section-text" id="s2Text">Your information is used to process your booking, send confirmation emails, and provide customer support. We may also use your contact information to notify you of any changes to your reservation or to send you relevant updates about our services. We do not share your information with third parties except as necessary to fulfill your booking.</p>
-    </section>
-    <section class="privacy-section">
-      <h2 class="section-heading" id="s3Title">Third-Party Services</h2>
-      <p class="section-text" id="s3Text">We use Stripe for secure payment processing and Google Calendar for scheduling your experience. These third-party service providers have their own privacy policies and are committed to protecting your data. We encourage you to review their privacy policies to understand how they handle your information.</p>
-    </section>
-    <section class="privacy-section">
-      <h2 class="section-heading" id="s4Title">Data Retention</h2>
-      <p class="section-text" id="s4Text">We retain booking data for legal and tax compliance purposes for a period of seven years after your experience. If you wish to have your personal information deleted, you may request deletion at any time, and we will process your request in accordance with applicable privacy laws.</p>
-    </section>
-    <section class="privacy-section">
-      <h2 class="section-heading" id="s5Title">Contact</h2>
-      <p class="section-text" id="s5Text">If you have any questions about this Privacy Policy or how we handle your data, please contact us at b hotel, located in Koban-dori Goju, Kyoto. We are committed to answering your questions and addressing any privacy concerns.</p>
-    </section>
-  </div>
-</main>
-<footer class="footer">
-  <span id="footerCopy">&copy; b hotel &mdash; Koban-dori Goju (交番通り五十)</span>
-  <a href="privacy.html" id="footerPrivacy">Privacy Policy</a>
-</footer>
-<script>
-const C = {
-  en: { legalLabel:'', privacyTitle:'Privacy Policy', s1Title:'Information We Collect', s1Text:'When you book the Dashi & Sushi Experience, we collect personal information including your full name, email address, phone number, and booking details such as your preferred date and number of guests. Payment information is securely processed through Stripe and is not stored directly on our servers.', s2Title:'How We Use Your Information', s2Text:'Your information is used to process your booking, send confirmation emails, and provide customer support. We may also use your contact information to notify you of any changes to your reservation or to send you relevant updates about our services. We do not share your information with third parties except as necessary to fulfill your booking.', s3Title:'Third-Party Services', s3Text:'We use Stripe for secure payment processing and Google Calendar for scheduling your experience. These third-party service providers have their own privacy policies and are committed to protecting your data. We encourage you to review their privacy policies to understand how they handle your information.', s4Title:'Data Retention', s4Text:'We retain booking data for legal and tax compliance purposes for a period of seven years after your experience. If you wish to have your personal information deleted, you may request deletion at any time, and we will process your request in accordance with applicable privacy laws.', s5Title:'Contact', s5Text:'If you have any questions about this Privacy Policy or how we handle your data, please contact us at b hotel, located in Koban-dori Goju, Kyoto. We are committed to answering your questions and addressing any privacy concerns.', footerPrivacy:'Privacy Policy' },
-  jp: { legalLabel:'', privacyTitle:'プライバシーポリシー', s1Title:'当社が収集する情報', s1Text:'出汁と寿司体験をご予約いただく際、当社はお客様のフルネーム、メールアドレス、電話番号、ご希望の日付およびゲスト数などの予約詳細を含む個人情報を収集します。支払い情報はStripeを通じて安全に処理され、当社のサーバーに直接保存されることはありません。', s2Title:'情報の利用方法', s2Text:'お客様の情報は、ご予約の処理、確認メールの送信、カスタマーサポートの提供に使用されます。当社はお客様の情報をご予約の履行に必要な場合を除き、第三者と共有することはありません。', s3Title:'第三者サービス', s3Text:'当社は支払い処理のためにStripeを、体験のスケジューリングのためにGoogle Calendarを使用しています。これらの第三者サービスプロバイダーは独自のプライバシーポリシーを持っています。', s4Title:'データ保持', s4Text:'当社は、体験後7年間、法的および税務上の目的のために予約データを保持します。お客様の個人情報の削除をご希望の場合、いつでも削除をリクエストできます。', s5Title:'お問い合わせ', s5Text:'このプライバシーポリシーについてご質問がある場合は、京都の交番通り五十にありb hotelまでお問い合わせください。', footerPrivacy:'プライバシーポリシー' }
-};
-let lang = (localStorage.getItem('sushi-booking-lang') || 'en') === 'ja' ? 'jp' : (localStorage.getItem('sushi-booking-lang') || 'en');
-function apply(l) { const c=C[l]||C.en; Object.keys(c).forEach(k=>{const el=document.getElementById(k);if(el)el.textContent=c[k];}); document.body.style.fontFamily=l==='jp'?"'Noto Sans JP',sans-serif":"'Inter',sans-serif"; }
-document.getElementById('langToggle').addEventListener('click',()=>{ lang=lang==='en'?'jp':'en'; localStorage.setItem('sushi-booking-lang',lang==='jp'?'ja':lang); apply(lang); });
-document.addEventListener('DOMContentLoaded',()=>apply(lang));
-</script>
+
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="logo"><span class="logo-b">b</span> hotel</a>
+      <button class="lang-btn" id="langToggle">JP / EN</button>
+    </div>
+  </nav>
+
+  <main class="privacy-main">
+    <div class="legal-label" id="legalLabel">LEGAL</div>
+    <h1 class="privacy-title" id="privacyTitle">Privacy Policy</h1>
+
+    <div class="privacy-content">
+
+      <section class="privacy-section">
+        <h2 class="section-heading" id="s1Title">Information We Collect</h2>
+        <p class="section-text" id="s1Text">When you make a reservation for the Dashi &amp; Sushi Experience, we collect the following personal information: full name, email address, phone number, accommodation reservation number (Guesty booking ID), room details, number of guests, and allergy / dietary restriction information. This information is collected solely for the purpose of managing your reservation and ensuring a safe, personalized experience.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2 class="section-heading" id="s2Title">Payment Information</h2>
+        <p class="section-text" id="s2Text">All payment processing is handled securely by Stripe, Inc. We do not store your credit or debit card information on our servers. When you proceed to payment, your card details are entered directly on Stripe's secure platform. Stripe registers your card at the time of booking, and the charge is automatically processed at 11:00 AM three days before your experience date. b hotel never has access to your full card number.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2 class="section-heading" id="s3Title">How We Use Your Information</h2>
+        <p class="section-text" id="s3Text">Your personal information is used exclusively to: confirm and manage your reservation; process payment via Stripe; send booking confirmation and reminder emails; accommodate allergy or dietary needs; and contact you in the event of changes to your reservation or cancellation. We do not use your information for marketing purposes without your explicit consent, and we do not sell or share your personal data with third parties except as required to fulfill your booking (Stripe for payments, Google Calendar for scheduling).</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2 class="section-heading" id="s4Title">Third-Party Services</h2>
+        <p class="section-text" id="s4Text">We use the following third-party services: Stripe for secure payment processing; Google Calendar for internal scheduling of your experience. Each of these providers operates under its own privacy policy and security standards. We encourage you to review Stripe's Privacy Policy (stripe.com/privacy) and Google's Privacy Policy (policies.google.com/privacy) to understand how your data is handled by these services.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2 class="section-heading" id="s5Title">Data Retention</h2>
+        <p class="section-text" id="s5Text">We retain your reservation and personal data for a period of seven (7) years following your experience, in accordance with Japanese tax and accounting regulations. After this period, your data will be securely deleted. If you wish to request early deletion of your personal information, please contact us at the address below. We will process your request in accordance with applicable privacy laws.</p>
+      </section>
+
+      <section class="privacy-section">
+        <h2 class="section-heading" id="s6Title">Contact</h2>
+        <p class="section-text" id="s6Text">For any questions or concerns regarding this Privacy Policy, or to request deletion of your personal data, please contact us at: support@breakfast-h.com. We aim to respond to all privacy-related inquiries within 5 business days.</p>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span id="footerCopy">&copy; b hotel &mdash; Koban-dori Goju (交番通り五十)</span>
+    <a href="privacy.html" id="footerPrivacy">Privacy Policy</a>
+  </footer>
+
+  <script>
+    const C = {
+      en: {
+        legalLabel: 'LEGAL',
+        privacyTitle: 'Privacy Policy',
+        s1Title: 'Information We Collect',
+        s1Text: 'When you make a reservation for the Dashi & Sushi Experience, we collect the following personal information: full name, email address, phone number, accommodation reservation number (Guesty booking ID), room details, number of guests, and allergy / dietary restriction information. This information is collected solely for the purpose of managing your reservation and ensuring a safe, personalized experience.',
+        s2Title: 'Payment Information',
+        s2Text: 'All payment processing is handled securely by Stripe, Inc. We do not store your credit or debit card information on our servers. When you proceed to payment, your card details are entered directly on Stripe\'s secure platform. Stripe registers your card at the time of booking, and the charge is automatically processed at 11:00 AM three days before your experience date. b hotel never has access to your full card number.',
+        s3Title: 'How We Use Your Information',
+        s3Text: 'Your personal information is used exclusively to: confirm and manage your reservation; process payment via Stripe; send booking confirmation and reminder emails; accommodate allergy or dietary needs; and contact you in the event of changes to your reservation or cancellation. We do not use your information for marketing purposes without your explicit consent, and we do not sell or share your personal data with third parties except as required to fulfill your booking.',
+        s4Title: 'Third-Party Services',
+        s4Text: 'We use the following third-party services: Stripe for secure payment processing; Google Calendar for internal scheduling of your experience. Each of these providers operates under its own privacy policy and security standards. We encourage you to review Stripe\'s Privacy Policy (stripe.com/privacy) and Google\'s Privacy Policy (policies.google.com/privacy).',
+        s5Title: 'Data Retention',
+        s5Text: 'We retain your reservation and personal data for a period of seven (7) years following your experience, in accordance with Japanese tax and accounting regulations. After this period, your data will be securely deleted. If you wish to request early deletion of your personal information, please contact us at the address below.',
+        s6Title: 'Contact',
+        s6Text: 'For any questions or concerns regarding this Privacy Policy, or to request deletion of your personal data, please contact us at: support@breakfast-h.com. We aim to respond to all privacy-related inquiries within 5 business days.',
+        footerPrivacy: 'Privacy Policy'
+      },
+      jp: {
+        legalLabel: 'プライバシー',
+        privacyTitle: 'プライバシーポリシー',
+        s1Title: '収集する個人情報',
+        s1Text: '出汁と寿司体験のご予約時に、以下の個人情報を収集します：氏名、メールアドレス、電話番号、宿泊予約番号（Guesty予約ID）、客室情報、人数、アレルギー・食事制限に関する情報。これらの情報は、予約管理および安全で個別対応の体験を提供する目的のみに使用されます。',
+        s2Title: '決済情報について',
+        s2Text: '決済処理はすべてStripe, Inc.によって安全に行われます。当社はお客様のクレジットカードまたはデビットカード情報を当社のサーバーに保存しません。お支払いへ進む際、カード情報はStripeのセキュアなプラットフォームに直接入力されます。カードはご予約時に登録され、体験日の3日前の午前11時に自動決済されます。b hotelがお客様の完全なカード番号にアクセスすることは一切ありません。',
+        s3Title: '情報の利用目的',
+        s3Text: 'お客様の個人情報は、以下の目的のみに使用されます：予約の確認および管理、Stripe経由の決済処理、予約確認・リマインダーメールの送信、アレルギー・食事制限への対応、予約変更やキャンセルが発生した場合の連絡。お客様の明示的な同意なく、マーケティング目的で情報を使用することはありません。また、予約履行に必要な場合（Stripeによる決済、Googleカレンダーによる日程管理）を除き、第三者に個人データを販売・提供することはありません。',
+        s4Title: '第三者サービスについて',
+        s4Text: '当社では以下の第三者サービスを利用しています：Stripe（安全な決済処理）、Googleカレンダー（体験日程の社内管理）。各サービスプロバイダーは独自のプライバシーポリシーおよびセキュリティ基準のもとで運営されています。Stripe（stripe.com/privacy）およびGoogle（policies.google.com/privacy）のプライバシーポリシーをご確認ください。',
+        s5Title: 'データ保持期間',
+        s5Text: '日本の税務・会計規制に基づき、体験日から7年間、予約および個人データを保持します。この期間を過ぎた後、データは安全に削除されます。早期削除をご希望の場合は、下記の連絡先までご連絡ください。適用されるプライバシー法に従い、リクエストに対応いたします。',
+        s6Title: 'お問い合わせ',
+        s6Text: 'プライバシーポリシーに関するご質問・ご不明点、または個人データの削除リタエストについては、support@breakfast-h.com までご連絡ください。プライバシーに関するお問い合わせには、5営業日以内にご回答するよう努めております。',
+        footerPrivacy: 'プライバシーポリシー'
+      }
+    };
+
+    let lang = (() => {
+      try {
+        const stored = localStorage.getItem('lang');
+        return stored === 'jp' || stored === 'ja' ? 'jp' : 'en';
+      } catch(e) { return 'en'; }
+    })();
+
+    function apply(l) {
+      const c = C[l] || C.en;
+      Object.keys(c).forEach(k => {
+        const el = document.getElementById(k);
+        if (el) el.textContent = c[k];
+      });
+      document.documentElement.lang = l === 'jp' ? 'ja' : 'en';
+      document.body.style.fontFamily = l === 'jp' ? "'Noto Sans JP', sans-serif" : "'Inter', sans-serif";
+    }
+
+    document.getElementById('langToggle').addEventListener('click', () => {
+      lang = lang === 'en' ? 'jp' : 'en';
+      try { localStorage.setItem('lang', lang === 'jp' ? 'ja' : 'en'); } catch(e) {}
+      apply(lang);
+    });
+
+    document.addEventListener('DOMContentLoaded', () => apply(lang));
+  </script>
 </body>
 </html>
