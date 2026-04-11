@@ -1,991 +1,959 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reserve Your Experience | b hotel</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* ============================================
-           BASE
-        ============================================ */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reserve Your Experience | b hotel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+/* ============================================
+   BASE
+============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: #faf7f2;
+  color: #3d2c1e;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #fff;
-            color: #3d2c1e;
-            min-height: 100vh;
-            -webkit-font-smoothing: antialiased;
-        }
+/* ============================================
+   NAVBAR
+============================================ */
+.navbar {
+  background: #3d2c1e;
+  padding: 12px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.nav-logo {
+  color: #fff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.nav-logo .logo-b { color: #e8a23a; font-style: italic; }
+:lang(ja), .lang-ja.active, .lang-ja.active * {
+  font-family: 'Noto Sans JP', sans-serif !important;
+}
 
-        /* Japanese font override */
-        :lang(ja), .lang-ja.active, .lang-ja.active * {
-            font-family: 'Noto Sans JP', sans-serif !important;
-        }
+/* ============================================
+   PAGE WRAPPER
+============================================ */
+.page-wrapper {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 36px 24px 80px;
+}
 
-        /* ============================================
-           PAGE WRAPPER
-        ============================================ */
-        .page-wrapper {
-            max-width: 520px;
-            margin: 0 auto;
-            padding: 28px 24px 60px;
-            position: relative;
-        }
+/* ============================================
+   LANGUAGE TOGGLE (in navbar)
+============================================ */
+.lang-toggle {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 20px;
+  padding: 5px 16px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  color: rgba(255,255,255,0.85);
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+.lang-toggle:hover { background: rgba(255,255,255,0.12); }
+.lang-en.active, .lang-ja.active { color: #fff; font-weight: 600; }
+.lang-separator { color: rgba(255,255,255,0.35); }
 
-        /* ============================================
-           LANGUAGE TOGGLE
-        ============================================ */
-        .lang-toggle-wrap {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-        }
-        .lang-toggle {
-            background: none;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            padding: 5px 14px;
-            font-size: 11px;
-            letter-spacing: 0.1em;
-            cursor: pointer;
-            color: #bbb;
-            display: flex;
-            gap: 5px;
-            align-items: center;
-            font-family: inherit;
-        }
-        .lang-en.active, .lang-ja.active {
-            color: #3d2c1e;
-            font-weight: 600;
-        }
-        .lang-separator { color: #ddd; }
+/* ============================================
+   HEADER
+============================================ */
+.page-header {
+  text-align: center;
+  padding: 40px 0 24px;
+}
+.experience-sub {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #bbb;
+}
 
-        /* ============================================
-           HEADER
-        ============================================ */
-        .page-header {
-            text-align: center;
-            padding: 52px 0 28px;
-        }
-        .brand-name {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 22px;
-            letter-spacing: 0.12em;
-            color: #3d2c1e;
-            margin-bottom: 6px;
-        }
-        .brand-name .logo-b {
-            font-style: italic;
-        }
-        .experience-sub {
-            font-size: 10px;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: #bbb;
-        }
+/* ============================================
+   FOOTER
+============================================ */
+.page-footer {
+  background: #3d2c1e;
+  color: rgba(255,255,255,0.55);
+  text-align: center;
+  padding: 28px 24px;
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+}
+.page-footer a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  margin-left: 16px;
+}
+.page-footer a:hover { color: #fff; }
 
-        /* ============================================
-           BACK LINK
-        ============================================ */
-        .back-link {
-            display: inline-block;
-            font-size: 12px;
-            color: #aaa;
-            text-decoration: none;
-            margin-bottom: 24px;
-            letter-spacing: 0.02em;
-            transition: color 0.2s;
-        }
-        .back-link:hover { color: #3d2c1e; }
+/* ============================================
+   BACK LINK
+============================================ */
+.back-link {
+  display: inline-block;
+  font-size: 12px;
+  color: #aaa;
+  text-decoration: none;
+  margin-bottom: 24px;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.back-link:hover { color: #3d2c1e; }
 
-        /* ============================================
-           DATE BADGE
-        ============================================ */
-        .date-row {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 36px;
-        }
-        .date-badge {
-            width: 56px;
-            height: 56px;
-            border-radius: 4px;
-            background: #3d2c1e;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            line-height: 1;
-        }
-        .date-badge-month {
-            font-size: 9px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            opacity: 0.75;
-            margin-bottom: 3px;
-        }
-        .date-badge-day {
-            font-size: 22px;
-            font-weight: 700;
-        }
-        .date-info-weekday {
-            font-size: 14px;
-            color: #3d2c1e;
-            font-weight: 500;
-            margin-bottom: 3px;
-        }
-        .date-info-time {
-            font-size: 12px;
-            color: #aaa;
-            letter-spacing: 0.03em;
-        }
+/* ============================================
+   DATE BADGE
+============================================ */
+.date-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 36px;
+}
+.date-badge {
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  background: #3d2c1e;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.date-badge-month {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 3px;
+}
+.date-badge-day { font-size: 22px; font-weight: 700; }
+.date-info-weekday { font-size: 14px; color: #3d2c1e; font-weight: 500; margin-bottom: 3px; }
+.date-info-time { font-size: 12px; color: #aaa; letter-spacing: 0.03em; }
 
-        /* ============================================
-           SECTION TITLE
-        ============================================ */
-        .section-title {
-            font-size: 10px;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: #bbb;
-            margin-bottom: 20px;
-            padding-bottom: 9px;
-            border-bottom: 1px solid #eee;
-        }
+/* ============================================
+   SECTION TITLE
+============================================ */
+.section-title {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #bbb;
+  margin-bottom: 20px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid #eee;
+}
 
-        /* ============================================
-           FORM SECTIONS
-        ============================================ */
-        .form-section {
-            margin-bottom: 32px;
-        }
+/* ============================================
+   FORM SECTIONS
+============================================ */
+.form-section { margin-bottom: 32px; }
 
-        /* ============================================
-           FORM FIELDS (bottom-border only)
-        ============================================ */
-        .form-field {
-            margin-bottom: 22px;
-        }
-        .field-label {
-            display: block;
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #bbb;
-            margin-bottom: 5px;
-        }
-        .required-star { color: #e8a23a; }
-        .form-input {
-            width: 100%;
-            padding: 10px 0;
-            font-size: 15px;
-            border: none;
-            border-bottom: 1px solid #e0e0e0;
-            background: transparent;
-            color: #3d2c1e;
-            outline: none;
-            transition: border-color 0.2s;
-            font-family: inherit;
-            -webkit-appearance: none;
-        }
-        .form-input:focus { border-bottom-color: #3d2c1e; }
-        .form-input::placeholder { color: #ccc; }
-        textarea.form-input {
-            resize: vertical;
-            min-height: 52px;
-            padding-top: 10px;
-        }
-        select.form-input { cursor: pointer; }
-        .error-msg {
-            font-size: 11px;
-            color: #c0392b;
-            margin-top: 4px;
-            display: none;
-        }
-        .error-msg.visible { display: block; }
+/* ============================================
+   FORM FIELDS (bottom-border only)
+============================================ */
+.form-field { margin-bottom: 22px; }
+.field-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bbb;
+  margin-bottom: 5px;
+}
+.required-star { color: #e8a23a; }
+.form-input {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 15px;
+  border: none;
+  border-bottom: 1px solid #e0e0e0;
+  background: transparent;
+  color: #3d2c1e;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+  -webkit-appearance: none;
+}
+.form-input:focus { border-bottom-color: #3d2c1e; }
+.form-input::placeholder { color: #ccc; }
+textarea.form-input { resize: vertical; min-height: 52px; padding-top: 10px; }
+select.form-input { cursor: pointer; }
+.error-msg { font-size: 11px; color: #c0392b; margin-top: 4px; display: none; }
+.error-msg.visible { display: block; }
 
-        /* ============================================
-           GUEST COUNTER
-        ============================================ */
-        .counter-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        .counter-row:last-of-type { border-bottom: none; }
-        .counter-label { flex: 1; }
-        .counter-label-name {
-            font-size: 14px;
-            color: #3d2c1e;
-            font-weight: 500;
-        }
-        .counter-label-price {
-            font-size: 11px;
-            color: #bbb;
-            margin-top: 2px;
-        }
-        .counter-controls {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .counter-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            border: 1px solid #ddd;
-            background: transparent;
-            font-size: 18px;
-            line-height: 1;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #3d2c1e;
-            transition: background 0.2s, color 0.2s, border-color 0.2s;
-            font-family: inherit;
-            user-select: none;
-        }
-        .counter-btn:hover {
-            background: #3d2c1e;
-            color: #fff;
-            border-color: #3d2c1e;
-        }
-        .counter-btn:disabled {
-            opacity: 0.25;
-            cursor: not-allowed;
-        }
-        .counter-btn:disabled:hover {
-            background: transparent;
-            color: #3d2c1e;
-            border-color: #ddd;
-        }
-        .counter-value {
-            font-size: 16px;
-            font-weight: 500;
-            min-width: 22px;
-            text-align: center;
-            color: #3d2c1e;
-        }
-        .group-notice {
-            font-size: 12px;
-            color: #e8a23a;
-            margin-top: 10px;
-            display: none;
-        }
-        .group-notice.visible { display: block; }
+/* ============================================
+   GUEST COUNTER
+============================================ */
+.counter-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.counter-row:last-of-type { border-bottom: none; }
+.counter-label { flex: 1; }
+.counter-label-name { font-size: 14px; color: #3d2c1e; font-weight: 500; }
+.counter-label-price { font-size: 11px; color: #bbb; margin-top: 2px; }
+.counter-controls { display: flex; align-items: center; gap: 14px; }
+.counter-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: transparent;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3d2c1e;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  font-family: inherit;
+  user-select: none;
+}
+.counter-btn:hover { background: #3d2c1e; color: #fff; border-color: #3d2c1e; }
+.counter-btn:disabled { opacity: 0.25; cursor: not-allowed; }
+.counter-btn:disabled:hover { background: transparent; color: #3d2c1e; border-color: #ddd; }
+.counter-value { font-size: 16px; font-weight: 500; min-width: 22px; text-align: center; color: #3d2c1e; }
+.group-notice { font-size: 12px; color: #e8a23a; margin-top: 10px; display: none; }
+.group-notice.visible { display: block; }
 
-        /* ============================================
-           PRICE SUMMARY
-        ============================================ */
-        .price-summary {
-            margin-bottom: 24px;
-        }
-        .price-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 9px 0;
-            font-size: 13px;
-            color: #888;
-            border-bottom: 1px solid #f5f5f5;
-        }
-        .price-row.total {
-            border-bottom: none;
-            font-weight: 600;
-            font-size: 15px;
-            color: #3d2c1e;
-            padding-top: 13px;
-        }
+/* ============================================
+   PRICE SUMMARY
+============================================ */
+.price-summary { margin-bottom: 24px; }
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  font-size: 13px;
+  color: #888;
+  border-bottom: 1px solid #f5f5f5;
+}
+.price-row.total {
+  border-bottom: none;
+  font-weight: 600;
+  font-size: 15px;
+  color: #3d2c1e;
+  padding-top: 13px;
+}
 
-        /* ============================================
-           CHARGE NOTICE
-        ============================================ */
-        .charge-notice {
-            background: #faf7f2;
-            border-left: 3px solid #e8a23a;
-            padding: 14px 16px;
-            font-size: 12px;
-            color: #777;
-            line-height: 1.65;
-            margin-bottom: 20px;
-        }
+/* ============================================
+   CHARGE NOTICE
+============================================ */
+.charge-notice {
+  background: #f0ece4;
+  border-left: 3px solid #e8a23a;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: #777;
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
 
-        /* ============================================
-           CONSENT TEXT
-        ============================================ */
-        .consent-text {
-            font-size: 11px;
-            color: #bbb;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            text-align: center;
-        }
+/* ============================================
+   CONSENT TEXT
+============================================ */
+.consent-text {
+  font-size: 11px;
+  color: #bbb;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-        /* ============================================
-           SUBMIT BUTTON
-        ============================================ */
-        .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 17px;
-            border: 1px solid #3d2c1e;
-            background: #3d2c1e;
-            color: #fff;
-            font-size: 13px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: background 0.2s, border-color 0.2s;
-            font-family: inherit;
-            font-weight: 500;
-            margin-bottom: 16px;
-        }
-        .submit-btn:hover { background: #5a3d28; border-color: #5a3d28; }
-        .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+/* ============================================
+   SUBMIT BUTTON
+============================================ */
+.submit-btn {
+  display: block;
+  width: 100%;
+  padding: 17px;
+  border: 1px solid #3d2c1e;
+  background: #3d2c1e;
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: inherit;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.submit-btn:hover { background: #5a3d28; border-color: #5a3d28; }
+.submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
-        /* ============================================
-           STRIPE FOOTER
-        ============================================ */
-        .stripe-footer {
-            text-align: center;
-            font-size: 11px;
-            color: #ccc;
-            letter-spacing: 0.05em;
-        }
+/* ============================================
+   CANCEL LINK
+============================================ */
+.cancel-link-row {
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 20px;
+}
+.cancel-link {
+  font-size: 12px;
+  color: #aaa;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.cancel-link:hover { color: #3d2c1e; }
 
-        /* ============================================
-           ALERTS
-        ============================================ */
-        .alert {
-            padding: 12px 16px;
-            font-size: 13px;
-            margin-bottom: 16px;
-            display: none;
-            line-height: 1.5;
-        }
-        .alert.visible { display: block; }
-        .alert-error { background: #fef2f2; border-left: 3px solid #e74c3c; color: #c0392b; }
-        .alert-success { background: #f0faf5; border-left: 3px solid #27ae60; color: #1e8449; }
+/* ============================================
+   STRIPE FOOTER
+============================================ */
+.stripe-footer { text-align: center; font-size: 11px; color: #ccc; letter-spacing: 0.05em; }
 
-        /* loading spinner text */
-        #loadingSpinner { display: none; }
-    </style>
+/* ============================================
+   ALERTS
+============================================ */
+.alert {
+  padding: 12px 16px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  display: none;
+  line-height: 1.5;
+}
+.alert.visible { display: block; }
+.alert-error { background: #fef2f2; border-left: 3px solid #e74c3c; color: #c0392b; }
+.alert-success { background: #f0faf5; border-left: 3px solid #27ae60; color: #1e8449; }
+#loadingSpinner { display: none; }
+  </style>
 </head>
 <body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="nav-logo"><span class="logo-b">b</span> hotel</a>
+      <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+        <span class="lang-en active" data-lang="en">EN</span>
+        <span class="lang-separator">/</span>
+        <span class="lang-ja" data-lang="ja">JP</span>
+      </button>
+    </div>
+  </nav>
+
 <div class="page-wrapper">
 
-    <!-- Language Toggle -->
-    <div class="lang-toggle-wrap">
-        <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
-            <span class="lang-en active" data-lang="en">EN</span>
-            <span class="lang-separator">/</span>
-            <span class="lang-ja" data-lang="ja">JP</span>
-        </button>
+  <!-- Header -->
+  <div class="page-header">
+    <div class="experience-sub" id="experienceSub">SUSHI EXPERIENCE</div>
+  </div>
+
+  <!-- Back link -->
+  <a href="index.html" class="back-link" id="backLink">← Back to dates</a>
+
+  <!-- Date badge -->
+  <div class="date-row">
+    <div class="date-badge">
+      <div class="date-badge-month" id="dateBadgeMonth">APR</div>
+      <div class="date-badge-day" id="dateBadgeDay">13</div>
+    </div>
+    <div>
+      <div class="date-info-weekday" id="heroDate">Monday, April 13, 2026</div>
+      <div class="date-info-time">11:00 – 13:00</div>
+    </div>
+  </div>
+
+  <!-- Booking Form -->
+  <form id="bookingForm" novalidate>
+    <!-- Hidden date fields -->
+    <input type="hidden" id="selectedDate" name="selectedDate">
+    <input type="hidden" id="dateValue" name="date">
+
+    <!-- GUEST INFORMATION -->
+    <div class="form-section">
+      <div class="section-title" id="sectionGuest">GUEST INFORMATION</div>
+
+      <div class="form-field">
+        <label class="field-label" for="name" id="labelName">FULL NAME <span class="required-star">*</span></label>
+        <input type="text" id="name" class="form-input" autocomplete="name" required>
+        <div class="error-msg" id="errorName"></div>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label" for="email" id="labelEmail">EMAIL <span class="required-star">*</span></label>
+        <input type="email" id="email" class="form-input" autocomplete="email" required>
+        <div class="error-msg" id="errorEmail"></div>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label" for="phone" id="labelPhone">PHONE <span class="required-star">*</span></label>
+        <input type="tel" id="phone" class="form-input" placeholder="+81 XX-XXXX-XXXX" autocomplete="tel" required>
+        <div class="error-msg" id="errorPhone"></div>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label" for="guestyId" id="labelGuestyId">ACCOMMODATION RESERVATION NO. <span class="required-star">*</span></label>
+        <input type="text" id="guestyId" class="form-input" placeholder="Guesty booking ID" required>
+        <div class="error-msg" id="errorGuestyId"></div>
+      </div>
     </div>
 
-    <!-- Header -->
-    <div class="page-header">
-        <div class="brand-name"><span class="logo-b">b</span> hotel</div>
-        <div class="experience-sub" id="experienceSub">SUSHI EXPERIENCE</div>
+    <!-- NUMBER OF GUESTS -->
+    <div class="form-section">
+      <div class="section-title" id="sectionGuests">NUMBER OF GUESTS</div>
+
+      <div class="counter-row">
+        <div class="counter-label">
+          <div class="counter-label-name" id="labelAdults">Adults</div>
+          <div class="counter-label-price">¥9,800 / person</div>
+        </div>
+        <div class="counter-controls">
+          <button type="button" class="counter-btn" id="adultsDecBtn">−</button>
+          <span class="counter-value" id="adultsDisplay">2</span>
+          <button type="button" class="counter-btn" id="adultsIncBtn">+</button>
+        </div>
+      </div>
+      <input type="hidden" id="adults" value="2">
+
+      <div class="counter-row">
+        <div class="counter-label">
+          <div class="counter-label-name" id="labelChildren">Children under 12</div>
+          <div class="counter-label-price">¥5,000 / person</div>
+        </div>
+        <div class="counter-controls">
+          <button type="button" class="counter-btn" id="childrenDecBtn">−</button>
+          <span class="counter-value" id="childrenDisplay">0</span>
+          <button type="button" class="counter-btn" id="childrenIncBtn">+</button>
+        </div>
+      </div>
+      <input type="hidden" id="children" value="0">
+
+      <div class="group-notice" id="groupSizeNotice">
+        <p id="groupSizeMessage"></p>
+      </div>
+      <div id="capacityInfo" style="display:none;background:#fef9f0;border:1px solid #e8a23a;border-radius:6px;padding:8px 14px;margin-top:8px;font-size:13px;color:#5a3d00;"></div>
+      <div id="soldOutNotice" style="display:none;background:#ffebee;border:1px solid #ef9a9a;border-radius:6px;padding:8px 14px;margin-top:8px;font-size:13px;color:#c62828;"></div>
     </div>
 
-    <!-- Back link -->
-    <a href="index.html" class="back-link" id="backLink">← Back to dates</a>
+    <!-- Hidden fields -->
+    <textarea id="allergies" style="display:none"></textarea>
+    <input type="hidden" id="language" value="en">
 
-    <!-- Date badge -->
-    <div class="date-row">
-        <div class="date-badge">
-            <div class="date-badge-month" id="dateBadgeMonth">APR</div>
-            <div class="date-badge-day" id="dateBadgeDay">13</div>
-        </div>
-        <div>
-            <div class="date-info-weekday" id="heroDate">Monday, April 13, 2026</div>
-            <div class="date-info-time">11:00 – 13:00</div>
-        </div>
+    <!-- PRICE SUMMARY -->
+    <div class="price-summary">
+      <div class="section-title" id="pricingTitle">PRICE SUMMARY</div>
+      <div class="price-row">
+        <span id="pricingAdultsLabel">Adults (2)</span>
+        <span id="pricingAdultsValue">¥19,600</span>
+      </div>
+      <div class="price-row" id="childrenPriceRow" style="display:none;">
+        <span id="pricingChildrenLabel">Children (0)</span>
+        <span id="pricingChildrenValue">¥0</span>
+      </div>
+      <div class="price-row total">
+        <span id="pricingTotalLabel">Total</span>
+        <span id="pricingTotalValue">¥19,600</span>
+      </div>
     </div>
 
-    <!-- Booking Form -->
-    <form id="bookingForm" novalidate>
-        <!-- Hidden date fields -->
-        <input type="hidden" id="selectedDate" name="selectedDate">
-        <input type="hidden" id="dateValue" name="date">
+    <!-- Alerts -->
+    <div class="alert alert-error" id="errorAlert" role="alert">
+      <p id="errorAlertMessage"></p>
+    </div>
+    <div class="alert alert-success" id="successAlert" role="status">
+      <p id="successAlertMessage"></p>
+    </div>
 
-        <!-- GUEST INFORMATION -->
-        <div class="form-section">
-            <div class="section-title" id="sectionGuest">GUEST INFORMATION</div>
+    <!-- Charge notice -->
+    <div class="charge-notice" id="paymentNoticeBox">
+      <p id="consentText">Today, we only register your card details. Your card will be automatically charged at 11:00 AM, 3 days before your experience. Free cancellation up to 3 days before.</p>
+    </div>
 
-            <div class="form-field">
-                <label class="field-label" for="name" id="labelName">FULL NAME <span class="required-star">*</span></label>
-                <input type="text" id="name" class="form-input" autocomplete="name" required>
-                <div class="error-msg" id="errorName"></div>
-            </div>
+    <!-- Consent -->
+    <p class="consent-text" id="stripeNotice">By proceeding, you agree to register your card for future payment. Your card will be automatically charged 3 days before your experience. Free cancellation up to 3 days before; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.</p>
 
-            <div class="form-field">
-                <label class="field-label" for="email" id="labelEmail">EMAIL <span class="required-star">*</span></label>
-                <input type="email" id="email" class="form-input" autocomplete="email" required>
-                <div class="error-msg" id="errorEmail"></div>
-            </div>
+    <!-- Submit -->
+    <button type="submit" class="submit-btn" id="submitBtn">
+      <span id="submitBtnText">PROCEED TO PAYMENT</span>
+      <span id="loadingSpinner">...</span>
+    </button>
 
-            <div class="form-field">
-                <label class="field-label" for="phone" id="labelPhone">PHONE</label>
-                <input type="tel" id="phone" class="form-input" placeholder="+81 XX-XXXX-XXXX" autocomplete="tel">
-                <div class="error-msg" id="errorPhone"></div>
-            </div>
-        </div>
+    <!-- Cancel link -->
+    <div class="cancel-link-row">
+      <a href="cancel.html" class="cancel-link" id="cancelLinkText">Cancellation / Booking Lookup →</a>
+    </div>
 
-        <!-- NUMBER OF GUESTS -->
-        <div class="form-section">
-            <div class="section-title" id="sectionGuests">NUMBER OF GUESTS</div>
-
-            <div class="counter-row">
-                <div class="counter-label">
-                    <div class="counter-label-name" id="labelAdults">Adults</div>
-                    <div class="counter-label-price">¥9,800 / person</div>
-                </div>
-                <div class="counter-controls">
-                    <button type="button" class="counter-btn" id="adultsDecBtn">−</button>
-                    <span class="counter-value" id="adultsDisplay">2</span>
-                    <button type="button" class="counter-btn" id="adultsIncBtn">+</button>
-                </div>
-            </div>
-            <input type="hidden" id="adults" value="2">
-
-            <div class="counter-row">
-                <div class="counter-label">
-                    <div class="counter-label-name" id="labelChildren">Children under 12</div>
-                    <div class="counter-label-price">¥5,000 / person</div>
-                </div>
-                <div class="counter-controls">
-                    <button type="button" class="counter-btn" id="childrenDecBtn">−</button>
-                    <span class="counter-value" id="childrenDisplay">0</span>
-                    <button type="button" class="counter-btn" id="childrenIncBtn">+</button>
-                </div>
-            </div>
-            <input type="hidden" id="children" value="0">
-
-            <div class="group-notice" id="groupSizeNotice">
-                <p id="groupSizeMessage"></p>
-            </div>
-            <div id="capacityInfo" style="display:none;background:#fef9f0;border:1px solid #e8a23a;border-radius:6px;padding:8px 14px;margin-top:8px;font-size:13px;color:#5a3d00;"></div>
-            <div id="soldOutNotice" style="display:none;background:#ffebee;border:1px solid #ef9a9a;border-radius:6px;padding:8px 14px;margin-top:8px;font-size:13px;color:#c62828;"></div>
-        </div>
-
-        <!-- Hidden fields (removed from UI but needed for form submission) -->
-        <textarea id="allergies" style="display:none"></textarea>
-        <input type="hidden" id="language" value="en">
-
-        <!-- PRICE SUMMARY -->
-        <div class="price-summary">
-            <div class="section-title" id="pricingTitle">PRICE SUMMARY</div>
-            <div class="price-row">
-                <span id="pricingAdultsLabel">Adults (2)</span>
-                <span id="pricingAdultsValue">¥19,600</span>
-            </div>
-            <div class="price-row" id="childrenPriceRow">
-                <span id="pricingChildrenLabel">Children (0)</span>
-                <span id="pricingChildrenValue">¥0</span>
-            </div>
-            <div class="price-row total">
-                <span id="pricingTotalLabel">Total</span>
-                <span id="pricingTotalValue">¥19,600</span>
-            </div>
-        </div>
-
-        <!-- Alerts -->
-        <div class="alert alert-error" id="errorAlert" role="alert">
-            <p id="errorAlertMessage"></p>
-        </div>
-        <div class="alert alert-success" id="successAlert" role="status">
-            <p id="successAlertMessage"></p>
-        </div>
-
-        <!-- Charge notice -->
-        <div class="charge-notice" id="paymentNoticeBox">
-            <p id="consentText">Today, we only register your card details. Your card will be automatically charged at 11:00 AM, 3 days before your experience. Free cancellation up to 3 days before.</p>
-        </div>
-
-        <!-- Consent -->
-        <p class="consent-text" id="stripeNotice">By proceeding, you agree to register your card for future payment. Your card will be automatically charged 3 days before your experience. Free cancellation up to 3 days before; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.</p>
-
-        <!-- Submit -->
-        <button type="submit" class="submit-btn" id="submitBtn">
-            <span id="submitBtnText">PROCEED TO PAYMENT</span>
-            <span id="loadingSpinner">...</span>
-        </button>
-    </form>
+  </form>
 
 </div><!-- /.page-wrapper -->
 
+  <!-- Footer -->
+  <footer class="page-footer">
+    <span>© b hotel — Koban-dori Goju (交番通り五十)</span>
+    <a href="privacy.html" id="footerPrivacyLink">Privacy Policy</a>
+  </footer>
+
 <script src="js/api.js"></script>
 <script>
-    // ============================================
-    // Language Management
-    // ============================================
-    const TRANSLATIONS = {
-        en: {
-            heroLabel: 'BOOKING',
-            heroTitle: 'Reserve Your Experience',
-            labelDate: 'Selected Date',
-            labelName: 'Full Name',
-            labelEmail: 'Email',
-            labelPhone: 'Phone',
-            labelAdults: 'Adults',
-            labelChildren: 'Children under 12',
-            labelAllergies: 'Allergies / Special Requests',
-            allergy_placeholder: 'Please let us know about any dietary restrictions or special requests...',
-            backLink: '← Back to dates',
-            submitBtn: 'PROCEED TO PAYMENT',
-            processingBtn: 'Processing...',
-            pricingTitle: 'PRICE SUMMARY',
-            pricingAdults: 'Adults',
-            pricingChildren: 'Children',
-            pricingTotal: 'Total',
-            groupSizeMessage: 'Group size must be between 2 and 8 people.',
-            errorRequired: 'This field is required.',
-            errorInvalidEmail: 'Please enter a valid email address.',
-            errorInvalidPhone: 'Please enter a valid phone number.',
-            errorGroupSize: 'Group size must be between 2 and 8 people.',
-            phone_placeholder: '+81 XX-XXXX-XXXX',
-            required_asterisk: '*',
-            errorGeneral: 'An error occurred. Please try again.',
-            errorNetwork: 'Network error. Please check your connection and try again.',
-            errorCheckout: 'Failed to create checkout session. Please try again.',
-            successRedirect: 'Redirecting to payment...',
-            consentText: 'Today, we only register your card details. Your card will be automatically charged at 11:00 AM, 3 days before your experience. Free cancellation up to 3 days before.',
-            stripeNotice: 'By proceeding, you agree to register your card for future payment. Your card will be automatically charged 3 days before your experience. Free cancellation up to 3 days before; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.',
-            experienceSub: 'SUSHI EXPERIENCE',
-            sectionGuest: 'GUEST INFORMATION',
-            sectionGuests: 'NUMBER OF GUESTS',
-            footerTitle: 'b hotel',
-            footerDesc: 'Experience authentic sushi craftsmanship',
-            footerContact: 'Contact',
-            footerHours: 'Hours',
-            footerHoursTue: 'Tue-Sun: 11AM - 10PM',
-            footerHoursMon: 'Closed Mondays',
-            footerCopy: '© 2025 b hotel. All rights reserved.'
-        },
-        ja: {
-            heroLabel: '予約',
-            heroTitle: '体験を予約する',
-            labelDate: '選択した日付',
-            labelName: 'お名前',
-            labelEmail: 'メールアドレス',
-            labelPhone: '電話番号',
-            labelAdults: '大人',
-            labelChildren: '子供（12歳以下）',
-            labelAllergies: 'アレルギー・特別なリクエスト',
-            allergy_placeholder: 'アレルギーや特別なリクエストについて教えてください...',
-            backLink: '← 日程一覧に戻る',
-            submitBtn: 'お支払いへ進む',
-            processingBtn: '処理中...',
-            pricingTitle: '料金概要',
-            pricingAdults: '大人',
-            pricingChildren: 'お子様',
-            pricingTotal: '合計',
-            groupSizeMessage: 'グループサイズは2〜8人である必要があります。',
-            errorRequired: 'この項目は必須です。',
-            errorInvalidEmail: '有効なメールアドレスを入力してください。',
-            errorInvalidPhone: '有効な電話番号を入力してください。',
-            errorGroupSize: 'グループサイズは2〜8人である必要があります。',
-            phone_placeholder: '+81 XX-XXXX-XXXX',
-            required_asterisk: '*',
-            errorGeneral: 'エラーが発生しました。もう一度試してください。',
-            errorNetwork: 'ネットワークエラー。接続を確認して、もう一度試してください。',
-            errorCheckout: 'チェックアウトセッションの作成に失敗しました。もう一度試してください。',
-            successRedirect: 'お支払いページにリダイレクト中...',
-            consentText: '本日はカード情報の登録のみです。体験日の3日前午前11時に自動決済されます。3日前までキャンセル無料です。',
-            stripeNotice: '次に進むことで、後日決済用のカード登録に同意されたものとします。体験日の3日前にカードへ自動決済されます。3日前までキャンセル無料。3日以内は食材準備のため返金不可。カード情報はStripeにより安全に管理されます。b hotelではカード情報を保持しません。',
-            experienceSub: '寿司体験',
-            sectionGuest: 'お客様情報',
-            sectionGuests: 'ゲスト人数',
-            footerTitle: 'b hotel',
-            footerDesc: '本物の寿司職人の技を体験',
-            footerContact: 'お問い合わせ',
-            footerHours: '営業時間',
-            footerHoursTue: '火〜日: 11時〜22時',
-            footerHoursMon: '月曜日休業',
-            footerCopy: '© 2025 b hotel. すべての権利を保有。'
-        }
+// ============================================
+// Language Management
+// ============================================
+const TRANSLATIONS = {
+  en: {
+    heroLabel: 'BOOKING',
+    heroTitle: 'Reserve Your Experience',
+    labelDate: 'Selected Date',
+    labelName: 'Full Name',
+    labelEmail: 'Email',
+    labelPhone: 'Phone',
+    labelGuestyId: 'Accommodation Reservation No.',
+    labelAdults: 'Adults',
+    labelChildren: 'Children under 12',
+    labelAllergies: 'Allergies / Special Requests',
+    allergy_placeholder: 'Please let us know about any dietary restrictions or special requests...',
+    backLink: '← Back to dates',
+    submitBtn: 'PROCEED TO PAYMENT',
+    processingBtn: 'Processing...',
+    pricingTitle: 'PRICE SUMMARY',
+    pricingAdults: 'Adults',
+    pricingChildren: 'Children',
+    pricingTotal: 'Total',
+    groupSizeMessage: 'Group size must be between 2 and 8 people.',
+    errorRequired: 'This field is required.',
+    errorInvalidEmail: 'Please enter a valid email address.',
+    errorInvalidPhone: 'Please enter a valid phone number.',
+    errorGroupSize: 'Group size must be between 2 and 8 people.',
+    phone_placeholder: '+81 XX-XXXX-XXXX',
+    guestyId_placeholder: 'Guesty booking ID',
+    required_asterisk: '*',
+    errorGeneral: 'An error occurred. Please try again.',
+    errorNetwork: 'Network error. Please check your connection and try again.',
+    errorCheckout: 'Failed to create checkout session. Please try again.',
+    successRedirect: 'Redirecting to payment...',
+    consentText: 'Today, we only register your card details. Your card will be automatically charged at 11:00 AM, 3 days before your experience. Free cancellation up to 3 days before.',
+    stripeNotice: 'By proceeding, you agree to register your card for future payment. Your card will be automatically charged 3 days before your experience. Free cancellation up to 3 days before; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.',
+    experienceSub: 'SUSHI EXPERIENCE',
+    sectionGuest: 'GUEST INFORMATION',
+    sectionGuests: 'NUMBER OF GUESTS',
+    cancelLinkText: 'Cancellation / Booking Lookup →'
+  },
+  ja: {
+    heroLabel: '予約',
+    heroTitle: '体験を予約する',
+    labelDate: '選択した日付',
+    labelName: 'お名前',
+    labelEmail: 'メールアドレス',
+    labelPhone: '電話番号',
+    labelGuestyId: '宿泊予約番号',
+    labelAdults: '大人',
+    labelChildren: '子供（12歳以下）',
+    labelAllergies: 'アレルギー・特別なリクエスト',
+    allergy_placeholder: 'アレルギーや特別なリクエストについて教えてください...',
+    backLink: '← 日程一覧に戻る',
+    submitBtn: 'お支払いへ進む',
+    processingBtn: '処理中...',
+    pricingTitle: '料金概要',
+    pricingAdults: '大人',
+    pricingChildren: 'お子様',
+    pricingTotal: '合計',
+    groupSizeMessage: 'グループサイズは2〜8人である必要があります。',
+    errorRequired: 'この項目は必須です。',
+    errorInvalidEmail: '有効なメールアドレスを入力してください。',
+    errorInvalidPhone: '有効な電話番号を入力してください。',
+    errorGroupSize: 'グループサイズは2〜8人である必要があります。',
+    phone_placeholder: '+81 XX-XXXX-XXXX',
+    guestyId_placeholder: 'Guesty予約ID',
+    required_asterisk: '*',
+    errorGeneral: 'エラーが発生しました。もう一度試してください。',
+    errorNetwork: 'ネットワークエラー。接続を確認して、もう一度試してください。',
+    errorCheckout: 'チェックアウトセッションの作成に失敗しました。もう一度試してください。',
+    successRedirect: 'お支払いページにリダイレクト中...',
+    consentText: '本日はカード情報の登録のみです。体験日の3日前午前11時に自動決済されます。3日前までキャンセル無料です。',
+    stripeNotice: '次に進むことで、後日決済用のカード登録に同意されたものとします。体験日の3日前にカードへ自動決済されます。3日前までキャンセル無料。3日以内は食材準備のため返金不可。カード情報はStripeにより安全に管理されます。b hotelではカード情報を保持しません。',
+    experienceSub: '寿司体験',
+    sectionGuest: 'お客様情報',
+    sectionGuests: 'ゲスト人数',
+    cancelLinkText: 'キャンセル・予約照会はこちら →'
+  }
+};
+
+let currentLang = 'en';
+
+// ============================================
+// Language Switching
+// ============================================
+function setLanguage(lang) {
+  currentLang = lang;
+  const t = TRANSLATIONS[lang];
+  const isJa = lang === 'ja';
+
+  document.querySelector('.lang-en').classList.toggle('active', !isJa);
+  document.querySelector('.lang-ja').classList.toggle('active', isJa);
+  document.documentElement.lang = isJa ? 'ja' : 'en';
+
+  const map = {
+    backLink: t.backLink,
+    labelName: t.labelName,
+    labelEmail: t.labelEmail,
+    labelPhone: t.labelPhone,
+    labelGuestyId: t.labelGuestyId,
+    labelAdults: t.labelAdults,
+    labelChildren: t.labelChildren,
+    pricingTitle: t.pricingTitle,
+    pricingTotalLabel: t.pricingTotal,
+    submitBtnText: t.submitBtn,
+    consentText: t.consentText,
+    stripeNotice: t.stripeNotice,
+    experienceSub: t.experienceSub,
+    sectionGuest: t.sectionGuest,
+    sectionGuests: t.sectionGuests,
+    groupSizeMessage: t.groupSizeMessage,
+    cancelLinkText: t.cancelLinkText
+  };
+
+  for (const [id, text] of Object.entries(map)) {
+    const el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+
+  const langInput = document.getElementById('language');
+  if (langInput) langInput.value = lang;
+
+  const phone = document.getElementById('phone');
+  if (phone) phone.placeholder = t.phone_placeholder;
+
+  const guestyInput = document.getElementById('guestyId');
+  if (guestyInput) guestyInput.placeholder = t.guestyId_placeholder;
+
+  updatePriceSummary();
+
+  try { localStorage.setItem('lang', lang); } catch(e) {}
+}
+
+// ============================================
+// Counter Logic
+// ============================================
+const ADULT_PRICE = 9800;
+const CHILD_PRICE = 5000;
+const MAX_CAPACITY = 8;
+let remainingCapacity = MAX_CAPACITY;
+
+function getAdults() { return parseInt(document.getElementById('adults').value) || 2; }
+function getChildren() { return parseInt(document.getElementById('children').value) || 0; }
+
+function adjustCounter(type, delta) {
+  const hiddenInput = document.getElementById(type);
+  const display = document.getElementById(type + 'Display');
+  const decBtn = document.getElementById(type + 'DecBtn');
+  const incBtn = document.getElementById(type + 'IncBtn');
+  const min = type === 'adults' ? 1 : 0;
+  const max = type === 'adults' ? 8 : 6;
+  let val = parseInt(hiddenInput.value) + delta;
+  val = Math.max(min, Math.min(max, val));
+  hiddenInput.value = val;
+  display.textContent = val;
+  decBtn.disabled = val <= min;
+  incBtn.disabled = val >= max;
+  updatePriceSummary();
+  validateGroupSize();
+}
+
+function updatePriceSummary() {
+  const t = TRANSLATIONS[currentLang];
+  const adults = getAdults();
+  const children = getChildren();
+  const adultsTotal = adults * ADULT_PRICE;
+  const childrenTotal = children * CHILD_PRICE;
+  const grandTotal = adultsTotal + childrenTotal;
+  const fmt = n => '¥' + n.toLocaleString('ja-JP');
+
+  document.getElementById('pricingAdultsLabel').textContent = t.pricingAdults + ' (' + adults + ')';
+  document.getElementById('pricingAdultsValue').textContent = fmt(adultsTotal);
+  document.getElementById('pricingChildrenLabel').textContent = t.pricingChildren + ' (' + children + ')';
+  document.getElementById('pricingChildrenValue').textContent = fmt(childrenTotal);
+  document.getElementById('pricingTotalValue').textContent = fmt(grandTotal);
+
+  const childRow = document.getElementById('childrenPriceRow');
+  if (childRow) childRow.style.display = children > 0 ? 'flex' : 'none';
+}
+
+function validateGroupSize() {
+  const t = TRANSLATIONS[currentLang];
+  const total = getAdults() + getChildren();
+  const notice = document.getElementById('groupSizeNotice');
+  const msg = document.getElementById('groupSizeMessage');
+  if (total < 2 || total > Math.min(MAX_CAPACITY, remainingCapacity)) {
+    msg.textContent = t.groupSizeMessage;
+    notice.classList.add('visible');
+    return false;
+  }
+  notice.classList.remove('visible');
+  return true;
+}
+
+// ============================================
+// Form Validation
+// ============================================
+function validateForm() {
+  const t = TRANSLATIONS[currentLang];
+  let valid = true;
+
+  // Name
+  const name = document.getElementById('name').value.trim();
+  const errorName = document.getElementById('errorName');
+  if (!name) {
+    errorName.textContent = t.errorRequired;
+    errorName.classList.add('visible');
+    valid = false;
+  } else { errorName.classList.remove('visible'); }
+
+  // Email
+  const email = document.getElementById('email').value.trim();
+  const errorEmail = document.getElementById('errorEmail');
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email) {
+    errorEmail.textContent = t.errorRequired;
+    errorEmail.classList.add('visible');
+    valid = false;
+  } else if (!emailRegex.test(email)) {
+    errorEmail.textContent = t.errorInvalidEmail;
+    errorEmail.classList.add('visible');
+    valid = false;
+  } else { errorEmail.classList.remove('visible'); }
+
+  // Phone (required)
+  const phone = document.getElementById('phone').value.trim();
+  const errorPhone = document.getElementById('errorPhone');
+  if (!phone) {
+    errorPhone.textContent = t.errorRequired;
+    errorPhone.classList.add('visible');
+    valid = false;
+  } else if (!/^[+\d\s\-().]{7,20}$/.test(phone)) {
+    errorPhone.textContent = t.errorInvalidPhone;
+    errorPhone.classList.add('visible');
+    valid = false;
+  } else { errorPhone.classList.remove('visible'); }
+
+  // Guesty Reservation ID (required)
+  const guestyId = document.getElementById('guestyId').value.trim();
+  const errorGuestyId = document.getElementById('errorGuestyId');
+  if (!guestyId) {
+    errorGuestyId.textContent = t.errorRequired;
+    errorGuestyId.classList.add('visible');
+    valid = false;
+  } else { errorGuestyId.classList.remove('visible'); }
+
+  // Group size
+  if (!validateGroupSize()) valid = false;
+
+  return valid;
+}
+
+// ============================================
+// Initialization
+// ============================================
+async function loadCapacityForDate(dateStr) {
+  const infoEl = document.getElementById('capacityInfo');
+  const soldOutEl = document.getElementById('soldOutNotice');
+  const submitBtn = document.getElementById('submitBtn');
+  try {
+    if (typeof getAvailability !== 'undefined') {
+      const avail = await getAvailability();
+      let remaining = MAX_CAPACITY;
+      if (avail && avail.dates) {
+        const entry = avail.dates.find(d => d.date === dateStr);
+        if (entry !== undefined) remaining = entry.remaining;
+      } else if (avail && typeof avail[dateStr] !== 'undefined') {
+        remaining = avail[dateStr];
+      }
+      remainingCapacity = Math.max(0, remaining);
+    }
+  } catch(e) { remainingCapacity = MAX_CAPACITY; }
+
+  if (remainingCapacity <= 0) {
+    if (soldOutEl) {
+      soldOutEl.textContent = currentLang === 'ja'
+        ? 'この日は満席です。別の日をお選びください。'
+        : 'This date is fully booked.';
+      soldOutEl.style.display = 'block';
+    }
+    if (infoEl) infoEl.style.display = 'none';
+    if (submitBtn) submitBtn.disabled = true;
+  } else {
+    if (soldOutEl) soldOutEl.style.display = 'none';
+    if (remainingCapacity < MAX_CAPACITY) {
+      if (infoEl) {
+        infoEl.textContent = currentLang === 'ja'
+          ? 'この日の残り枠：' + remainingCapacity + '名'
+          : remainingCapacity + ' spot' + (remainingCapacity === 1 ? '' : 's') + ' remaining.';
+        infoEl.style.display = 'block';
+      }
+    } else {
+      if (infoEl) infoEl.style.display = 'none';
+    }
+    if (submitBtn) submitBtn.disabled = false;
+  }
+}
+
+function init() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const dateParam = urlParams.get('date');
+
+  if (!dateParam) { window.location.href = 'index.html'; return; }
+
+  if (dateParam) loadCapacityForDate(dateParam);
+
+  const langParam = urlParams.get('lang');
+  const savedLang = (() => { try { return localStorage.getItem('lang'); } catch(e) { return null; } })();
+  const lang = langParam || savedLang || 'en';
+  setLanguage(lang);
+
+  // Parse and display date
+  const date = new Date(dateParam + 'T00:00:00');
+  const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const weekdaysJa = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
+
+  document.getElementById('dateBadgeMonth').textContent = months[date.getMonth()];
+  document.getElementById('dateBadgeDay').textContent = date.getDate();
+
+  if (lang === 'ja') {
+    const wd = weekdaysJa[date.getDay()];
+    document.getElementById('heroDate').textContent =
+      date.getFullYear() + '年' + (date.getMonth()+1) + '月' + date.getDate() + '日（' + wd + '）';
+  } else {
+    const wd = weekdays[date.getDay()];
+    document.getElementById('heroDate').textContent =
+      wd + ', ' + monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+  }
+
+  document.getElementById('selectedDate').value = dateParam;
+  document.getElementById('dateValue').value = dateParam;
+  document.getElementById('language').value = lang === 'ja' ? 'ja' : 'en';
+
+  document.getElementById('adultsDecBtn').disabled = false;
+  document.getElementById('childrenDecBtn').disabled = true;
+  updatePriceSummary();
+  setupListeners();
+}
+
+function setupListeners() {
+  document.getElementById('langToggle').addEventListener('click', function() {
+    const newLang = currentLang === 'en' ? 'ja' : 'en';
+    const dateParam = new URLSearchParams(window.location.search).get('date');
+    setLanguage(newLang);
+    if (dateParam) {
+      const date = new Date(dateParam + 'T00:00:00');
+      const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+      const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      const weekdaysJa = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
+      const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      document.getElementById('dateBadgeMonth').textContent = months[date.getMonth()];
+      document.getElementById('dateBadgeDay').textContent = date.getDate();
+      if (newLang === 'ja') {
+        const wd = weekdaysJa[date.getDay()];
+        document.getElementById('heroDate').textContent =
+          date.getFullYear() + '年' + (date.getMonth()+1) + '月' + date.getDate() + '日（' + wd + '）';
+      } else {
+        const wd = weekdays[date.getDay()];
+        document.getElementById('heroDate').textContent =
+          wd + ', ' + monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
+      }
+    }
+  });
+
+  document.getElementById('adultsDecBtn').addEventListener('click', () => adjustCounter('adults', -1));
+  document.getElementById('adultsIncBtn').addEventListener('click', () => adjustCounter('adults', 1));
+  document.getElementById('childrenDecBtn').addEventListener('click', () => adjustCounter('children', -1));
+  document.getElementById('childrenIncBtn').addEventListener('click', () => adjustCounter('children', 1));
+
+  document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    const t = TRANSLATIONS[currentLang];
+    const submitBtn = document.getElementById('submitBtn');
+    const submitBtnText = document.getElementById('submitBtnText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    const errorAlert = document.getElementById('errorAlert');
+    const errorAlertMessage = document.getElementById('errorAlertMessage');
+    const successAlert = document.getElementById('successAlert');
+    const successAlertMessage = document.getElementById('successAlertMessage');
+
+    submitBtn.disabled = true;
+    submitBtnText.style.display = 'none';
+    loadingSpinner.style.display = 'inline';
+    errorAlert.classList.remove('visible');
+    successAlert.classList.remove('visible');
+
+    const formData = {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      guestyId: document.getElementById('guestyId').value.trim(),
+      adults: parseInt(document.getElementById('adults').value),
+      children: parseInt(document.getElementById('children').value),
+      date: document.getElementById('dateValue').value,
+      allergies: document.getElementById('allergies').value.trim() || null,
+      language: document.getElementById('language').value
     };
 
-    let currentLang = 'en';
-
-    // ============================================
-    // Language Switching
-    // ============================================
-    function setLanguage(lang) {
-        currentLang = lang;
-        const t = TRANSLATIONS[lang];
-        const isJa = lang === 'ja';
-
-        // Toggle button state
-        document.querySelector('.lang-en').classList.toggle('active', !isJa);
-        document.querySelector('.lang-ja').classList.toggle('active', isJa);
-
-        // Set lang attribute for font switching
-        document.documentElement.lang = isJa ? 'ja' : 'en';
-
-        // Update text elements
-        const map = {
-            backLink: t.backLink,
-            labelName: t.labelName,
-            labelEmail: t.labelEmail,
-            labelPhone: t.labelPhone,
-            labelAdults: t.labelAdults,
-            labelChildren: t.labelChildren,
-            pricingTitle: t.pricingTitle,
-            pricingTotalLabel: t.pricingTotal,
-            submitBtnText: t.submitBtn,
-            consentText: t.consentText,
-            stripeNotice: t.stripeNotice,
-            experienceSub: t.experienceSub,
-            sectionGuest: t.sectionGuest,
-            sectionGuests: t.sectionGuests,
-            groupSizeMessage: t.groupSizeMessage
-        };
-        for (const [id, text] of Object.entries(map)) {
-            const el = document.getElementById(id);
-            if (el) el.textContent = text;
-        }
-
-        // Update hidden language field
-        const langInput = document.getElementById('language');
-        if (langInput) langInput.value = lang;
-
-        // Placeholder
-        const phone = document.getElementById('phone');
-        if (phone) phone.placeholder = t.phone_placeholder;
-
-        // Update pricing labels (preserving counts)
-        updatePriceSummary();
-
-        // Save preference
-        try { localStorage.setItem('lang', lang); } catch(e) {}
-    }
-
-    // ============================================
-    // Counter Logic
-    // ============================================
-    const ADULT_PRICE = 9800;
-    const CHILD_PRICE = 5000;
-    const MAX_CAPACITY = 8;
-    let remainingCapacity = MAX_CAPACITY;
-
-    function getAdults() { return parseInt(document.getElementById('adults').value) || 2; }
-    function getChildren() { return parseInt(document.getElementById('children').value) || 0; }
-
-    function adjustCounter(type, delta) {
-        const hiddenInput = document.getElementById(type);
-        const display = document.getElementById(type + 'Display');
-        const decBtn = document.getElementById(type + 'DecBtn');
-        const incBtn = document.getElementById(type + 'IncBtn');
-
-        const min = type === 'adults' ? 1 : 0;
-        const max = type === 'adults' ? 8 : 6;
-        let val = parseInt(hiddenInput.value) + delta;
-        val = Math.max(min, Math.min(max, val));
-
-        hiddenInput.value = val;
-        display.textContent = val;
-        decBtn.disabled = val <= min;
-        incBtn.disabled = val >= max;
-
-        updatePriceSummary();
-        validateGroupSize();
-    }
-
-    function updatePriceSummary() {
-        const t = TRANSLATIONS[currentLang];
-        const adults = getAdults();
-        const children = getChildren();
-        const adultsTotal = adults * ADULT_PRICE;
-        const childrenTotal = children * CHILD_PRICE;
-        const grandTotal = adultsTotal + childrenTotal;
-
-        const fmt = n => '¥' + n.toLocaleString('ja-JP');
-
-        document.getElementById('pricingAdultsLabel').textContent =
-            t.pricingAdults + ' (' + adults + ')';
-        document.getElementById('pricingAdultsValue').textContent = fmt(adultsTotal);
-        document.getElementById('pricingChildrenLabel').textContent =
-            t.pricingChildren + ' (' + children + ')';
-        document.getElementById('pricingChildrenValue').textContent = fmt(childrenTotal);
-        document.getElementById('pricingTotalValue').textContent = fmt(grandTotal);
-
-        // Show/hide children row
-        const childRow = document.getElementById('childrenPriceRow');
-        if (childRow) childRow.style.display = children > 0 ? 'flex' : 'none';
-    }
-
-    function validateGroupSize() {
-        const t = TRANSLATIONS[currentLang];
-        const total = getAdults() + getChildren();
-        const notice = document.getElementById('groupSizeNotice');
-        const msg = document.getElementById('groupSizeMessage');
-        if (total < 2 || total > Math.min(MAX_CAPACITY, remainingCapacity)) {
-            msg.textContent = t.groupSizeMessage;
-            notice.classList.add('visible');
-            return false;
-        }
-        notice.classList.remove('visible');
-        return true;
-    }
-
-    // ============================================
-    // Form Validation
-    // ============================================
-    function validateForm() {
-        const t = TRANSLATIONS[currentLang];
-        let valid = true;
-
-        // Name
-        const name = document.getElementById('name').value.trim();
-        const errorName = document.getElementById('errorName');
-        if (!name) {
-            errorName.textContent = t.errorRequired;
-            errorName.classList.add('visible');
-            valid = false;
+    try {
+      if (typeof createCheckoutSession === 'undefined') {
+        throw new Error('API script not loaded. Please refresh the page.');
+      }
+      const response = await createCheckoutSession(formData);
+      if (!response || !response.url) {
+        throw new Error(t.errorCheckout);
+      }
+      successAlertMessage.textContent = t.successRedirect;
+      successAlert.classList.add('visible');
+      setTimeout(() => { window.location.href = response.url; }, 800);
+    } catch (err) {
+      let msg = t.errorGeneral;
+      if (err && err.message) {
+        if (err.message.includes('network') || err.message.includes('Network')) {
+          msg = t.errorNetwork;
         } else {
-            errorName.classList.remove('visible');
+          msg = err.message || t.errorCheckout;
         }
-
-        // Email
-        const email = document.getElementById('email').value.trim();
-        const errorEmail = document.getElementById('errorEmail');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email) {
-            errorEmail.textContent = t.errorRequired;
-            errorEmail.classList.add('visible');
-            valid = false;
-        } else if (!emailRegex.test(email)) {
-            errorEmail.textContent = t.errorInvalidEmail;
-            errorEmail.classList.add('visible');
-            valid = false;
-        } else {
-            errorEmail.classList.remove('visible');
-        }
-
-        // Phone (optional but validate format if provided)
-        const phone = document.getElementById('phone').value.trim();
-        const errorPhone = document.getElementById('errorPhone');
-        if (phone && !/^[+\d\s\-().]{7,20}$/.test(phone)) {
-            errorPhone.textContent = t.errorInvalidPhone;
-            errorPhone.classList.add('visible');
-            valid = false;
-        } else {
-            errorPhone.classList.remove('visible');
-        }
-
-        // Group size
-        if (!validateGroupSize()) valid = false;
-
-        return valid;
+      }
+      errorAlertMessage.textContent = msg;
+      errorAlert.classList.add('visible');
+      submitBtn.disabled = false;
+      submitBtnText.style.display = 'inline';
+      loadingSpinner.style.display = 'none';
     }
+  });
+}
 
-    // ============================================
-    // Initialization
-    // ============================================
-    async function loadCapacityForDate(dateStr) {
-        const infoEl = document.getElementById('capacityInfo');
-        const soldOutEl = document.getElementById('soldOutNotice');
-        const submitBtn = document.querySelector('button[type="submit"], .submit-btn, #submitBtn');
-        try {
-            if (typeof getAvailability !== 'undefined') {
-                const avail = await getAvailability();
-                let remaining = MAX_CAPACITY;
-                if (avail && avail.dates) {
-                    const entry = avail.dates.find(d => d.date === dateStr);
-                    if (entry !== undefined) remaining = entry.remaining;
-                } else if (avail && typeof avail[dateStr] !== 'undefined') {
-                    remaining = avail[dateStr];
-                }
-                remainingCapacity = Math.max(0, remaining);
-            }
-        } catch(e) { remainingCapacity = MAX_CAPACITY; }
-
-        if (remainingCapacity <= 0) {
-            if (soldOutEl) { soldOutEl.textContent = currentLang === 'ja' ? 'この日は満席です。別の日をお選びください。' : 'This date is fully booked.'; soldOutEl.style.display = 'block'; }
-            if (infoEl) infoEl.style.display = 'none';
-            if (submitBtn) submitBtn.disabled = true;
-        } else {
-            if (soldOutEl) soldOutEl.style.display = 'none';
-            if (remainingCapacity < MAX_CAPACITY) {
-                if (infoEl) { infoEl.textContent = currentLang === 'ja' ? 'この日の残り枠：' + remainingCapacity + '名' : remainingCapacity + ' spot' + (remainingCapacity === 1 ? '' : 's') + ' remaining.'; infoEl.style.display = 'block'; }
-            } else {
-                if (infoEl) infoEl.style.display = 'none';
-            }
-            if (submitBtn) submitBtn.disabled = false;
-        }
-    }
-
-    function init() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const dateParam = urlParams.get('date');
-        if (dateParam) loadCapacityForDate(dateParam);
-        const langParam = urlParams.get('lang');
-
-        // Redirect if no date
-        if (!dateParam) {
-            window.location.href = 'index.html';
-            return;
-        }
-
-        // Set language
-        const savedLang = (() => { try { return localStorage.getItem('lang'); } catch(e) { return null; } })();
-        const lang = langParam || savedLang || 'en';
-        setLanguage(lang);
-
-        // Parse and display date
-        const date = new Date(dateParam + 'T00:00:00');
-        const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-        const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-        const weekdaysJa = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
-
-        document.getElementById('dateBadgeMonth').textContent = months[date.getMonth()];
-        document.getElementById('dateBadgeDay').textContent = date.getDate();
-
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        if (lang === 'ja') {
-            const wd = weekdaysJa[date.getDay()];
-            const formattedDate = date.getFullYear() + '年' + (date.getMonth()+1) + '月' + date.getDate() + '日（' + wd + '）';
-            document.getElementById('heroDate').textContent = formattedDate;
-        } else {
-            const wd = weekdays[date.getDay()];
-            const formattedDate = wd + ', ' + monthNames[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
-            document.getElementById('heroDate').textContent = formattedDate;
-        }
-
-        // Set hidden date fields
-        document.getElementById('selectedDate').value = dateParam;
-        document.getElementById('dateValue').value = dateParam;
-
-        // Set language select
-        document.getElementById('language').value = lang === 'ja' ? 'ja' : 'en';
-
-        // Init counter buttons
-        document.getElementById('adultsDecBtn').disabled = true; // starts at 2, min is 1... actually 2>1 so enable
-        document.getElementById('adultsDecBtn').disabled = false;
-        document.getElementById('childrenDecBtn').disabled = true; // starts at 0
-
-        updatePriceSummary();
-        setupListeners();
-    }
-
-    function setupListeners() {
-        // Language toggle
-        document.getElementById('langToggle').addEventListener('click', function() {
-            const newLang = currentLang === 'en' ? 'ja' : 'en';
-            // Re-format date in new language
-            const dateParam = new URLSearchParams(window.location.search).get('date');
-            setLanguage(newLang);
-            if (dateParam) {
-                const date = new Date(dateParam + 'T00:00:00');
-                const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
-                const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-                const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-                const weekdaysJa = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
-                document.getElementById('dateBadgeMonth').textContent = months[date.getMonth()];
-                document.getElementById('dateBadgeDay').textContent = date.getDate();
-                if (newLang === 'ja') {
-                    const wd = weekdaysJa[date.getDay()];
-                    document.getElementById('heroDate').textContent =
-                        date.getFullYear() + '年' + (date.getMonth()+1) + '月' + date.getDate() + '日（' + wd + '）';
-                } else {
-                    const wd = weekdays[date.getDay()];
-                    const monthNames2 = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-                    document.getElementById('heroDate').textContent =
-                        wd + ', ' + monthNames2[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear();
-                }
-            }
-        });
-
-        // Counter buttons
-        document.getElementById('adultsDecBtn').addEventListener('click', () => adjustCounter('adults', -1));
-        document.getElementById('adultsIncBtn').addEventListener('click', () => adjustCounter('adults', 1));
-        document.getElementById('childrenDecBtn').addEventListener('click', () => adjustCounter('children', -1));
-        document.getElementById('childrenIncBtn').addEventListener('click', () => adjustCounter('children', 1));
-
-        // Form submit
-        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            if (!validateForm()) return;
-
-            const t = TRANSLATIONS[currentLang];
-            const submitBtn = document.getElementById('submitBtn');
-            const submitBtnText = document.getElementById('submitBtnText');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const errorAlert = document.getElementById('errorAlert');
-            const errorAlertMessage = document.getElementById('errorAlertMessage');
-            const successAlert = document.getElementById('successAlert');
-            const successAlertMessage = document.getElementById('successAlertMessage');
-
-            // Disable button, show loading
-            submitBtn.disabled = true;
-            submitBtnText.style.display = 'none';
-            loadingSpinner.style.display = 'inline';
-            errorAlert.classList.remove('visible');
-            successAlert.classList.remove('visible');
-
-            const formData = {
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                phone: document.getElementById('phone').value.trim() || null,
-                adults: parseInt(document.getElementById('adults').value),
-                children: parseInt(document.getElementById('children').value),
-                date: document.getElementById('dateValue').value,
-                allergies: document.getElementById('allergies').value.trim() || null,
-                language: document.getElementById('language').value
-            };
-
-            try {
-                // Call API to create checkout session
-                if (typeof createCheckoutSession === 'undefined') {
-                    throw new Error('API script not loaded. Please refresh the page.');
-                }
-
-                const response = await createCheckoutSession(formData);
-
-                if (!response || !response.url) {
-                    throw new Error(t.errorCheckout);
-                }
-
-                // Show success and redirect
-                successAlertMessage.textContent = t.successRedirect;
-                successAlert.classList.add('visible');
-                setTimeout(() => { window.location.href = response.url; }, 800);
-
-            } catch (err) {
-                let msg = t.errorGeneral;
-                if (err && err.message) {
-                    if (err.message.includes('network') || err.message.includes('Network')) {
-                        msg = t.errorNetwork;
-                    } else if (err.message.includes('API')) {
-                        msg = err.message;
-                    } else {
-                        msg = err.message || t.errorCheckout;
-                    }
-                }
-                errorAlertMessage.textContent = msg;
-                errorAlert.classList.add('visible');
-
-                submitBtn.disabled = false;
-                submitBtnText.style.display = 'inline';
-                loadingSpinner.style.display = 'none';
-            }
-        });
-    }
-
-    // Start
-    init();
+init();
 </script>
 </body>
 </html>
