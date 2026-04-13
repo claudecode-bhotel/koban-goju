@@ -1165,15 +1165,15 @@
                 }
 
                 const rawData = await getAvailability();
-                                // Convert array response to object keyed by date
-                                if (Array.isArray(rawData)) {
-                                                        availabilityData = {};
-                                                        rawData.forEach(item => {
-                                                                                    availabilityData[item.date] = item;
-                                                        });
-                                } else {
-                                                        availabilityData = rawData;
-                                }
+                                                // Handle both array and {success, dates:[]} API response formats
+                                                                const datesArray = Array.isArray(rawData) ? rawData : (rawData.dates || []);
+                                                                                availabilityData = {};
+                                                                                                datesArray.forEach(item => {
+                                                                                                                    let status = 'available';
+                                                                                                                                        if (item.remaining === 0) status = 'full';
+                                                                                                                                                            else if (item.remaining <= 3) status = 'few';
+                                                                                                                                                                                availabilityData[item.date] = Object.assign({}, item, { status: status });
+                                                                                                                                                                                                });
                 calendarLoading.style.display = 'none';
                 renderCalendar();
             } catch (error) {
