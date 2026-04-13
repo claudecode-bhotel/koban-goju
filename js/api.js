@@ -29,7 +29,7 @@ async function apiPost(action, data) {
 
 // --- Convenience wrappers ---
 function getAvailability() {
-  return apiGet('getAvailability';
+    return apiGet('getAvailability');
 }
 
 function getConfig() {
