@@ -69,7 +69,7 @@
       var sid=new URLSearchParams(location.search).get('session_id');
       if(!sid){show('error-view');document.getElementById('error-message').textContent='セッションIDが見つかりません。';return;}
       show('loading-view');
-      fetch(GAS,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'confirmBooking',sessionId:sid})})
+      fetch(GAS+'?action=confirmBooking&session_id='+encodeURIComponent(sid))
       .then(function(r){return r.json();})
       .then(function(d){
         if(d.error){show('error-view');document.getElementById('error-message').textContent='エラー: '+d.error;return;}
