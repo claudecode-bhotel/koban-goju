@@ -48,8 +48,8 @@ function lookupBooking(email, date) {
   return apiPost('lookupBooking', { email: email, date: date });
 }
 
-function cancelBooking(email, date) {
-  return apiPost('cancelBooking', { email: email, date: date });
+function cancelBooking(bookingId) {
+  return apiPost('cancelBooking', { booking_id: bookingId });
 }
 
 // --- Language Helper ---
