@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>予約完了 | b hotel 高万五柔</title>
+  <title>予約完了</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif; background: #f9f6f0; color: #333; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -39,7 +39,7 @@
     <div id="success-view">
       <div class="icon">&#10003;</div>
       <h1>予約が確定しました</h1>
-      <p class="subtitle">ご予約ありがとうございます。<br>確認メールをお送りしましたのでご確認ください。</p>
+      <p class="subtitle">ご予約ありがとうございます。</p>
       <div class="booking-details">
         <h2>ご予約内容</h2>
         <div class="detail-row"><span class="detail-label">予約番号</span><span class="detail-value" id="detail-booking-id">-</span></div>
@@ -50,7 +50,7 @@
         <div class="detail-row"><span class="detail-label">ステータス</span><span class="detail-value" id="detail-status">-</span></div>
       </div>
       <a href="https://claudecode-bhotel.github.io/koban-goju/booking.html" class="btn btn-primary">トップページに戻る</a>
-      <p class="email-note">ご不明な点は info@bhoteljp.com までお問い合わせください。</p>
+      <p class="email-note">ご不明な点は support@breakfast-h.com までお問い合わせください。</p>
     </div>
     <div id="error-view">
       <div class="icon" style="background:#fff3e0;font-size:32px;">!</div>
@@ -59,22 +59,33 @@
       <a href="https://claudecode-bhotel.github.io/koban-goju/booking.html" class="btn btn-primary">予約ページに戻る</a>
     </div>
   </div>
-  <!-- api.js と同じ通信方式を使用 (text/plain で CORS preflight 回避) -->
   <script src="js/api.js"></script>
   <script>
     function show(id){['loading-view','success-view','error-view'].forEach(function(v){document.getElementById(v).style.display=(v===id)?'block':'none';});}
-    function fmtDate(s){if(!s)return '-';try{var d=new Date(s+'T00:00:00+09:00');return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 ['+'日月火水木金土'[d.getDay()]+']';}catch(e){return s;}}
+    function fmtDate(s){
+      if(!s)return '-';
+      try{
+        var str=s.toString();
+        var d;
+        // ISO date only: "2026-04-20" or "2026/04/20"
+        var m=str.match(/^(\d{4})[\/-](\d{2})[\/-](\d{2})/);
+        if(m){d=new Date(parseInt(m[1]),parseInt(m[2])-1,parseInt(m[3]));}
+        else{d=new Date(str);}
+        if(isNaN(d.getTime()))return str;
+        return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 ['+'日月火水木金土'[d.getDay()]+']';
+      }catch(e){return s;}
+    }
     function fmtAmt(n){return(n||n===0)?'¥'+Number(n).toLocaleString():'-';}
     function fmtSt(s){return s==='confirmed'?'確定':s==='tentative'?'仮予約':s||'-';}
     (function(){
       var sid=new URLSearchParams(location.search).get('session_id');
       if(!sid){show('error-view');document.getElementById('error-message').textContent='セッションIDが見つかりません。';return;}
       show('loading-view');
-      apiPost('confirmBooking', { session_id: sid })
+      apiPost('confirmBooking',{session_id:sid})
       .then(function(d){
         if(d.error){show('error-view');document.getElementById('error-message').textContent='エラー: '+d.error;return;}
         document.getElementById('detail-booking-id').textContent=d.booking_id||'-';
-        document.getElementById('detail-date').textContent=fmtDate(d.date);
+        document.getElementById('detail-date').textContent=d.date?fmtDate(d.date):'-';
         document.getElementById('detail-name').textContent=d.name||'-';
         document.getElementById('detail-guests').textContent='大人'+(d.adults||0)+'名'+(d.children>0?'・子ども'+d.children+'名':'');
         document.getElementById('detail-amount').textContent=fmtAmt(d.totalAmount);
