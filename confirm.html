@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>予約完了 | b hotel 寿司体験</title>
+  <title>予約完了 | b hotel 高万五柔</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif; background: #f9f6f0; color: #333; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
@@ -13,12 +13,12 @@
     .subtitle { font-size: 16px; color: #666; margin-bottom: 32px; line-height: 1.6; }
     .booking-details { background: #f5f5f5; border-radius: 8px; padding: 24px; text-align: left; margin-bottom: 32px; }
     .booking-details h2 { font-size: 14px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
-    .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e0e0e0; font-size: 15px; }
+    .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #e8e8e8; font-size: 15px; }
     .detail-row:last-child { border-bottom: none; }
     .detail-label { color: #666; }
     .detail-value { font-weight: 600; color: #333; }
     .loading { display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 20px 0; }
-    .spinner { width: 40px; height: 40px; border: 3px solid #e0e0e0; border-top-color: #2e7d32; border-radius: 50%; animation: spin 0.8s linear infinite; }
+    .spinner { width: 40px; height: 40px; border: 3px solid #e8e8e8; border-top-color: #2e7d32; border-radius: 50%; animation: spin 0.8s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
     .error-box { background: #fff3e0; border: 1px solid #ffcc80; border-radius: 8px; padding: 20px; margin-bottom: 24px; font-size: 14px; color: #e65100; line-height: 1.6; }
     .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; border: none; }
@@ -33,15 +33,15 @@
     <div id="loading-view">
       <div class="loading">
         <div class="spinner"></div>
-        <p style="color:#666;font-size:15px;">予約を確認しています...</p>
+        <p>予約を確認しています...</p>
       </div>
     </div>
     <div id="success-view">
       <div class="icon">&#10003;</div>
-      <h1>ご予約ありがとうございます</h1>
-      <p class="subtitle">お支払いが完了し、ご予約が確定しました。<br>確認メールをお送りしますのでご確認ください。</p>
+      <h1>予約が確定しました</h1>
+      <p class="subtitle">ご予約ありがとうございます。<br>確認メールをお送りしましたのでご確認ください。</p>
       <div class="booking-details">
-        <h2>予約内容</h2>
+        <h2>ご予約内容</h2>
         <div class="detail-row"><span class="detail-label">予約番号</span><span class="detail-value" id="detail-booking-id">-</span></div>
         <div class="detail-row"><span class="detail-label">日付</span><span class="detail-value" id="detail-date">-</span></div>
         <div class="detail-row"><span class="detail-label">お名前</span><span class="detail-value" id="detail-name">-</span></div>
@@ -59,23 +59,18 @@
       <a href="https://claudecode-bhotel.github.io/koban-goju/booking.html" class="btn btn-primary">予約ページに戻る</a>
     </div>
   </div>
+  <!-- api.js と同じ通信方式を使用 (text/plain で CORS preflight 回避) -->
+  <script src="js/api.js"></script>
   <script>
-    var GAS='https://script.google.com/macros/s/AKfycbxpmP4M5lj6Hn_YRwx-FuADIZOhbxJc_3B81MIPzjbaD6nvnBPk8VFshmbnTb1n1NSyA/exec';
     function show(id){['loading-view','success-view','error-view'].forEach(function(v){document.getElementById(v).style.display=(v===id)?'block':'none';});}
-    function fmtDate(s){if(!s)return'-';try{var d=new Date(s+'T00:00:00+09:00');return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日（'+['日','月','火','水','木','金','土'][d.getDay()]+'）';}catch(e){return s;}}
+    function fmtDate(s){if(!s)return '-';try{var d=new Date(s+'T00:00:00+09:00');return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 ['+'日月火水木金土'[d.getDay()]+']';}catch(e){return s;}}
     function fmtAmt(n){return(n||n===0)?'¥'+Number(n).toLocaleString():'-';}
     function fmtSt(s){return s==='confirmed'?'確定':s==='tentative'?'仮予約':s||'-';}
     (function(){
       var sid=new URLSearchParams(location.search).get('session_id');
       if(!sid){show('error-view');document.getElementById('error-message').textContent='セッションIDが見つかりません。';return;}
       show('loading-view');
-      /* Content-Type: text/plain で CORS preflight を回避 (api.js と同じ方式) */
-      fetch(GAS,{
-        method:'POST',
-        headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body:JSON.stringify({action:'confirmBooking',session_id:sid})
-      })
-      .then(function(r){return r.json();})
+      apiPost('confirmBooking', { session_id: sid })
       .then(function(d){
         if(d.error){show('error-view');document.getElementById('error-message').textContent='エラー: '+d.error;return;}
         document.getElementById('detail-booking-id').textContent=d.booking_id||'-';
