@@ -48,6 +48,16 @@ function lookupBooking(email, date) {
   return apiPost('lookupBooking', { email: email, date: date });
 }
 
+// Look up by booking_id or email (identifier)
+function lookupBookingById(identifier) {
+  // Send both fields so GAS can match whichever is set
+  const isBookingId = /^BK\d+$/.test(identifier);
+  if (isBookingId) {
+    return apiPost('lookupBooking', { booking_id: identifier });
+  }
+  return apiPost('lookupBooking', { email: identifier });
+}
+
 function cancelBooking(bookingId) {
   return apiPost('cancelBooking', { booking_id: bookingId });
 }
