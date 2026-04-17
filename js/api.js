@@ -41,7 +41,7 @@ function createCheckoutSession(formData) {
 }
 
 function confirmBooking(sessionId) {
-  return apiPost('confirmBooking', { sessionId: sessionId });
+  return apiPost('confirmBooking', { session_id: sessionId });
 }
 
 function lookupBooking(email, date) {
