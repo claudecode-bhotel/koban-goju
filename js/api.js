@@ -37,7 +37,7 @@ function getConfig() {
 }
 
 function createCheckoutSession(formData) {
-  return apiPost('createCheckout', { formData: formData });
+  return apiPost('createCheckout', formData);
 }
 
 function confirmBooking(sessionId) {
