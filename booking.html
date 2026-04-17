@@ -374,7 +374,7 @@ select.form-input { cursor: pointer; }
   </div>
 
   <!-- Back link -->
-  <a href="index.html" class="back-link" id="backLink">← Back to dates</a>
+  <a href="index.html" class="back-link" id="backLink">â Back to dates</a>
 
   <!-- Date badge -->
   <div class="date-row">
@@ -384,7 +384,7 @@ select.form-input { cursor: pointer; }
     </div>
     <div>
       <div class="date-info-weekday" id="heroDate">Monday, April 13, 2026</div>
-      <div class="date-info-time">11:00 – 13:00</div>
+      <div class="date-info-time">11:00 â 13:00</div>
     </div>
   </div>
 
@@ -430,10 +430,10 @@ select.form-input { cursor: pointer; }
       <div class="counter-row">
         <div class="counter-label">
           <div class="counter-label-name" id="labelAdults">Adults</div>
-          <div class="counter-label-price">¥9,800 / person</div>
+          <div class="counter-label-price">Â¥9,800 / person</div>
         </div>
         <div class="counter-controls">
-          <button type="button" class="counter-btn" id="adultsDecBtn">−</button>
+          <button type="button" class="counter-btn" id="adultsDecBtn">â</button>
           <span class="counter-value" id="adultsDisplay">2</span>
           <button type="button" class="counter-btn" id="adultsIncBtn">+</button>
         </div>
@@ -443,10 +443,10 @@ select.form-input { cursor: pointer; }
       <div class="counter-row">
         <div class="counter-label">
           <div class="counter-label-name" id="labelChildren">Children under 12</div>
-          <div class="counter-label-price">¥5,000 / person</div>
+          <div class="counter-label-price">Â¥5,000 / person</div>
         </div>
         <div class="counter-controls">
-          <button type="button" class="counter-btn" id="childrenDecBtn">−</button>
+          <button type="button" class="counter-btn" id="childrenDecBtn">â</button>
           <span class="counter-value" id="childrenDisplay">0</span>
           <button type="button" class="counter-btn" id="childrenIncBtn">+</button>
         </div>
@@ -460,8 +460,15 @@ select.form-input { cursor: pointer; }
       <div id="soldOutNotice" style="display:none;background:#ffebee;border:1px solid #ef9a9a;border-radius:6px;padding:8px 14px;margin-top:8px;font-size:13px;color:#c62828;"></div>
     </div>
 
+    <!-- Allergies / Special Requests -->
+    <div class="form-section">
+      <div class="form-field">
+        <label class="field-label" for="allergies" id="labelAllergies">ALLERGIES / SPECIAL REQUESTS</label>
+        <textarea id="allergies" class="form-input" rows="3" placeholder="Please let us know about any dietary restrictions or special requests..."></textarea>
+      </div>
+    </div>
+
     <!-- Hidden fields -->
-    <textarea id="allergies" style="display:none"></textarea>
     <input type="hidden" id="language" value="en">
 
     <!-- PRICE SUMMARY -->
@@ -469,15 +476,15 @@ select.form-input { cursor: pointer; }
       <div class="section-title" id="pricingTitle">PRICE SUMMARY</div>
       <div class="price-row">
         <span id="pricingAdultsLabel">Adults (2)</span>
-        <span id="pricingAdultsValue">¥19,600</span>
+        <span id="pricingAdultsValue">Â¥19,600</span>
       </div>
       <div class="price-row" id="childrenPriceRow" style="display:none;">
         <span id="pricingChildrenLabel">Children (0)</span>
-        <span id="pricingChildrenValue">¥0</span>
+        <span id="pricingChildrenValue">Â¥0</span>
       </div>
       <div class="price-row total">
         <span id="pricingTotalLabel">Total</span>
-        <span id="pricingTotalValue">¥19,600</span>
+        <span id="pricingTotalValue">Â¥19,600</span>
       </div>
     </div>
 
@@ -505,7 +512,7 @@ select.form-input { cursor: pointer; }
 
     <!-- Cancel link -->
     <div class="cancel-link-row">
-      <a href="cancel.html" class="cancel-link" id="cancelLinkText">Cancellation / Booking Lookup →</a>
+      <a href="cancel.html" class="cancel-link" id="cancelLinkText">Cancellation / Booking Lookup â</a>
     </div>
 
   </form>
@@ -514,7 +521,7 @@ select.form-input { cursor: pointer; }
 
   <!-- Footer -->
   <footer class="page-footer">
-    <span>© b hotel — Koban-dori Goju (交番通り五十)</span>
+    <span>Â© b hotel â Koban-dori Goju (äº¤çªéãäºå)</span>
     <a href="privacy.html" id="footerPrivacyLink">Privacy Policy</a>
   </footer>
 
@@ -536,7 +543,7 @@ const TRANSLATIONS = {
     labelChildren: 'Children under 12',
     labelAllergies: 'Allergies / Special Requests',
     allergy_placeholder: 'Please let us know about any dietary restrictions or special requests...',
-    backLink: '← Back to dates',
+    backLink: 'â Back to dates',
     submitBtn: 'PROCEED TO PAYMENT',
     processingBtn: 'Processing...',
     pricingTitle: 'PRICE SUMMARY',
@@ -560,45 +567,45 @@ const TRANSLATIONS = {
     experienceSub: 'SUSHI EXPERIENCE',
     sectionGuest: 'GUEST INFORMATION',
     sectionGuests: 'NUMBER OF GUESTS',
-    cancelLinkText: 'Cancellation / Booking Lookup →'
+    cancelLinkText: 'Cancellation / Booking Lookup â'
   },
   ja: {
-    heroLabel: '予約',
-    heroTitle: '体験を予約する',
-    labelDate: '選択した日付',
-    labelName: 'お名前',
-    labelEmail: 'メールアドレス',
-    labelPhone: '電話番号',
-    labelGuestyId: '宿泊予約番号',
-    labelAdults: '大人',
-    labelChildren: '子供（12歳以下）',
-    labelAllergies: 'アレルギー・特別なリクエスト',
-    allergy_placeholder: 'アレルギーや特別なリクエストについて教えてください...',
-    backLink: '← 日程一覧に戻る',
-    submitBtn: 'お支払いへ進む',
-    processingBtn: '処理中...',
-    pricingTitle: '料金概要',
-    pricingAdults: '大人',
-    pricingChildren: 'お子様',
-    pricingTotal: '合計',
-    groupSizeMessage: 'グループサイズは2〜8人である必要があります。',
-    errorRequired: 'この項目は必須です。',
-    errorInvalidEmail: '有効なメールアドレスを入力してください。',
-    errorInvalidPhone: '有効な電話番号を入力してください。',
-    errorGroupSize: 'グループサイズは2〜8人である必要があります。',
+    heroLabel: 'äºç´',
+    heroTitle: 'ä½é¨ãäºç´ãã',
+    labelDate: 'é¸æããæ¥ä»',
+    labelName: 'ãåå',
+    labelEmail: 'ã¡ã¼ã«ã¢ãã¬ã¹',
+    labelPhone: 'é»è©±çªå·',
+    labelGuestyId: 'å®¿æ³äºç´çªå·',
+    labelAdults: 'å¤§äºº',
+    labelChildren: 'å­ä¾ï¼12æ­³ä»¥ä¸ï¼',
+    labelAllergies: 'ã¢ã¬ã«ã®ã¼ã»ç¹å¥ãªãªã¯ã¨ã¹ã',
+    allergy_placeholder: 'ã¢ã¬ã«ã®ã¼ãç¹å¥ãªãªã¯ã¨ã¹ãã«ã¤ãã¦æãã¦ãã ãã...',
+    backLink: 'â æ¥ç¨ä¸è¦§ã«æ»ã',
+    submitBtn: 'ãæ¯æãã¸é²ã',
+    processingBtn: 'å¦çä¸­...',
+    pricingTitle: 'æéæ¦è¦',
+    pricingAdults: 'å¤§äºº',
+    pricingChildren: 'ãå­æ§',
+    pricingTotal: 'åè¨',
+    groupSizeMessage: 'ã°ã«ã¼ããµã¤ãºã¯2ã8äººã§ããå¿è¦ãããã¾ãã',
+    errorRequired: 'ãã®é ç®ã¯å¿é ã§ãã',
+    errorInvalidEmail: 'æå¹ãªã¡ã¼ã«ã¢ãã¬ã¹ãå¥åãã¦ãã ããã',
+    errorInvalidPhone: 'æå¹ãªé»è©±çªå·ãå¥åãã¦ãã ããã',
+    errorGroupSize: 'ã°ã«ã¼ããµã¤ãºã¯2ã8äººã§ããå¿è¦ãããã¾ãã',
     phone_placeholder: '+81 XX-XXXX-XXXX',
-    guestyId_placeholder: 'Guesty予約ID',
+    guestyId_placeholder: 'Guestyäºç´ID',
     required_asterisk: '*',
-    errorGeneral: 'エラーが発生しました。もう一度試してください。',
-    errorNetwork: 'ネットワークエラー。接続を確認して、もう一度試してください。',
-    errorCheckout: 'チェックアウトセッションの作成に失敗しました。もう一度試してください。',
-    successRedirect: 'お支払いページにリダイレクト中...',
-    consentText: '本日はカード情報の登録のみです。体験日の3日前午前11時に自動決済されます。3日前までキャンセル無料です。',
-    stripeNotice: '次に進むことで、後日決済用のカード登録に同意されたものとします。体験日の3日前にカードへ自動決済されます。3日前までキャンセル無料。3日以内は食材準備のため返金不可。カード情報はStripeにより安全に管理されます。b hotelではカード情報を保持しません。',
-    experienceSub: '寿司体験',
-    sectionGuest: 'お客様情報',
-    sectionGuests: 'ゲスト人数',
-    cancelLinkText: 'キャンセル・予約照会はこちら →'
+    errorGeneral: 'ã¨ã©ã¼ãçºçãã¾ãããããä¸åº¦è©¦ãã¦ãã ããã',
+    errorNetwork: 'ãããã¯ã¼ã¯ã¨ã©ã¼ãæ¥ç¶ãç¢ºèªãã¦ãããä¸åº¦è©¦ãã¦ãã ããã',
+    errorCheckout: 'ãã§ãã¯ã¢ã¦ãã»ãã·ã§ã³ã®ä½æã«å¤±æãã¾ãããããä¸åº¦è©¦ãã¦ãã ããã',
+    successRedirect: 'ãæ¯æããã¼ã¸ã«ãªãã¤ã¬ã¯ãä¸­...',
+    consentText: 'æ¬æ¥ã¯ã«ã¼ãæå ±ã®ç»é²ã®ã¿ã§ããä½é¨æ¥ã®3æ¥ååå11æã«èªåæ±ºæ¸ããã¾ãã3æ¥åã¾ã§ã­ã£ã³ã»ã«ç¡æã§ãã',
+    stripeNotice: 'æ¬¡ã«é²ããã¨ã§ãå¾æ¥æ±ºæ¸ç¨ã®ã«ã¼ãç»é²ã«åæããããã®ã¨ãã¾ããä½é¨æ¥ã®3æ¥åã«ã«ã¼ãã¸èªåæ±ºæ¸ããã¾ãã3æ¥åã¾ã§ã­ã£ã³ã»ã«ç¡æã3æ¥ä»¥åã¯é£ææºåã®ããè¿éä¸å¯ãã«ã¼ãæå ±ã¯Stripeã«ããå®å¨ã«ç®¡çããã¾ããb hotelã§ã¯ã«ã¼ãæå ±ãä¿æãã¾ããã',
+    experienceSub: 'å¯¿å¸ä½é¨',
+    sectionGuest: 'ãå®¢æ§æå ±',
+    sectionGuests: 'ã²ã¹ãäººæ°',
+    cancelLinkText: 'ã­ã£ã³ã»ã«ã»äºç´ç§ä¼ã¯ãã¡ã â'
   }
 };
 
@@ -633,7 +640,8 @@ function setLanguage(lang) {
     sectionGuest: t.sectionGuest,
     sectionGuests: t.sectionGuests,
     groupSizeMessage: t.groupSizeMessage,
-    cancelLinkText: t.cancelLinkText
+    cancelLinkText: t.cancelLinkText,
+    labelAllergies: t.labelAllergies
   };
 
   for (const [id, text] of Object.entries(map)) {
@@ -645,7 +653,10 @@ function setLanguage(lang) {
   if (langInput) langInput.value = lang;
 
   const phone = document.getElementById('phone');
-  if (phone) phone.placeholder = t.phone_placeholder;
+  if (phone) phone.placeholder = t.ph/ne_placeholder;
+
+  const allergiesField = document.getElementById('allergies');
+  if (allergiesField) allergiesField.placeholder = t.allergy_placeholder;
 
   const guestyInput = document.getElementById('guestyId');
   if (guestyInput) guestyInput.placeholder = t.guestyId_placeholder;
@@ -686,11 +697,11 @@ function adjustCounter(type, delta) {
 function updatePriceSummary() {
   const t = TRANSLATIONS[currentLang];
   const adults = getAdults();
-  const children = getChildren();
+  con3t children = getChildren();
   const adultsTotal = adults * ADULT_PRICE;
   const childrenTotal = children * CHILD_PRICE;
   const grandTotal = adultsTotal + childrenTotal;
-  const fmt = n => '¥' + n.toLocaleString('ja-JP');
+  const fmt = n => 'Â¥' + n.toLocaleString('ja-JP');
 
   document.getElementById('pricingAdultsLabel').textContent = t.pricingAdults + ' (' + adults + ')';
   document.getElementById('pricingAdultsValue').textContent = fmt(adultsTotal);
@@ -724,7 +735,7 @@ function validateForm() {
   let valid = true;
 
   // Name
-  const name = document.getElementById('name').value.trim();
+  const n!me = document.getElementById('name').value.trim();
   const errorName = document.getElementById('errorName');
   if (!name) {
     errorName.textContent = t.errorRequired;
@@ -798,7 +809,7 @@ async function loadCapacityForDate(dateStr) {
   if (remainingCapacity <= 0) {
     if (soldOutEl) {
       soldOutEl.textContent = currentLang === 'ja'
-        ? 'この日は満席です。別の日をお選びください。'
+        ? 'ãã®æ¥ã¯æºå¸­ã§ããå¥ã®æ¥ããé¸ã³ãã ããã'
         : 'This date is fully booked.';
       soldOutEl.style.display = 'block';
     }
@@ -809,7 +820,7 @@ async function loadCapacityForDate(dateStr) {
     if (remainingCapacity < MAX_CAPACITY) {
       if (infoEl) {
         infoEl.textContent = currentLang === 'ja'
-          ? 'この日の残り枠：' + remainingCapacity + '名'
+          ? 'ãã®æ¥ã®æ®ãæ ï¼' + remainingCapacity + 'å'
           : remainingCapacity + ' spot' + (remainingCapacity === 1 ? '' : 's') + ' remaining.';
         infoEl.style.display = 'block';
       }
@@ -838,15 +849,15 @@ function init() {
   const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
   const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-  const weekdaysJa = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
+  const weekdaysJa = ['æ¥ææ¥','æææ¥','ç«ææ¥','æ°´ææ¥','æ¨ææ¥','éææ¥','åææ¥'];
 
   document.getElementById('dateBadgeMonth').textContent = months[date.getMonth()];
-  document.getElementById('dateBadgeDay').textContent = date.getDate();
+  do#ument.getElementById('dateBadgeDay').textContent = date.getDate();
 
   if (lang === 'ja') {
     const wd = weekdaysJa[date.getDay()];
     document.getElementById('heroDate').textContent =
-      date.getFullYear() + '年' + (date.getMonth()+1) + '月' + date.getDate() + '日（' + wd + '）';
+      date.getFullYear() + 'å¹´' + (date.getMonth()+1) + 'æ' + date.getDate() + 'æ¥ï¼' + wd + 'ï¼';
   } else {
     const wd = weekdays[date.getDay()];
     document.getElementById('heroDate').textContent =
@@ -872,14 +883,14 @@ function setupListeners() {
       const date = new Date(dateParam + 'T00:00:00');
       const months = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
       const weekdays = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-      const weekdaysJa = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
+      const weekdaysJa = ['æ¥ææ¥','æææ¥','ç«ææ¥','æ°´ææ¥','æ¨ææ¥','éææ¥','åææ¥'];
       const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       document.getElementById('dateBadgeMonth').textContent = months[date.getMonth()];
       document.getElementById('dateBadgeDay').textContent = date.getDate();
       if (newLang === 'ja') {
         const wd = weekdaysJa[date.getDay()];
         document.getElementById('heroDate').textContent =
-          date.getFullYear() + '年' + (date.getMonth()+1) + '月' + date.getDate() + '日（' + wd + '）';
+          date.getFullYear() + 'å¹´' + (date.getMonth()+1) + 'æ' + date.getDate() + 'æ¥ï¼' + wd + 'ï¼';
       } else {
         const wd = weekdays[date.getDay()];
         document.getElementById('heroDate').textContent =
