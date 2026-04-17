@@ -546,6 +546,77 @@
             font-weight: 600;
         }
 
+        /* Manage Booking Section */
+        .manage-grid {
+            display: flex;
+            justify-content: center;
+        }
+
+        .manage-card {
+            background-color: #f9f9f9;
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 480px;
+            width: 100%;
+        }
+
+        .manage-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-color: #e8a23a;
+        }
+
+        .manage-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .manage-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 0.75rem;
+        }
+
+        .manage-desc {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .manage-btn {
+            display: inline-block;
+            background-color: #3d2c1e;
+            color: #fff;
+            padding: 0.75rem 1.75rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            transition: background-color 0.3s ease;
+        }
+
+        .manage-card:hover .manage-btn {
+            background-color: #e8a23a;
+        }
+
+        @media (max-width: 768px) {
+            .manage-card {
+                padding: 2rem 1.5rem;
+            }
+        }
+
         /* Footer */
         .footer {
             background-color: #3d2c1e;
@@ -1017,6 +1088,32 @@
             </div>
     </section>
 
+    <!-- Manage Booking Section -->
+    <section class="container">
+        <h2 class="section-title">
+            <span class="en active">Manage Your Booking</span>
+            <span class="ja">ご予約の管理</span>
+        </h2>
+
+        <div class="manage-grid">
+            <a href="cancel.html" class="manage-card">
+                <div class="manage-icon">&#128221;</div>
+                <h3 class="manage-title">
+                    <span class="en active">Booking Lookup &amp; Cancellation</span>
+                    <span class="ja">予約照会・キャンセル</span>
+                </h3>
+                <p class="manage-desc">
+                    <span class="en active">Look up your reservation details or cancel your booking using your booking ID.</span>
+                    <span class="ja">予約IDでご予約内容の確認とキャンセル手続きを行えます。</span>
+                </p>
+                <span class="manage-btn">
+                    <span class="en active">View / Cancel Booking</span>
+                    <span class="ja">予約を確認・キャンセル</span>
+                </span>
+            </a>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
@@ -1034,8 +1131,29 @@
     <script>
         // State management
         let currentMonth = new Date();
+        currentMonth.setDate(1);
         let currentLang = 'en';
         let availabilityData = {};
+
+        // Booking window: today through 6 months ahead, Mondays & Thursdays only
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const maxBookingDate = new Date(today);
+        maxBookingDate.setMonth(maxBookingDate.getMonth() + 6);
+
+        // Month navigation bounds (inclusive)
+        const minMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        const maxMonth = new Date(maxBookingDate.getFullYear(), maxBookingDate.getMonth(), 1);
+
+        // Booking deadline: 3 days before experience at 11:00 AM JST (02:00 UTC)
+        function isBookingClosed(dateStr) {
+            const parts = dateStr.split('-');
+            const y = parseInt(parts[0], 10);
+            const m = parseInt(parts[1], 10) - 1;
+            const d = parseInt(parts[2], 10);
+            const deadlineUTC = Date.UTC(y, m, d - 3, 2, 0, 0);
+            return Date.now() >= deadlineUTC;
+        }
 
         // Language toggle
         const langButtons = document.querySelectorAll('.lang-btn');
@@ -1077,14 +1195,30 @@
         const calendarError = document.getElementById('calendar-error');
 
         prevMonthBtn.addEventListener('click', () => {
-            currentMonth.setMonth(currentMonth.getMonth() - 1);
+            const target = new Date(currentMonth);
+            target.setMonth(target.getMonth() - 1);
+            if (target < minMonth) return;
+            currentMonth = target;
             renderCalendar();
         });
 
         nextMonthBtn.addEventListener('click', () => {
-            currentMonth.setMonth(currentMonth.getMonth() + 1);
+            const target = new Date(currentMonth);
+            target.setMonth(target.getMonth() + 1);
+            if (target > maxMonth) return;
+            currentMonth = target;
             renderCalendar();
         });
+
+        function updateNavButtons() {
+            const prevTarget = new Date(currentMonth);
+            prevTarget.setMonth(prevTarget.getMonth() - 1);
+            prevMonthBtn.disabled = prevTarget < minMonth;
+
+            const nextTarget = new Date(currentMonth);
+            nextTarget.setMonth(nextTarget.getMonth() + 1);
+            nextMonthBtn.disabled = nextTarget > maxMonth;
+        }
 
         function renderCalendar() {
             const year = currentMonth.getFullYear();
@@ -1122,30 +1256,38 @@
             // Add days of month
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const thisDate = new Date(year, month, day);
+                const dayOfWeek = thisDate.getDay(); // 0=Sun ... 1=Mon, 4=Thu
                 const dayEl = document.createElement('div');
                 dayEl.className = 'calendar-day';
                 dayEl.textContent = day;
 
-                // Check if date is available
-                const dateData = availabilityData[dateStr];
-                if (dateData) {
-                    if (dateData.status === 'available') {
+                const isBookableDay = (dayOfWeek === 1 || dayOfWeek === 4);
+                const isWithinWindow = thisDate >= today && thisDate <= maxBookingDate;
+                const deadlinePassed = isBookingClosed(dateStr);
+
+                if (isBookableDay && isWithinWindow && !deadlinePassed) {
+                    const dateData = availabilityData[dateStr];
+                    let status = 'available';
+                    if (dateData && dateData.status) {
+                        status = dateData.status;
+                    }
+
+                    if (status === 'available') {
                         dayEl.classList.add('available');
-                        dayEl.addEventListener('click', () => {
-                            navigateToBooking(dateStr);
-                        });
-                    } else if (dateData.status === 'few') {
+                        dayEl.addEventListener('click', () => navigateToBooking(dateStr));
+                    } else if (status === 'few') {
                         dayEl.classList.add('few-spots');
-                        dayEl.addEventListener('click', () => {
-                            navigateToBooking(dateStr);
-                        });
-                    } else if (dateData.status === 'full') {
+                        dayEl.addEventListener('click', () => navigateToBooking(dateStr));
+                    } else if (status === 'full') {
                         dayEl.classList.add('full');
                     }
                 }
 
                 calendarGrid.appendChild(dayEl);
             }
+
+            updateNavButtons();
         }
 
         function navigateToBooking(dateStr) {
