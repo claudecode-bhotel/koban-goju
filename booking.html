@@ -502,6 +502,11 @@ select.form-input { cursor: pointer; }
       <p id="consentText">Today, we only register your card details. Your card will be automatically charged at 11:00 AM, 3 days before your experience. Free cancellation up to 3 days before.</p>
     </div>
 
+    <!-- Session expiry notice -->
+    <div class="charge-notice" id="expiryNoticeBox" style="background:#fff7e6;border-left:3px solid #f59e0b;">
+      <p id="expiryNoticeText">⏱ Please complete your card registration within 30 minutes. The session will expire after that and you will need to start over.</p>
+    </div>
+
     <!-- Consent -->
     <p class="consent-text" id="stripeNotice">By proceeding, you agree to register your card for future payment. Your card will be automatically charged 3 days before your experience. Free cancellation up to 3 days before; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.</p>
 
@@ -572,7 +577,8 @@ const TRANSLATIONS = {
     sectionGuest: 'GUEST INFORMATION',
     sectionGuests: 'NUMBER OF GUESTS',
     cancelLinkText: 'Cancellation / Booking Lookup →',
-    deadlinePassed: 'Bookings for this date are now closed (deadline: 3 days before, 11:00 AM).'
+    deadlinePassed: 'Bookings for this date are now closed (deadline: 3 days before, 11:00 AM).',
+    expiryNotice: '⏱ Please complete your card registration within 30 minutes. The session will expire after that and you will need to start over.'
   },
   ja: {
     heroLabel: '予約',
@@ -611,7 +617,8 @@ const TRANSLATIONS = {
     sectionGuest: 'お客様情報',
     sectionGuests: 'ゲスト人数',
     cancelLinkText: 'キャンセル・予約照会はこちら →',
-    deadlinePassed: 'この日程の予約受付は終了しました（締め切り：体験日の3日前午前11時）。'
+    deadlinePassed: 'この日程の予約受付は終了しました（締め切り：体験日の3日前午前11時）。',
+    expiryNotice: '⏱ お支払いは30分以内に完了してください。それを過ぎるとセッションが無効となり、最初からやり直しとなります。'
   }
 };
 
@@ -647,7 +654,8 @@ function setLanguage(lang) {
     sectionGuests: t.sectionGuests,
     groupSizeMessage: t.groupSizeMessage,
     cancelLinkText: t.cancelLinkText,
-    labelAllergies: t.labelAllergies
+    labelAllergies: t.labelAllergies,
+    expiryNoticeText: t.expiryNotice
   };
 
   for (const [id, text] of Object.entries(map)) {
