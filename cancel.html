@@ -297,12 +297,8 @@
 
       <form id="lookupForm" class="lookup-form">
         <div class="form-group">
-          <label for="bookingId" data-en="BOOKING ID (optional)" data-jp="予約ID（任意）">BOOKING ID (optional)</label>
-          <input type="text" id="bookingId" name="bookingId" placeholder="BK1234567890">
-        </div>
-        <div class="form-group">
           <label for="email" data-en="EMAIL" data-jp="メールアドレス">EMAIL</label>
-          <input type="email" id="email" name="email" placeholder="your@email.com">
+          <input type="email" id="email" name="email" placeholder="your@email.com" required>
         </div>
         <div class="form-group">
           <label for="bookingDate" data-en="BOOKING DATE" data-jp="予約日">BOOKING DATE</label>
@@ -409,7 +405,6 @@
     // ── Lookup ──
     async function handleLookup(e) {
       e.preventDefault();
-      const bookingId   = (document.getElementById('bookingId').value || '').trim();
       const email       = (document.getElementById('email').value || '').trim();
       const bookingDate = document.getElementById('bookingDate').value;
       const errorDiv = document.getElementById('lookupError');
@@ -417,20 +412,17 @@
       errorDiv.style.display = 'none';
       btn.disabled = true;
 
-      // Require either booking ID or email
-      if (!bookingId && !email) {
+      if (!email) {
         errorDiv.style.display = 'block';
         errorDiv.textContent = getLang() === 'en'
-          ? 'Please enter a booking ID or email address.'
-          : '予約IDまたはメールアドレスを入力してください。';
+          ? 'Please enter your email address.'
+          : 'メールアドレスを入力してください。';
         btn.disabled = false;
         return;
       }
 
       try {
-        // Prefer booking ID lookup; fall back to email
-        const identifier = bookingId || email;
-        const response = await lookupBookingById(identifier);
+        const response = await lookupBookingById(email);
 
         if (!response.success || !response.bookings || response.bookings.length === 0) {
           throw new Error(getLang() === 'en'
