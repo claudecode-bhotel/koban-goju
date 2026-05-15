@@ -224,6 +224,7 @@ select.form-input { cursor: pointer; }
 .counter-label { flex: 1; }
 .counter-label-name { font-size: 14px; color: #3d2c1e; font-weight: 500; }
 .counter-label-price { font-size: 11px; color: #bbb; margin-top: 2px; }
+.counter-label-note { font-size: 11px; color: #888; margin-top: 2px; line-height: 1.4; }
 .counter-controls { display: flex; align-items: center; gap: 14px; }
 .counter-btn {
   width: 36px; height: 36px;
@@ -445,6 +446,7 @@ select.form-input { cursor: pointer; }
         <div class="counter-label">
           <div class="counter-label-name" id="labelChildren">Children under 12</div>
           <div class="counter-label-price">&yen;5,000 / person</div>
+          <div class="counter-label-note" id="noteChildren">Ages 4&ndash;12. Children 3 and under are free of charge (no meal provided; sharing with adults is welcome).</div>
         </div>
         <div class="counter-controls">
           <button type="button" class="counter-btn" id="childrenDecBtn">&minus;</button>
@@ -550,6 +552,7 @@ const TRANSLATIONS = {
     labelGuestyId: 'Accommodation Reservation No.',
     labelAdults: 'Adults',
     labelChildren: 'Children under 12',
+    noteChildren: 'Ages 4–12. Children 3 and under are free of charge (no meal provided; sharing with adults is welcome).',
     labelAllergies: 'Allergies / Special Requests',
     allergy_placeholder: 'Please let us know about any dietary restrictions or special requests...',
     backLink: '← Back to dates',
@@ -590,6 +593,7 @@ const TRANSLATIONS = {
     labelGuestyId: '宿泊予約番号',
     labelAdults: '大人',
     labelChildren: '子供（12歳以下）',
+    noteChildren: '4歳〜12歳、3歳以下無料（提供無し、大人と取分け可）',
     labelAllergies: 'アレルギー・特別なリクエスト',
     allergy_placeholder: 'アレルギーや特別なリクエストについて教えてください...',
     backLink: '← 日程一覧に戻る',
@@ -644,6 +648,7 @@ function setLanguage(lang) {
     labelGuestyId: t.labelGuestyId,
     labelAdults: t.labelAdults,
     labelChildren: t.labelChildren,
+    noteChildren: t.noteChildren,
     pricingTitle: t.pricingTitle,
     pricingTotalLabel: t.pricingTotal,
     submitBtnText: t.submitBtn,
