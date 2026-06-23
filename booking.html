@@ -857,15 +857,12 @@ async function loadCapacityForDate(dateStr) {
     if (submitBtn) submitBtn.disabled = true;
   } else {
     if (soldOutEl) soldOutEl.style.display = 'none';
-    if (remainingCapacity < MAX_CAPACITY) {
-      if (infoEl) {
-        infoEl.textContent = currentLang === 'ja'
-          ? 'この日の残り枠：' + remainingCapacity + '名'
-          : remainingCapacity + ' spot' + (remainingCapacity === 1 ? '' : 's') + ' remaining.';
-        infoEl.style.display = 'block';
-      }
-    } else {
-      if (infoEl) infoEl.style.display = 'none';
+    // 満枠(残=定員)でも常に残り枠を表示する
+    if (infoEl) {
+      infoEl.textContent = currentLang === 'ja'
+        ? 'この日の残り枠：' + remainingCapacity + '名'
+        : remainingCapacity + ' spot' + (remainingCapacity === 1 ? '' : 's') + ' remaining.';
+      infoEl.style.display = 'block';
     }
     if (submitBtn) submitBtn.disabled = false;
   }
