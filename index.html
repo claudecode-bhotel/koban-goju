@@ -439,6 +439,22 @@
             right: 6px;
         }
 
+        /* Remaining-seats badge on each bookable day */
+        .calendar-day .day-remaining {
+            position: absolute;
+            top: 4px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .calendar-day.available .day-remaining { color: #2e7d32; }
+        .calendar-day.few-spots .day-remaining { color: #e65100; }
+        .calendar-day.full .day-remaining { color: #c62828; }
+
         /* Calendar Legend */
         .calendar-legend {
             display: flex;
@@ -1285,6 +1301,17 @@
                         dayEl.addEventListener('click', () => navigateToBooking(dateStr));
                     } else if (status === 'full') {
                         dayEl.classList.add('full');
+                    }
+
+                    // Remaining-seats badge (常時表示)
+                    const rem = (dateData && typeof dateData.remaining === 'number') ? dateData.remaining : null;
+                    if (rem !== null) {
+                        const badge = document.createElement('span');
+                        badge.className = 'day-remaining';
+                        badge.textContent = (status === 'full')
+                            ? (currentLang === 'jp' ? '満席' : 'Full')
+                            : (currentLang === 'jp' ? '残' + rem : rem + ' left');
+                        dayEl.appendChild(badge);
                     }
                 }
 
