@@ -1100,8 +1100,12 @@
                     </div>
                     <div class="cancellation-row">
                         <div style="color:#666;line-height:1.6;font-size:0.9rem;">
-                            <span class="en active">Regarding refunds: Refunds will be processed within a few business days after cancellation. Please allow additional time for the refund to appear, depending on your card issuer.</span>
-                            <span class="ja">【返金について】キャンセル受付後、数営業日以内に返金処理が行われます。ご利用のカード会社により、反映までにお時間をいただく場合がございます。</span>
+                            <!-- 以前ここには「キャンセル受付後、数営業日以内に返金処理が行われます」と
+                                 書いてあったが、この予約システムでは返金が発生する場面が無い。
+                                 締切前は課金前（カード登録を使わないだけ）、締切後は100%charge で返金なし。
+                                 コードにも Stripe の返金APIを呼ぶ箇所は無い。誤った期待を持たせるため削除した。 -->
+                            <span class="en active">Regarding charges: If you cancel before the deadline, no charge is made to your card. After the deadline, your card has already been charged at 11:00 AM JST three days before, and we are unable to issue a refund.</span>
+                            <span class="ja">【ご請求について】締切前のキャンセルでは、カードへのご請求は発生しません。締切後は体験日の3日前 午前11時に決済が完了しているため、ご返金はいたしかねます。</span>
                         </div>
                     </div>
                 </div>
