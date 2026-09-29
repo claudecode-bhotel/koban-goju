@@ -79,7 +79,8 @@
     <div id="errorState" class="error-state" style="display: none;">
       <div class="error-icon">⚠</div>
       <h1 class="error-title" data-en="Something Went Wrong" data-jp="エラーが発生しました">Something Went Wrong</h1>
-      <p class="error-message" id="errorMessage">-</p>
+      <!-- pre-line: エラー本文に改行を入れて、原因とセッションIDを読める形で出すため -->
+      <p class="error-message" id="errorMessage" style="white-space: pre-line;">-</p>
       <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
         <button class="button button-secondary" onclick="location.reload()" data-en="Try Again" data-jp="もう一度試す">Try Again</button>
         <a href="index.html" class="button button-primary" data-en="Back to Home" data-jp="ホームに戻る">Back to Home</a>
@@ -107,9 +108,19 @@
     if (lang) localStorage.setItem('lang', lang);
     updatePageLanguage();
 
-    // Demo mode: no session_id → show preview confirmation
+    // ★確定できなかったときに架空の予約内容を出さないこと。
+    //   以前は session_id が無いときも、確定処理が失敗したときも showDemoState() で
+    //   「山本 恵子 / 2026年4月9日 / ¥44,000」という作り物の予約内容を、
+    //   本物の確認画面と同じ見た目で表示していた。
+    //   ゲストには自分の予約が違う内容で登録されたように見える。
+    //   （バックエンド未デプロイの頃の名残。確定処理が例外を投げる条件は
+    //     その後増えている：キャンセル済み・予約を特定できない・通信失敗など）
     if (!sessionId) {
-      showDemoState();
+      showErrorState(getLang() === 'en'
+        ? 'This page is opened after completing payment. No payment information was found in the URL. '
+          + 'If you have already paid, please check your confirmation email or contact us.'
+        : 'このページは決済完了後に表示されるページです。URLに決済情報が見つかりませんでした。'
+          + 'お支払いがお済みの場合は、確認メールをご確認いただくかお問い合わせください。');
       return;
     }
 
@@ -117,22 +128,17 @@
       const response = await confirmBooking(sessionId);
       showSuccessState(response);
     } catch (error) {
-      // GAS backend may not be deployed yet – fall back to demo
-      showDemoState();
+      // ★予約が成立していない可能性があるので、成功したように見せない。
+      //   問い合わせに必要な情報（エラー内容とセッションID）を画面に出す。
+      showErrorState((getLang() === 'en'
+        ? 'We could not complete your booking confirmation. Your reservation may not be registered. '
+          + 'Please contact us with the reference below.\n'
+        : 'ご予約の確定処理が完了できませんでした。ご予約が登録されていない可能性があります。'
+          + 'お手数ですが、下記をお知らせのうえお問い合わせください。\n')
+        + '\n' + (error && error.message ? error.message : String(error))
+        + '\n(' + sessionId + ')');
     }
   });
-
-  function showDemoState() {
-    // Show a representative confirmation with placeholder data
-    showSuccessState({
-      date: '2026-04-09',
-      name: '山本 恵子',
-      email: 'keiko@example.com',
-      adults: 2,
-      children: 0,
-      total_amount: 44000
-    });
-  }
 
   function showSuccessState(bookingData) {
     document.getElementById('loadingState').style.display = 'none';
@@ -158,7 +164,18 @@
   }
 
   function formatDate(dateString, lang) {
-    const date = new Date(dateString);
+    // ★'2026-10-05' を new Date() にそのまま渡さないこと。
+    //   ISO の日付だけの文字列は UTC の深夜として解釈され、toLocaleDateString は
+    //   ブラウザのタイムゾーンで描画する。日本より西のゲスト（北米など）には
+    //   前日が表示される。2026-09 に「予約した日と違う日付が出た」と問い合わせが来た。
+    //   年月日を分解してローカル時刻で組み立てれば、どの国から見てもズレない。
+    //   confirm.html / cancel.html も同じ書き方で揃えてある。
+    const str = String(dateString || '');
+    const m = str.match(/^(\d{4})[\/-](\d{1,2})[\/-](\d{1,2})/);
+    const date = m
+      ? new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10))
+      : new Date(str);
+    if (isNaN(date.getTime())) return str;
     if (lang === 'en') {
       return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     } else {
