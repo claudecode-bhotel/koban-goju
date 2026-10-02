@@ -1084,8 +1084,8 @@
                             <span class="ja">体験日の3日前 午前11:00（日本時間）まで</span>
                         </div>
                         <div class="cancellation-charge">
-                            <span class="en active">Free cancellation</span>
-                            <span class="ja">キャンセル料：無料</span>
+                            <span class="en active">Refund, less a 5% processing fee</span>
+                            <span class="ja">決済手数料5%を差し引いて返金</span>
                         </div>
                     </div>
                     <div class="cancellation-row">
@@ -1100,12 +1100,13 @@
                     </div>
                     <div class="cancellation-row">
                         <div style="color:#666;line-height:1.6;font-size:0.9rem;">
-                            <!-- 以前ここには「キャンセル受付後、数営業日以内に返金処理が行われます」と
-                                 書いてあったが、この予約システムでは返金が発生する場面が無い。
-                                 締切前は課金前（カード登録を使わないだけ）、締切後は100%charge で返金なし。
-                                 コードにも Stripe の返金APIを呼ぶ箇所は無い。誤った期待を持たせるため削除した。 -->
-                            <span class="en active">Regarding charges: If you cancel before the deadline, no charge is made to your card. After the deadline, your card has already been charged at 11:00 AM JST three days before, and we are unable to issue a refund.</span>
-                            <span class="ja">【ご請求について】締切前のキャンセルでは、カードへのご請求は発生しません。締切後は体験日の3日前 午前11時に決済が完了しているため、ご返金はいたしかねます。</span>
+                            <!-- 2026-10-02 予約時決済へ切替。予約した時点で決済が完了するため、
+                                 締切前のキャンセルは「請求されない」ではなく「返金する」になった。
+                                 返金額は決済手数料5%を差し引いた額（cancelBooking が自動で返金する）。
+                                 ※これより前に予約されたお客様は全額返金（シートZ列の印で判定）。
+                                   その方々には個別に案内済みなので、ここには書かない。 -->
+                            <span class="en active">Regarding refunds: If you cancel before the deadline, we refund the amount paid, less a 5% payment processing fee. It may take a few days to appear on your statement. After the deadline we are unable to issue a refund.</span>
+                            <span class="ja">【ご返金について】締切前のキャンセルは、お支払いいただいた額から決済手数料5%を差し引いてご返金いたします。カード会社の処理により、口座への反映まで数日かかる場合がございます。締切後のご返金はいたしかねます。</span>
                         </div>
                     </div>
                 </div>
