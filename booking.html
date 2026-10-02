@@ -501,7 +501,7 @@ select.form-input { cursor: pointer; }
 
     <!-- Charge notice -->
     <div class="charge-notice" id="paymentNoticeBox">
-      <p id="consentText">Today, we only register your card details. Your card will be automatically charged at 11:00 AM, 3 days before your experience. Free cancellation up to 3 days before.</p>
+      <p id="consentText">Your card will be charged now to confirm your booking. You may cancel up to 11:00 AM JST, 3 days before your experience, for a refund less a 5% processing fee.</p>
     </div>
 
     <!-- Session expiry notice -->
@@ -510,7 +510,7 @@ select.form-input { cursor: pointer; }
     </div>
 
     <!-- Consent -->
-    <p class="consent-text" id="stripeNotice">By proceeding, you agree to register your card for future payment. Your card will be automatically charged 3 days before your experience. Free cancellation up to 3 days before; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.</p>
+    <p class="consent-text" id="stripeNotice">By proceeding, you agree to pay now to confirm your booking. Cancel up to 11:00 AM JST, 3 days before your experience for a refund less a 5% processing fee; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.</p>
 
     <!-- Deadline passed notice -->
     <div id="deadlinePassedNotice" style="display:none;background:#ffebee;border:1px solid #ef9a9a;border-radius:6px;padding:12px 16px;margin-bottom:12px;font-size:14px;color:#c62828;text-align:center;font-weight:500;"></div>
@@ -574,8 +574,8 @@ const TRANSLATIONS = {
     errorNetwork: 'Network error. Please check your connection and try again.',
     errorCheckout: 'Failed to create checkout session. Please try again.',
     successRedirect: 'Redirecting to payment...',
-    consentText: 'Today, we only register your card details. Your card will be automatically charged at 11:00 AM, 3 days before your experience. Free cancellation up to 3 days before.',
-    stripeNotice: 'By proceeding, you agree to register your card for future payment. Your card will be automatically charged 3 days before your experience. Free cancellation up to 3 days before; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.',
+    consentText: 'Your card will be charged now to confirm your booking. You may cancel up to 11:00 AM JST, 3 days before your experience, for a refund less a 5% processing fee.',
+    stripeNotice: 'By proceeding, you agree to pay now to confirm your booking. Cancel up to 11:00 AM JST, 3 days before your experience for a refund less a 5% processing fee; no refunds within 3 days due to ingredient preparation. Your card information is securely managed by Stripe. b hotel does not store your card information.',
     experienceSub: 'SUSHI EXPERIENCE',
     sectionGuest: 'GUEST INFORMATION',
     sectionGuests: 'NUMBER OF GUESTS',
@@ -615,8 +615,8 @@ const TRANSLATIONS = {
     errorNetwork: 'ネットワークエラー。接続を確認して、もう一度試してください。',
     errorCheckout: 'チェックアウトセッションの作成に失敗しました。もう一度試してください。',
     successRedirect: 'お支払いページにリダイレクト中...',
-    consentText: '本日はカード情報の登録のみです。体験日の3日前午前11時に自動決済されます。3日前までキャンセル無料です。',
-    stripeNotice: '次に進むことで、後日決済用のカード登録に同意されたものとします。体験日の3日前にカードへ自動決済されます。3日前までキャンセル無料。3日以内は食材準備のため返金不可。カード情報はStripeにより安全に管理されます。b hotelではカード情報を保持しません。',
+    consentText: 'ご予約の確定と同時に決済いたします。体験日の3日前 午前11時までのキャンセルは、決済手数料5%を差し引いてご返金いたします。',
+    stripeNotice: '次に進むことで、この場でのお支払いに同意されたものとします。体験日の3日前 午前11時までのキャンセルは決済手数料5%を差し引いてご返金。3日以内は食材準備のため返金不可。カード情報はStripeにより安全に管理されます。b hotelではカード情報を保持しません。',
     experienceSub: '寿司体験',
     sectionGuest: 'お客様情報',
     sectionGuests: 'ゲスト人数',
