@@ -340,12 +340,17 @@
       </div>
 
       <div id="cancellationPolicyBox" class="policy-box">
+        <!-- 2026-10-02 予約時決済へ切替。期限内のキャンセルは「請求されない」ではなく
+             「返金する」に変わった。返金額は決済手数料5%を差し引いた額。
+             ※切替前に予約されたお客様は全額返金（サーバー側がシートZ列の印で判定する）。
+               ここには一律の説明だけを書き、個別の金額は完了後のメールで伝える。 -->
         <div id="freePolicy" style="display: none;">
-          <p class="policy-text" data-en="Free cancellation available" data-jp="無料キャンセル可能">Free cancellation available</p>
+          <p class="policy-text" data-en="Cancellation available" data-jp="キャンセル可能">Cancellation available</p>
+          <p class="policy-detail" data-en="We will refund the amount paid, less a 5% payment processing fee. It may take a few days to appear on your statement." data-jp="お支払いいただいた額から決済手数料5%を差し引いてご返金いたします。口座への反映まで数日かかる場合がございます。">We will refund the amount paid, less a 5% payment processing fee.</p>
         </div>
         <div id="chargePolicy" style="display: none;">
           <p class="policy-text warning" data-en="Cancellation deadline has passed" data-jp="キャンセル期限が過ぎています">Cancellation deadline has passed</p>
-          <p class="policy-detail" data-en="After 11:00 AM JST, 3 days before – day of: 100% charge" data-jp="3日前 午前11:00以降〜当日：100%料金">After 11:00 AM JST, 3 days before – day of: 100% charge</p>
+          <p class="policy-detail" data-en="After 11:00 AM JST, 3 days before – day of: 100% charge, no refund" data-jp="3日前 午前11:00以降〜当日：100%料金（ご返金はできません）">After 11:00 AM JST, 3 days before – day of: 100% charge, no refund</p>
         </div>
       </div>
 
