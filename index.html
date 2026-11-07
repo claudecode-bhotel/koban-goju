@@ -174,6 +174,21 @@
             margin: 0 auto;
         }
 
+        /* 開催地。見落とされると他施設の宿泊者が自分の滞在先だと誤解するので、
+           背景を敷いて副題から独立して見えるようにする。 */
+        .hero-venue {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #fff;
+            max-width: 600px;
+            margin: 1.25rem auto 0;
+            padding: 0.6rem 1rem;
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 6px;
+            line-height: 1.5;
+        }
+
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 2.5rem;
@@ -906,8 +921,17 @@
             <span class="ja">&#20986;&#27713;&#12392;&#23551;&#21496;&#20307;&#39443;</span>
         </h1>
         <p class="hero-subtitle">
-            <span class="en active">An authentic Japanese culinary journey at Koban-dori Goju</span>
-            <span class="ja">&#20132;&#30058;&#36890;&#12426;&#20116;&#21313;&#12391;&#12398;&#26412;&#26684;&#26085;&#26412;&#26009;&#29702;&#20307;&#39443;</span>
+            <span class="en active">An authentic Japanese culinary journey at Koban-dori Goju, Hiroshima</span>
+            <span class="ja">&#24195;&#23798;&#12539;&#20132;&#30058;&#36890;&#12426;&#20116;&#21313;&#12391;&#12398;&#26412;&#26684;&#26085;&#26412;&#26009;&#29702;&#20307;&#39443;</span>
+        </p>
+        <!-- ★開催地を見出しのすぐ下に出す。
+             この体験の案内は b hotel 全施設（尾道・京都を含む）の宿泊者へ送られるため、
+             「自分の滞在先で開催される」と誤解したゲストから問い合わせが来た（2026-11）。
+             これまでサイトには「広島」も住所も一度も出ておらず、開催地が分かるのは
+             予約完了メールが最初だった。ページを開いた時点で分かるようにする。 -->
+        <p class="hero-venue">
+            <span class="en active">Held in Hiroshima &#8212; Kameizumi Bldg 1F, 6-22 Nagarekawa-cho, Naka-ku, Hiroshima</span>
+            <span class="ja">&#38283;&#20652;&#22320;&#65306;&#24195;&#23798;&#24066;&#20013;&#21306;&#27969;&#24029;&#30010;6-22 &#20124;&#27849;&#12499;&#12523;1&#38542;</span>
         </p>
     </section>
 
