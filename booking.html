@@ -176,6 +176,12 @@ body {
    FORM SECTIONS
 ============================================ */
 .form-section { margin-bottom: 32px; }
+/* 開催地。日付バッジのすぐ下に置き、見落とされないよう枠で囲う。 */
+.venue-row {
+  margin: 12px 0 24px; padding: 10px 14px;
+  background: #f5f1e8; border: 1px solid #d8cdb4; border-radius: 6px;
+  font-size: 13px; line-height: 1.6; color: #5a4a2a;
+}
 
 /* ============================================
    FORM FIELDS (bottom-border only)
@@ -390,6 +396,11 @@ select.form-input { cursor: pointer; }
     </div>
   </div>
 
+  <!-- ★開催地。決済の直前にもう一度目に入るようにする。
+       この体験の案内は b hotel 全施設（尾道・京都を含む）の宿泊者へ送られるため、
+       「自分の滞在先で開催される」と誤解したゲストから問い合わせが来た（2026-11）。 -->
+  <div class="venue-row" id="venueInfo">Venue: Koban-dori Goju, Hiroshima &mdash; Kameizumi Bldg 1F, 6-22 Nagarekawa-cho, Naka-ku, Hiroshima</div>
+
   <!-- Booking Form -->
   <form id="bookingForm" novalidate>
     <!-- Hidden date fields -->
@@ -581,7 +592,8 @@ const TRANSLATIONS = {
     sectionGuests: 'NUMBER OF GUESTS',
     cancelLinkText: 'Cancellation / Booking Lookup →',
     deadlinePassed: 'Bookings for this date are now closed (deadline: 3 days before, 11:00 AM).',
-    expiryNotice: '⏱ Please complete your card registration within 30 minutes. The session will expire after that and you will need to start over.'
+    expiryNotice: '⏱ Please complete your card registration within 30 minutes. The session will expire after that and you will need to start over.',
+    venueInfo: '📍 Venue: Koban-dori Goju, HIROSHIMA — Kameizumi Bldg 1F, 6-22 Nagarekawa-cho, Naka-ku, Hiroshima. Please note that this experience takes place in Hiroshima. If you are staying at a b hotel property in another area, please plan your travel accordingly.'
   },
   ja: {
     heroLabel: '予約',
@@ -622,7 +634,8 @@ const TRANSLATIONS = {
     sectionGuests: 'ゲスト人数',
     cancelLinkText: 'キャンセル・予約照会はこちら →',
     deadlinePassed: 'この日程の予約受付は終了しました（締め切り：体験日の3日前午前11時）。',
-    expiryNotice: '⏱ お支払いは30分以内に完了してください。それを過ぎるとセッションが無効となり、最初からやり直しとなります。'
+    expiryNotice: '⏱ お支払いは30分以内に完了してください。それを過ぎるとセッションが無効となり、最初からやり直しとなります。',
+    venueInfo: '📍 開催地：交番通り五十（広島）— 広島市中区流川町6-22 亀泉ビル1階。本体験は広島で開催されます（他のエリアのb hotel各施設にご宿泊のお客様はご注意ください）。'
   }
 };
 
@@ -660,7 +673,8 @@ function setLanguage(lang) {
     groupSizeMessage: t.groupSizeMessage,
     cancelLinkText: t.cancelLinkText,
     labelAllergies: t.labelAllergies,
-    expiryNoticeText: t.expiryNotice
+    expiryNoticeText: t.expiryNotice,
+    venueInfo: t.venueInfo
   };
 
   for (const [id, text] of Object.entries(map)) {
