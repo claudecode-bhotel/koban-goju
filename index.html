@@ -1064,7 +1064,7 @@
                     </h3>
                     <ul>
                         <li>
-                            <strong><span class="en active">Available days</span><span class="ja">利用可能日</span>:</strong> <span class="en active">Mondays &amp; Thursdays only</span><span class="ja">月曜日・木曜日のみ</span>
+                            <strong><span class="en active">Available days</span><span class="ja">利用可能日</span>:</strong> <span class="en active">Mondays to Fridays</span><span class="ja">月曜日〜金曜日</span>
                         </li>
                         <li>
                             <strong><span class="en active">Session time</span><span class="ja">開催時間</span>:</strong> <span class="en active">11:00 AM &#8211; 1:00 PM (starts at 11:00 AM sharp)</span><span class="ja">11:00 &#xFF5E; 13:00（※午前11:00開始）</span>
@@ -1184,7 +1184,7 @@
         let currentLang = 'en';
         let availabilityData = {};
 
-        // Booking window: today through 6 months ahead, Mondays & Thursdays only
+        // Booking window: today through 6 months ahead, Mondays through Fridays
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         const maxBookingDate = new Date(today);
@@ -1306,12 +1306,12 @@
             for (let day = 1; day <= daysInMonth; day++) {
                 const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const thisDate = new Date(year, month, day);
-                const dayOfWeek = thisDate.getDay(); // 0=Sun ... 1=Mon, 4=Thu
+                const dayOfWeek = thisDate.getDay(); // 0=Sun ... 1=Mon .. 5=Fri
                 const dayEl = document.createElement('div');
                 dayEl.className = 'calendar-day';
                 dayEl.textContent = day;
 
-                const isBookableDay = (dayOfWeek === 1 || dayOfWeek === 4);
+                const isBookableDay = (dayOfWeek >= 1 && dayOfWeek <= 5);
                 const isWithinWindow = thisDate >= today && thisDate <= maxBookingDate;
                 const deadlinePassed = isBookingClosed(dateStr);
 
