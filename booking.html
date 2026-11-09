@@ -573,11 +573,11 @@ const TRANSLATIONS = {
     pricingAdults: 'Adults',
     pricingChildren: 'Children',
     pricingTotal: 'Total',
-    groupSizeMessage: 'Group size must be between 2 and 8 people.',
+    groupSizeMessage: 'Group size must be between 2 and 12 people.',
     errorRequired: 'This field is required.',
     errorInvalidEmail: 'Please enter a valid email address.',
     errorInvalidPhone: 'Please enter a valid phone number.',
-    errorGroupSize: 'Group size must be between 2 and 8 people.',
+    errorGroupSize: 'Group size must be between 2 and 12 people.',
     phone_placeholder: '+81 XX-XXXX-XXXX',
     guestyId_placeholder: 'Guesty booking ID',
     required_asterisk: '*',
@@ -615,11 +615,11 @@ const TRANSLATIONS = {
     pricingAdults: '大人',
     pricingChildren: 'お子様',
     pricingTotal: '合計',
-    groupSizeMessage: 'グループサイズは2〜8人である必要があります。',
+    groupSizeMessage: 'グループサイズは2〜12人である必要があります。',
     errorRequired: 'この項目は必須です。',
     errorInvalidEmail: '有効なメールアドレスを入力してください。',
     errorInvalidPhone: '有効な電話番号を入力してください。',
-    errorGroupSize: 'グループサイズは2〜8人である必要があります。',
+    errorGroupSize: 'グループサイズは2〜12人である必要があります。',
     phone_placeholder: '+81 XX-XXXX-XXXX',
     guestyId_placeholder: 'Guesty予約ID',
     required_asterisk: '*',
@@ -710,7 +710,7 @@ function setLanguage(lang) {
 // ============================================
 const ADULT_PRICE = 9800;
 const CHILD_PRICE = 5000;
-const MAX_CAPACITY = 8;
+const MAX_CAPACITY = 12;
 let remainingCapacity = MAX_CAPACITY;
 
 function getAdults() { return parseInt(document.getElementById('adults').value) || 2; }
@@ -722,7 +722,7 @@ function adjustCounter(type, delta) {
   const decBtn = document.getElementById(type + 'DecBtn');
   const incBtn = document.getElementById(type + 'IncBtn');
   const min = type === 'adults' ? 1 : 0;
-  const max = type === 'adults' ? 8 : 6;
+  const max = type === 'adults' ? MAX_CAPACITY : 6;
   let val = parseInt(hiddenInput.value) + delta;
   val = Math.max(min, Math.min(max, val));
   hiddenInput.value = val;
